@@ -21,13 +21,7 @@ body>#contenido{
    display: grid;
    grid-template-rows:15vh 10vh auto;
 }
-body>#contenido>#nombre{
-   display: flex;
-   font-size: 50px;
-   align-items: center;
-   justify-content: center;
-   color:rgb(30,50,94);
-}
+
 body>#contenido>#menu{  
    background-color:rgb(30,50,94);
    color:rgb(240,240,240);
@@ -36,6 +30,14 @@ body>#contenido>#menu{
    align-items: center;
    justify-items: center;
    font-size:20px ;
+}
+
+  body>#contenido>#menu>#logo{
+   background-image: url(Logo.png);
+   width: 30%;
+   height: 80%;
+   background-position: center;
+   background-size: 100% 100%;
 }
 body>#contenido>#menu>div:hover{
    background-color: rgb(247,224,86);
@@ -267,7 +269,24 @@ body>#contenido>a:hover{
   
       }
 
- 
+ @media only screen and (max-width: 1500px) {
+
+
+   body>#contenido{
+   background-color: rgb(255,239,223);
+   width:80vw;
+   height: 650vh;
+   margin-left: 8%;
+   margin-top: 4%;
+   margin-bottom: 4%;
+   border-radius: 20px;
+   display: grid;
+   grid-template-rows:15vh 10vh auto;
+}
+
+   
+          }
+
     
 
 
@@ -276,12 +295,12 @@ body>#contenido>a:hover{
 </head>
 <body>
 <div id="contenido">
-   <div id="nombre">Colegio León de Greiff I.E.D</div>
-   <div id="menu">
-      <div>Mi colegio</div>
-      <div>Metodología</div>
-      <div>Media técnica</div>
-      <div>Documentos</div>
+ 
+ <div id="menu">
+      <a id="logo"></a>
+      <div>Acerca de</div>
+      <div>Nosotros</div>
+      <div>Contacto</div>
    </div>
    <div id="info">
       <div id="ssn">
