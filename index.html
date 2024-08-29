@@ -29,68 +29,68 @@
             border-radius: 10px;
             overflow: hidden;
         }
-   
- .school-container {
-            background-image: url('ruta/a/tu-imagen.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
-            width: 60%;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-        .school-container::before {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 20%;
-            height: 100%;
-            background: url('ruta/a/imagen-lateral.jpg') no-repeat center center;
-            background-size: cover;
-        }
-        .school-content {
-            width: 80%;
-            position: relative;
-            z-index: 1;
-        }
-        .school-title {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            font-size: 2.5rem;
-            color: rgb(30, 50, 94);
-            margin-bottom: 15px;
-        }
-        .school-description {
-            font-size: 1.2rem;
-            color: #333;
-            background-color: rgba(240, 240, 240, 0.9);
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .btn-custom {
-            background-color: rgb(30, 50, 94);
-            color: white;
-            border: none;
-            margin: 5px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .btn-custom:hover {
-            background-color: rgb(20, 40, 70);
-        }
-    
+  
+.school-container {
+    background-color: #B44AF7; /* Color de fondo sólido */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    width: 60%;
+    color: white;
+    display: flex;
+    flex-direction: row; /* Cambiado de column a row */
+    align-items: center;
+    position: relative;
+}
+
+.school-image {
+    width: 20%;
+    height: auto;
+    background-image: url('https://leondegreiff.edu.co/Imagenes/Colegio.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.school-content {
+    width: 80%;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.school-title {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 2.5rem;
+    color: rgb(30, 50, 94);
+    margin-bottom: 15px;
+}
+
+.school-description {
+    font-size: 1.2rem;
+    color: #333;
+    background-color: rgba(240, 240, 240, 0.9);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.btn-custom {
+    background-color: rgb(30, 50, 94);
+    color: white;
+    border: none;
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: rgb(20, 40, 70);
+}
 
     .footer {
       background-color: rgb(30,50,94);
@@ -171,21 +171,21 @@
     </div>
 
 
-  <br>
-
-   <div class="container mt-4">
-        <div class="school-container">
-            <div class="school-content">
-                <h1 class="school-title">Nuestro Colegio</h1>
-                <p class="school-description">Bienvenidos a un espacio donde aprendemos, crecemos y nos divertimos juntos. Ubicado en el corazón de Ciudad Bolívar, en [inserta dirección], nuestro colegio es más que un lugar de estudios: es una comunidad vibrante donde cada día trae algo nuevo. ¡Ven y sé parte de esta experiencia única!</p>
-                <div class="mt-3">
-                    <button class="btn-custom">Ubicación y Símbolos</button>
-                    <button class="btn-custom">Datos</button>
-                    <button class="btn-custom">Horizonte Institucional</button>
-                </div>
+ <div class="container mt-4">
+    <div class="school-container">
+        <div class="school-image"></div> <!-- Imagen a la derecha -->
+        <div class="school-content">
+            <h1 class="school-title">Nuestro Colegio</h1>
+            <p class="school-description">Bienvenidos a un espacio donde aprendemos, crecemos y nos divertimos juntos. Ubicado en el corazón de Ciudad Bolívar, en [inserta dirección], nuestro colegio es más que un lugar de estudios: es una comunidad vibrante donde cada día trae algo nuevo. ¡Ven y sé parte de esta experiencia única!</p>
+            <div class="mt-3">
+                <button class="btn-custom">Ubicación y Símbolos</button>
+                <button class="btn-custom">Datos</button>
+                <button class="btn-custom">Horizonte Institucional</button>
             </div>
         </div>
     </div>
+</div>
+
  
 <footer class="footer">
   <div class="container text-center">
