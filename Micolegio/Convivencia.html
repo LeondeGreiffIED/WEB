@@ -78,29 +78,41 @@
 </nav>
 <br>
   
- <div class="container horizon-section mt-5">
-        <h2 class="text-center mb-4">Políticas de Convivencia Escolar</h2>
-        <p class="text-justify" tabindex="0" onclick="toggleInfo(1)">En el Colegio León de Greiff IED, las políticas de convivencia se fundamentan en conceptos clave que reflejan la filosofía de nuestra comunidad Leonista. Estas guías orientan nuestras interacciones diarias, promoviendo un ambiente armónico y respetuoso entre todos los miembros de la comunidad educativa.</p>
-        <div id="info1" class="hidden-info">
-            <p class="text-justify">Este enfoque nos permite construir relaciones significativas, donde cada voz es escuchada y valorada, fomentando un sentido de pertenencia y comunidad.</p>
-        </div>
-        
-        <p class="text-justify" tabindex="0" onclick="toggleInfo(2)">Para asegurar esta convivencia, es fundamental tener en cuenta las normativas que rigen la ciudadanía y convivencia, establecidas en los “Lineamientos para la Ciudadanía y la Convivencia” emitidos por la Secretaría de Educación de Bogotá, así como en el Artículo 39 del Decreto 1965 de 2013. Estos lineamientos son esenciales para el desarrollo de una cultura de respeto y colaboración, sentando las bases de nuestras relaciones interpersonales.</p>
-        <div id="info2" class="hidden-info">
-            <p class="text-justify">Al seguir estas normativas, nos comprometemos a crear un entorno seguro y acogedor, donde todos los estudiantes puedan crecer y desarrollarse plenamente.</p>
-        </div>
-
-        <h3 class="text-center mb-3">Ciudadanía y Convivencia</h3>
-        <p class="text-justify" tabindex="0" onclick="toggleInfo(3)">La ciudadanía se entiende como un conjunto de derechos y deberes que nos competen a todos. Por lo tanto, en el Colegio, buscamos romper las barreras de clase social, género y etnia, fomentando el desarrollo de capacidades ciudadanas. Este enfoque nos permite reconocer y valorar nuestra identidad como seres históricos y culturales, esenciales para el fortalecimiento de nuestra comunidad.</p>
-        <div id="info3" class="hidden-info">
-            <p class="text-justify">Al promover esta inclusión, fortalecemos nuestra comunidad y aseguramos que todos se sientan valorados y respetados.</p>
-        </div>
-
-        <p class="text-justify" tabindex="0" onclick="toggleInfo(4)">En este sentido, la convivencia escolar se define como la interacción coherente y armónica entre todos los miembros de la comunidad. Este tipo de convivencia se basa en principios fundamentales como la democracia, el respeto por las diferencias y la mediación en conflictos. Así, promovemos un entorno donde cada persona pueda desarrollarse plenamente, contribuyendo al bienestar general de la comunidad educativa.</p>
-        <div id="info4" class="hidden-info">
-            <p class="text-justify">La mediación efectiva de conflictos garantiza que cada desafío se convierta en una oportunidad de aprendizaje y crecimiento personal.</p>
-        </div>
-    </div>
+<div class="container horizon-section">
+    <h2 class="text-center mb-4">Convivencia Escolar</h2>
+    <p class="text-justify">Con el fin de aterrizar las políticas de convivencia
+escolar a las prácticas del Colegio León de Greiff
+IED, se precisan los conceptos fundamentales
+que orientan el ejercicio institucional, las cuales
+representan la filosofía de la comunidad Leonista
+viabilizada en los procesos de interacción
+cotidianos.</p>
+    
+    <p class="text-justify">Los derroteros de ley que orientan los procesos
+de ciudadanía y convivencia se encuentran
+plasmados en los “Lineamientos para la
+Ciudadanía y la Convivencia” emitidos por la
+Secretaría de Educación de Bogotá y el Artículo
+39 del Decreto 1965 de 2013.</p>
+    
+    <h3 class="text-center mb-3">Ciudadanía y Convivencia</h3>
+    <p class="text-justify">Se entiende la
+ciudadanía como el conjunto de derechos que
+son inherentes a cada sujeto y los deberes que
+se derivan de ellos, en un marco atravesado por
+categorías como la de clase social, género, etnia;
+las cuales se pretende romper en la Comunidad
+Educativa Leonista con el desarrollo de las
+capacidades ciudadanas esenciales y la asunción
+o aceptación como seres históricos culturalespolíticos. </p>
+    
+    <p class="text-justify">La convivencia escolar se concibe como la
+interacción coherente y armónica entre los
+miembros de la comunidad educativa, cuyos
+principios reguladores son la democracia, el
+reconocimiento de las diferencias y la mediación
+del conflicto.</p>
+</div>
 <footer class="footer">
   <div class="container text-center">
     <p>Derechos de autor &copy; 2024 Colegio XYZ. Todos los derechos reservados.</p>
@@ -112,24 +124,7 @@
 </footer>
 
 
-  <script>
-        function toggleInfo(infoId) {
-            const infoDiv = document.getElementById(`info${infoId}`);
-            infoDiv.style.display = infoDiv.style.display === "none" || infoDiv.style.display === "" ? "block" : "none";
-        }
-        
-        // Event listener for keyboard events
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                const activeElement = document.activeElement;
-                if (activeElement.tagName === 'P') {
-                    const index = Array.from(activeElement.parentNode.children).indexOf(activeElement) / 2 + 1; // Calculate the index
-                    toggleInfo(Math.ceil(index));
-                }
-            }
-        });
-    </script>
-  
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
