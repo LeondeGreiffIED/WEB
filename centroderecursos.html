@@ -9,72 +9,76 @@
   <style>
     /* Estilos personalizados */
 
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f9f9f9;
-    text-align: center; /* Centrar el texto */
-}
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center; /* Centrar el texto */
+        }
 
-header {
-    margin-bottom: 20px;
-}
+        header {
+            margin-bottom: 20px;
+        }
 
-.search-section {
-    margin-bottom: 30px;
-}
+        .search-section {
+            margin-bottom: 30px;
+        }
 
-.resources-section {
-    margin-bottom: 30px;
-}
+        .resources-section {
+            margin-bottom: 30px;
+        }
 
-h2 {
-    color: #333;
-}
+        h2 {
+            color: #333;
+        }
 
-.resources-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centrar los elementos */
-}
+        .resources-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centrar los elementos */
+        }
 
-.resource {
-    margin: 10px;
-    padding: 10px;
-    width: calc(33.33% - 20px); /* 3 columnas en pantallas grandes */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
-}
+        .resource {
+            margin: 10px;
+            padding: 10px;
+            width: calc(33.33% - 20px); /* 3 columnas en pantallas grandes */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+        }
 
-.resource img {
-    width: 50px; /* Tamaño del logo */
-    height: auto;
-}
+        .resource img {
+            width: 100px; /* Tamaño del logo (ajustar según necesidad) */
+            height: auto;
+            margin-bottom: 10px; /* Espacio entre logo y nombre */
+        }
 
-.resource a {
-    text-decoration: none;
-    color: #007BFF;
-}
+        .resource a {
+            display: block; /* Asegura que el enlace ocupe todo el ancho */
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            margin-bottom: 5px; /* Espacio entre nombre y descripción */
+        }
 
-.resource a:hover {
-    text-decoration: underline;
-}
+        .resource p {
+            margin: 0; /* Elimina márgenes de la descripción */
+            color: #555; /* Color de la descripción */
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .resource {
-        width: calc(50% - 20px); /* 2 columnas en pantallas medianas */
-    }
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .resource {
+                width: calc(50% - 20px); /* 2 columnas en pantallas medianas */
+            }
+        }
 
-@media (max-width: 480px) {
-    .resource {
-        width: 100%; /* 1 columna en pantallas pequeñas */
-    }
-}
-
+        @media (max-width: 480px) {
+            .resource {
+                width: 100%; /* 1 columna en pantallas pequeñas */
+            }
+        }
 
     
     .navbar {
