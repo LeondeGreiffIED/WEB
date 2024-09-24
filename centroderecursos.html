@@ -8,6 +8,75 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* Estilos personalizados */
+
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    text-align: center; /* Centrar el texto */
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.search-section {
+    margin-bottom: 30px;
+}
+
+.resources-section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #333;
+}
+
+.resources-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar los elementos */
+}
+
+.resource {
+    margin: 10px;
+    padding: 10px;
+    width: calc(33.33% - 20px); /* 3 columnas en pantallas grandes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.resource img {
+    width: 50px; /* Tamaño del logo */
+    height: auto;
+}
+
+.resource a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.resource a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .resource {
+        width: calc(50% - 20px); /* 2 columnas en pantallas medianas */
+    }
+}
+
+@media (max-width: 480px) {
+    .resource {
+        width: 100%; /* 1 columna en pantallas pequeñas */
+    }
+}
+
+
+    
     .navbar {
       background-color: #ffffff; /* Fondo blanco */
       border: 2px solid rgb(30,50,94); /* Borde morado */
@@ -93,8 +162,8 @@
 <br>
 
 
-<main>
-        <section>
+    <main>
+        <section class="search-section">
             <h2>Buscador</h2>
             <form action="https://www.google.com/search" method="get">
                 <input type="text" name="q" placeholder="Buscar en Google" required>
@@ -102,18 +171,33 @@
             </form>
         </section>
 
-        <section>
+        <section class="resources-section">
             <h2>Enlaces a Aplicaciones</h2>
-            <ul>
-                <li><a href="https://colab.research.google.com/" target="_blank">Google Colab</a></li>
-                <li><a href="https://scratch.mit.edu/" target="_blank">Scratch</a></li>
-                <li><a href="https://classroom.google.com/" target="_blank">Google Classroom</a></li>
-                <li><a href="https://www.tinkercad.com/" target="_blank">Tinkercad</a></li>
-            </ul>
+            <div class="resources-container">
+                <div class="resource">
+                    <img src="path/to/google-colab-logo.png" alt="Google Colab">
+                    <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>
+                    <p>Entorno de programación en Python en la nube.</p>
+                </div>
+                <div class="resource">
+                    <img src="path/to/scratch-logo.png" alt="Scratch">
+                    <a href="https://scratch.mit.edu/" target="_blank">Scratch</a>
+                    <p>Plataforma para aprender a programar creando juegos y animaciones.</p>
+                </div>
+                <div class="resource">
+                    <img src="path/to/classroom-logo.png" alt="Google Classroom">
+                    <a href="https://classroom.google.com/" target="_blank">Google Classroom</a>
+                    <p>Gestión de clases y tareas en línea.</p>
+                </div>
+                <div class="resource">
+                    <img src="path/to/tinkercad-logo.png" alt="Tinkercad">
+                    <a href="https://www.tinkercad.com/" target="_blank">Tinkercad</a>
+                    <p>Herramienta para diseño 3D y electrónica.</p>
+                </div>
+                <!-- Agrega más recursos según sea necesario -->
+            </div>
         </section>
     </main>
-
-
   
 <footer class="footer">
   <div class="container text-center">
