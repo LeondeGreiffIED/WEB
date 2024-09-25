@@ -68,21 +68,112 @@
 </nav>
 
 <!-- Header -->
+<!-- Header with Carousel -->
 <header id="header">
-  <div class="intro">
-    <div class="overlay">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 intro-text">
-            <h1>Landscaping Services</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-              Duis sed dapibus leo nec ornare diam.</p>
-            <a href="#about" class="btn btn-custom btn-lg page-scroll">More Info</a> </div>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Carousel Images -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="intro" style="background-image: url('image1.jpg');">
+          <div class="overlay">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 intro-text">
+                  <h1>Landscaping Services</h1>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                    Duis sed dapibus leo nec ornare diam.</p>
+                  <a href="#about" class="btn btn-custom btn-lg page-scroll">More Info</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="intro" style="background-image: url('image2.jpg');">
+          <div class="overlay">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 intro-text">
+                  <h1>Garden Design</h1>
+                  <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.</p>
+                  <a href="#about" class="btn btn-custom btn-lg page-scroll">More Info</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat for more images (3 more) -->
+      <div class="carousel-item">
+        <div class="intro" style="background-image: url('image3.jpg');">
+          <div class="overlay">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 intro-text">
+                  <h1>Watering Systems</h1>
+                  <p>Suspendisse potenti. Nullam accumsan lorem in dui.</p>
+                  <a href="#about" class="btn btn-custom btn-lg page-scroll">More Info</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="intro" style="background-image: url('image4.jpg');">
+          <div class="overlay">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 intro-text">
+                  <h1>Lawn Care</h1>
+                  <p>Aenean imperdiet. Etiam ultricies nisi vel augue.</p>
+                  <a href="#about" class="btn btn-custom btn-lg page-scroll">More Info</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="intro" style="background-image: url('image5.jpg');">
+          <div class="overlay">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 intro-text">
+                  <h1>Tree Trimming</h1>
+                  <p>Pellentesque auctor neque nec urna proin sapien ipsum.</p>
+                  <a href="#about" class="btn btn-custom btn-lg page-scroll">More Info</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Controls (Optional) -->
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
 </header>
+
+
 <!-- About Section -->
 <div id="about">
   <div class="container">
