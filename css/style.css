@@ -213,7 +213,7 @@ header .intro-text {
 	margin: 20px 0 0 0;
 }
 #about .about-text span {
-	color: #70ad47;
+	color: #0147a2;
 	font-weight: 700;
 	letter-spacing: -1px;
 }
@@ -240,7 +240,7 @@ header .intro-text {
 /* Services Section */
 #services {
 	padding: 120px 0;
-	background: #6aaf08;
+	background: #0147a2;
 }
 #services .service-media {
 	margin: 10px;
@@ -384,7 +384,7 @@ ol.type li a:hover {
 }
 #testimonials .overlay {
 	padding: 120px 0;
-	background: rgba(106, 175, 8, 0.85);
+	background: rgba(1, 71, 162, 0.85);
 }
 #testimonials h2 {
 	color: #fff;
