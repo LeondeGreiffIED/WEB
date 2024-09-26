@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,168 +7,150 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* Estilos personalizados */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        text-align: center; /* Centrar el texto */
+    }
 
-       body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            text-align: center; /* Centrar el texto */
-        }
+    header {
+        margin-bottom: 20px;
+    }
 
-        header {
-            margin-bottom: 20px;
-        }
+    .search-section {
+        margin-bottom: 30px;
+    }
 
-        .search-section {
-            margin-bottom: 30px;
-        }
+    .resources-section {
+        margin-bottom: 30px;
+    }
 
-        .resources-section {
-            margin-bottom: 30px;
-        }
+    h2 {
+        color: #333;
+    }
 
-        h2 {
-            color: #333;
-        }
+    .resources-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Centrar los elementos */
+    }
 
-        .resources-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* Centrar los elementos */
-        }
+    .resource {
+        margin: 10px;
+        padding: 10px;
+        width: calc(33.33% - 20px); /* 3 columnas en pantallas grandes */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: #fff;
+    }
 
+    .resource img {
+        width: 100px; /* Ancho fijo para todos los logos */
+        height: 100px; /* Altura fija para todos los logos */
+        object-fit: contain; /* Mantener la proporción sin recortar */
+        margin-bottom: 10px; /* Espacio entre logo y nombre */
+    }
+
+    .resource a {
+        display: block; /* Asegura que el enlace ocupe todo el ancho */
+        text-decoration: none;
+        color: #007BFF;
+        font-weight: bold;
+        margin-bottom: 5px; /* Espacio entre nombre y descripción */
+    }
+
+    .resource p {
+        margin: 0; /* Elimina márgenes de la descripción */
+        color: #555; /* Color de la descripción */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
         .resource {
-            margin: 10px;
-            padding: 10px;
-            width: calc(33.33% - 20px); /* 3 columnas en pantallas grandes */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            background-color: #fff;
+            width: calc(50% - 20px); /* 2 columnas en pantallas medianas */
         }
+    }
 
-        .resource img {
-            width: 100px; /* Tamaño del logo (ajustar según necesidad) */
-            height: auto;
-            margin-bottom: 10px; /* Espacio entre logo y nombre */
+    @media (max-width: 480px) {
+        .resource {
+            width: 100%; /* 1 columna en pantallas pequeñas */
         }
+    }
 
-        .resource a {
-            display: block; /* Asegura que el enlace ocupe todo el ancho */
-            text-decoration: none;
-            color: #007BFF;
-            font-weight: bold;
-            margin-bottom: 5px; /* Espacio entre nombre y descripción */
-        }
-
-        .resource p {
-            margin: 0; /* Elimina márgenes de la descripción */
-            color: #555; /* Color de la descripción */
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .resource {
-                width: calc(50% - 20px); /* 2 columnas en pantallas medianas */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .resource {
-                width: 100%; /* 1 columna en pantallas pequeñas */
-            }
-        }
-
-    
     .navbar {
-      background-color: #ffffff; /* Fondo blanco */
-      border: 2px solid rgb(30,50,94); /* Borde morado */
-      padding: 20px; /* Padding de 20px */
+        background-color: #ffffff; /* Fondo blanco */
+        border: 2px solid rgb(30,50,94); /* Borde morado */
+        padding: 20px; /* Padding de 20px */
     }
 
     .navbar-brand, .navbar-nav .nav-link {
-      color: rgb(30,50,94); /* Color del texto */
+        color: rgb(30,50,94); /* Color del texto */
     }
 
     .navbar-brand:hover, .navbar-nav .nav-link:hover {
-      color: rgb(30,50,94); /* Cambiar color al pasar el ratón */
+        color: rgb(30,50,94); /* Cambiar color al pasar el ratón */
     }
 
-
-        .custom-container {
-      background-color: rgb(85,0,226); /* Fondo colorido */
-      color: white;
-      position: relative;
-      padding: 20px;
-      border-radius: 10px;
-     
-      overflow: hidden;
+    .custom-container {
+        background-color: rgb(85,0,226); /* Fondo colorido */
+        color: white;
+        position: relative;
+        padding: 20px;
+        border-radius: 10px;
+        overflow: hidden;
     }
 
-         .custom-container-two {
-      background-color: #0147a2; /* Fondo colorido */
-      color: white;
-      position: relative;
-      padding: 20px;
-      border-radius: 10px;
-     
-      overflow: hidden;
+    .custom-container-two {
+        background-color: #0147a2; /* Fondo colorido */
+        color: white;
+        position: relative;
+        padding: 20px;
+        border-radius: 10px;
+        overflow: hidden;
     }
-    
-    
+
     .carousel-title {
-      background-color: white; /* Fondo morado */
-      color: rgb(30,50,94); /* Texto blanco */
+        background-color: white; /* Fondo morado */
+        color: rgb(30,50,94); /* Texto blanco */
     }
-
 
     .carousel-item img {
-      max-height: 800px; /* Altura máxima de las imágenes */
-      width: auto; /* Ancho automático para mantener la proporción */
+        max-height: 800px; /* Altura máxima de las imágenes */
+        width: auto; /* Ancho automático para mantener la proporción */
     }
 
     .carousel {
-      max-width: 1000px; /* Ancho máximo del carrusel */
-      margin: auto; /* Centrar el carrusel */
+        max-width: 1000px; /* Ancho máximo del carrusel */
+        margin: auto; /* Centrar el carrusel */
     }
-    
-   .card-text {
-            text-align: justify; /* Justificar el texto */
-        }
 
-     .card-img-top {
-            height: 250px; /* Altura fija para las imágenes */
-       
-            object-fit: contain; /* Ajustar la imagen para que se mantenga completa */
+    .card-text {
+        text-align: justify; /* Justificar el texto */
+    }
 
-        }
+    .card-img-top {
+        height: 250px; /* Altura fija para las imágenes */
+        object-fit: contain; /* Ajustar la imagen para que se mantenga completa */
+    }
 
     .footer {
-      background-color: rgb(30,50,94);
-      color: #fff;
-      padding: 20px 0;
+        background-color: rgb(30,50,94);
+        color: #fff;
+        padding: 20px 0;
     }
-
-
-      
-
-
-    
   </style>
 </head>
 <body>
 
- 
-
-
 <div class="container mt-4">
-  <div class="row align-items-center custom-container-two">
-    <!-- Descripción y botón al 100% del contenedor -->
-    <div class="col-md-12">
-      <p>Descubre todo lo que nuestro colegio tiene para ofrecer. Conoce nuestras instalaciones, programas académicos y actividades que fomentan el desarrollo integral de nuestros estudiantes. ¡Explora más aquí!</p>
-      <a href="https://leondegreiff.edu.co/" class="btn" style="background-color: rgb(30, 50, 94); color: white;">Conocer el Colegio</a>
+    <div class="row align-items-center custom-container-two">
+        <div class="col-md-12">
+            <p>Descubre todo lo que nuestro colegio tiene para ofrecer. Conoce nuestras instalaciones, programas académicos y actividades que fomentan el desarrollo integral de nuestros estudiantes. ¡Explora más aquí!</p>
+            <a href="https://leondegreiff.edu.co/" class="btn" style="background-color: rgb(30, 50, 94); color: white;">Conocer el Colegio</a>
+        </div>
     </div>
-  </div>
 </div>
 <br>
 
@@ -179,7 +160,7 @@
         <h2>Inicia tu navegación aquí</h2>
         <p>Explora todos los recursos y actividades de nuestro colegio. Utiliza el buscador para encontrar lo que necesites.</p>
     </div>
-    
+
     <div class="text-center mb-4">
         <img src="https://leondegreiff.edu.co/Imagenes/CR/google.png" alt="Google Colab" style="max-width: 100%; height: auto;">
     </div>
@@ -192,44 +173,40 @@
     </div>
 </section>
 
-  <hr>
-    <main>
-   
-        <section class="resources-section">
-            
-            <div class="resources-container">
-                <div class="resource">
-                      <img src="https://leondegreiff.edu.co/Imagenes/CR/gmail.svg" alt="Google Classroom">
-                    <a href="https://accounts.google.com/AccountChooser/signinchooser?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=AccountChooser&ec=asw-gmail-globalnav-signin&ddm=0" target="_blank">Gmail</a>
-                    <p>Gestión de clases y tareas en línea.</p>
-                    
-                </div>
-                <div class="resource">
-                    <img src="https://leondegreiff.edu.co/Imagenes/CR/classroom.png" alt="Google Classroom">
-                    <a href="https://classroom.google.com/" target="_blank">Google Classroom</a>
-                    <p>Gestión de clases y tareas en línea.</p>
-                </div>
-                <div class="resource">            
-                    <img src="https://leondegreiff.edu.co/Imagenes/CR/scratch.svg" alt="Scratch">
-                    <a href="https://scratch.mit.edu/projects/editor/" target="_blank">Scratch</a>
-                    <p>Plataforma para aprender a programar creando juegos y animaciones.</p>
-                
-                </div>
-              <div class="resource">
-                    <img src="https://leondegreiff.edu.co/Imagenes/CR/code.svg" alt="Scratch">
-                    <a href="https://code.org/" target="_blank">Code</a>
-                    <p>Descubre herramientas y recursos educativos para potenciar tu aprendizaje y habilidades de programación.</p>
-                </div>
-                <div class="resource">
-                    <img src="https://leondegreiff.edu.co/Imagenes/CR/googlecolab.png" alt="Google Colab">
-                    <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>
-                    <p>Entorno de programación en Python en la nube.</p>
-                </div>
-                <div class="resource">
-                    <img src="https://leondegreiff.edu.co/Imagenes/CR/tinkercad.png" alt="Tinkercad">
-                    <a href="https://www.tinkercad.com/" target="_blank">Tinkercad</a>
-                    <p>Herramienta para diseño 3D y electrónica.</p>
-                </div>
+<hr>
+<main>
+    <section class="resources-section">
+        <div class="resources-container">
+            <div class="resource">
+                <img src="https://leondegreiff.edu.co/Imagenes/CR/gmail.svg" alt="Google Classroom">
+                <a href="https://accounts.google.com/AccountChooser/signinchooser?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=AccountChooser&ec=asw-gmail-globalnav-signin&ddm=0" target="_blank">Gmail</a>
+                <p>Gestión de clases y tareas en línea.</p>
+            </div>
+            <div class="resource">
+                <img src="https://leondegreiff.edu.co/Imagenes/CR/classroom.png" alt="Google Classroom">
+                <a href="https://classroom.google.com/" target="_blank">Google Classroom</a>
+                <p>Gestión de clases y tareas en línea.</p>
+            </div>
+            <div class="resource">            
+                <img src="https://leondegreiff.edu.co/Imagenes/CR/scratch.svg" alt="Scratch">
+                <a href="https://scratch.mit.edu/projects/editor/" target="_blank">Scratch</a>
+                <p>Plataforma para aprender a programar creando juegos y animaciones.</p>
+            </div>
+            <div class="resource">
+                <img src="https://leondegreiff.edu.co/Imagenes/CR/code.svg" alt="Scratch">
+                <a href="https://code.org/" target="_blank">Code</a>
+                <p>Descubre herramientas y recursos educativos para potenciar tu aprendizaje y habilidades de programación.</p>
+            </div>
+            <div class="resource">
+                <img src="https://leondegreiff.edu.co/Imagenes/CR/googlecolab.png" alt="Google Colab">
+                <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>
+                <p>Entorno de programación en Python en la nube.</p>
+            </div>
+            <div class="resource">
+                <img src="https://leondegreiff.edu.co/Imagenes/CR/tinkercad.png" alt="Tinkercad">
+                <a href="https://www.tinkercad.com/" target="_blank">Tinkercad</a>
+                <p>Herramienta para diseño 3D y electrónica.</p>
+            </div>
 
             <div class="resource">
                     <img src="https://leondegreiff.edu.co/Imagenes/CR/canva.svg" alt="Canva">
