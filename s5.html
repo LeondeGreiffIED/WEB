@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Encuesta de Salud Mental</title>
+    <style>
+        #image-container {
+            max-width: 100%; 
+            overflow: hidden;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+
+        #image {
+            max-width: 100%; 
+            height: auto; 
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta de Salud Mental</h1>
+
+        <!-- Formulario para capturar información personal -->
+        <div id="initial-form">
+            <div class="welcome-message">
+                <h1>¡Bienvenidos a la Socialización del Ciclo V!</h1>
+                <p>Nos complace tenerlos aquí. En esta ocasión, queremos invitarles a participar en una breve encuesta sobre salud mental, la cual es el resultado del esfuerzo y dedicación de nuestros estudiantes de los cursos de este ciclo.</p>
+                <p>¡Comencemos!</p>
+            </div>
+            
+            <h2>Información Personal</h2>
+            <form id="personal-info-form">
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="surname">Apellido:</label>
+                    <input type="text" id="surname" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="course">Curso:</label>
+                    <input type="text" id="course" required><br>
+                </div>
+                <button type="submit">Iniciar Encuesta</button>
+            </form>
+        </div>
+
+        <!-- Contenedor de preguntas -->
+        <div id="greeting" class="hidden"></div>
+        <div id="questions-container" class="hidden">
+            <h2 id="questions-title">Por favor, responde las siguientes preguntas:</h2>
+            <form id="quiz-form">
+                <!-- Las preguntas se añadirán aquí dinámicamente -->
+            </form>
+            <br>
+            <button id="submit-button">Enviar Respuestas</button>
+        </div>
+
+        <!-- Contenedor de resultados -->
+        <div id="result-container" class="hidden">
+            <h2>Resultado:</h2>
+            <p id="result-text"></p>
+            <button id="restart-button">Volver a empezar</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
