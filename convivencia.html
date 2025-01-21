@@ -84,9 +84,20 @@
         La convivencia escolar se concibe en la institución como la interacción coherente y armónica entre los miembros de la comunidad educativa, cuyos principios reguladores son la democracia, el reconocimiento de las diferencias y la mediación
 del conflicto. El sistema de gestión convivencial permite hacer seguimiento a la convivencia escolar, a la cual se puede acceder a continuación introduciendo el codigo asignado por la institución:
     </p>
-    <div class="d-flex justify-content-center my-4">
-        <img src="http://leondegreiff.edu.co/Imagenes/ce.jpg" alt="Descripción de la imagen" class="img-fluid w-50 custom-img" />
+        <div class="container">
+        <!-- Mensaje de advertencia si el usuario no está activo -->
+        <div id="userStatus" class="alert alert-danger d-none" role="alert">
+            El usuario no está activo.
+        </div>
+
+        <!-- Formulario con cuadro de texto y botón -->
+        <div class="mb-3">
+            <label for="inputText" class="form-label">Ingrese su información:</label>
+            <input type="text" class="form-control" id="inputText" placeholder="Escriba aquí...">
+        </div>
+        <button class="btn btn-primary" onclick="enviarDatos()">Enviar</button>
     </div>
+
     <br>
     <p style="text-align: justify;">
        Los conceptos basicos con los que se comprende la convivencia escolar en la institución se encuentran haciendo click en el siguiente botón:
@@ -115,7 +126,24 @@ del conflicto. El sistema de gestión convivencial permite hacer seguimiento a l
         </div>
       </div>
     </div>
+  <script>
+        // Simula el estado del usuario (false significa que no está activo)
+        const usuarioActivo = false;
 
+        // Si el usuario no está activo, mostrar el mensaje
+        if (!usuarioActivo) {
+            document.getElementById("userStatus").classList.remove("d-none");
+        }
+
+        function enviarDatos() {
+            const inputText = document.getElementById("inputText").value;
+            if (inputText.trim() === "") {
+                alert("Por favor, ingrese algún dato.");
+            } else {
+                alert("Datos enviados: " + inputText);
+            }
+        }
+    </script>
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
     <!-- Bootstrap JS -->
