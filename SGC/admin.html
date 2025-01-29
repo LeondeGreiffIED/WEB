@@ -8,33 +8,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
     <script>
         // Función para encriptar el JSON usando AES
-        function encrypt(text) {
-            const crypto = window.crypto || window.msCrypto; // Para compatibilidad con navegadores
-            const encoder = new TextEncoder();
-            const iv = crypto.getRandomValues(new Uint8Array(16));  // Crear un IV aleatorio
-            const key = encoder.encode('clave-secreta-muy-larga'); // La clave secreta (no subirla en el código real)
-            
-            return crypto.subtle.importKey(
-                'raw',
-                key,
-                { name: 'AES-CBC', length: 256 },
-                false,
-                ['encrypt']
-            ).then(function(key) {
-                return crypto.subtle.encrypt(
-                    { name: 'AES-CBC', iv: iv },
-                    key,
-                    encoder.encode(text)
-                ).then(function(encrypted) {
-                    const buffer = new Uint8Array(encrypted);
-                    let encryptedHex = '';
-                    buffer.forEach(byte => {
-                        encryptedHex += byte.toString(16).padStart(2, '0');
-                    });
-                    return iv.join('') + ':' + encryptedHex;
-                });
+      // Función para encriptar el JSON usando AES
+function encrypt(text) {
+    const encoder = new TextEncoder();
+    let key = encoder.encode('clave-secreta-muy-larga'); // Convertimos la clave en un arreglo de bytes
+
+    // Aseguramos que la clave tenga 32 bytes (256 bits) de longitud
+    if (key.length < 32) {
+        const padding = new Uint8Array(32 - key.length); // Creamos el padding
+        key = new Uint8Array([...key, ...padding]); // Completa con ceros hasta 32 bytes
+    } else if (key.length > 32) {
+        key = key.slice(0, 32); // Si la clave es más larga, la recortamos a 32 bytes
+    }
+
+    const iv = window.crypto.getRandomValues(new Uint8Array(16));  // Crear un IV aleatorio
+
+    return window.crypto.subtle.importKey(
+        'raw',
+        key,
+        { name: 'AES-CBC', length: 256 },
+        false,
+        ['encrypt']
+    ).then(function(cryptoKey) {
+        return window.crypto.subtle.encrypt(
+            { name: 'AES-CBC', iv: iv },
+            cryptoKey,
+            encoder.encode(text)
+        ).then(function(encrypted) {
+            const buffer = new Uint8Array(encrypted);
+            let encryptedHex = '';
+            buffer.forEach(byte => {
+                encryptedHex += byte.toString(16).padStart(2, '0');
             });
-        }
+            return iv.join('') + ':' + encryptedHex;
+        });
+    });
+}
+
 
         // Función para manejar la carga del archivo de Excel
         function handleFileUpload(event) {
@@ -114,3 +124,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
