@@ -22,21 +22,23 @@
             }
 
             // Lógica de redirección según el código ingresado
-            switch (codigo) {
-                case "12345":
-                    window.location.href = "admin.html"; // Redirigir a página de admin
-                    break;
-                case "67890":
-                    window.location.href = "usuario1.html"; // Redirigir a página de usuario1
-                    break;
-                case "11223":
-                    window.location.href = "usuario2.html"; // Redirigir a página de usuario2
-                    break;
-                default:
-                    mensaje.innerHTML = "Código incorrecto.";
-                    mensaje.classList.add("alert", "alert-danger");
-                    break;
-            }
+           // Lógica de redirección según el código ingresado
+        switch (codigo) {
+            case "12345":
+                window.open("admin.html", "_blank"); // Redirigir a página de admin en una nueva pestaña
+                break;
+            case "67890":
+                window.open("usuario1.html", "_blank"); // Redirigir a página de usuario1 en una nueva pestaña
+                break;
+            case "11223":
+                window.open("usuario2.html", "_blank"); // Redirigir a página de usuario2 en una nueva pestaña
+                break;
+            default:
+                mensaje.innerHTML = "Código incorrecto.";
+                mensaje.classList.add("alert", "alert-danger");
+                break;
+        }
+
         }
     </script>
 </head>
