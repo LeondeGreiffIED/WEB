@@ -6,43 +6,36 @@
     <title>Convivencia Escolar</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script>
-        function validarLogin(event) {
+        function validarCodigo(event) {
             event.preventDefault();
             
-            let usuario = document.getElementById("usuario").value;
-            let password = document.getElementById("password").value;
+            let codigo = document.getElementById("codigo").value;
             let mensaje = document.getElementById("mensaje");
             
             mensaje.innerHTML = "";
             mensaje.classList.remove("alert", "alert-danger");
             
-            if (usuario === "" || password === "") {
-                mensaje.innerHTML = "Por favor, complete todos los campos.";
+            if (codigo === "") {
+                mensaje.innerHTML = "Por favor, ingrese el código.";
                 mensaje.classList.add("alert", "alert-danger");
                 return;
             }
 
-            let usuariosRegistrados = {
-                "admin": "admin123",
-                "usuario1": "clave123",
-                "usuario2": "password456"
-            };
-            
-            if (usuariosRegistrados[usuario] && usuariosRegistrados[usuario] === password) {
-                switch (usuario) {
-                    case "admin":
-                        window.location.href = "admin.html";
-                        break;
-                    case "usuario1":
-                        window.location.href = "usuario1.html";
-                        break;
-                    case "usuario2":
-                        window.location.href = "usuario2.html";
-                        break;
-                }
-            } else {
-                mensaje.innerHTML = "Usuario o contraseña incorrectos.";
-                mensaje.classList.add("alert", "alert-danger");
+            // Lógica de redirección según el código ingresado
+            switch (codigo) {
+                case "12345":
+                    window.location.href = "admin.html"; // Redirigir a página de admin
+                    break;
+                case "67890":
+                    window.location.href = "usuario1.html"; // Redirigir a página de usuario1
+                    break;
+                case "11223":
+                    window.location.href = "usuario2.html"; // Redirigir a página de usuario2
+                    break;
+                default:
+                    mensaje.innerHTML = "Código incorrecto.";
+                    mensaje.classList.add("alert", "alert-danger");
+                    break;
             }
         }
     </script>
@@ -56,11 +49,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Mi Colegio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Evaluación Institucional</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Media Fortalecida</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Convivencia</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Red Académica</a></li>
+                 <li><a href="Micolegio.html" class="page-scroll">Mi Colegio</a></li>
+        <li><a href="https://colegioleondegreiff.jimdofree.com/evaluac%C3%ADon-institucional/" class="page-scroll">Evaluación Institucional</a></li>
+        <li><a href="media.html" class="page-scroll">Media Fortalecida</a></li>
+        <li><a href="convivencia.html" class="page-scroll">Convivencia</a></li>
+        <li><a href="https://www.redacademica.edu.co/colegios/colegio-leon-de-greiff-ied" class="page-scroll">Red Académica</a></li>
                 </ul>
             </div>
         </div>
@@ -72,15 +65,10 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card p-4 shadow">
-                
-                    <form onsubmit="validarLogin(event)">
+                    <form onsubmit="validarCodigo(event)">
                         <div class="mb-3">
-                            <label for="usuario" class="form-label">Código</label>
-                            <input type="text" class="form-control" id="usuario" placeholder="Ingrese su usuario">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                            <label for="codigo" class="form-label">Código</label>
+                            <input type="text" class="form-control" id="codigo" placeholder="Ingrese su código">
                         </div>
                         
                         <button type="submit" class="btn btn-primary w-100">Ingresar</button>
@@ -101,3 +89,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
