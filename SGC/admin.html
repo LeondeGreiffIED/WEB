@@ -16,7 +16,7 @@
                 const data = e.target.result;
                 const workbook = XLSX.read(data, { type: 'binary' });
                 let jsonData = [];
-                let jsonDataDecrypted = [];
+                let decryptedData = [];
     
                 const validSheets = ["1001", "1002", "1003", "1101", "1102", "1103"].map(sheet => sheet.trim());
     
@@ -39,10 +39,18 @@
                         // Extraer datos desde la fila de estudiantes (2 filas debajo de "NOMBRE DEL ESTUDIANTE")
                         const students = sheetData.slice(startRow + 2).map(row => {
                             let studentName = row[colB] ? row[colB] : ""; // Columna B - Nombre
+                            let encryptedName = encryptText(studentName);
+                            let password = generatePassword();
+                            
+                            decryptedData.push({
+                                "Curso": sheetName.trim(),
+                                "Nombre": studentName,
+                                "Contraseña": password
+                            });
+                            
                             return {
                                 "Curso": sheetName.trim(),
-                                "Nombre": encryptText(studentName),
-                                "Nombre_Desencriptado": studentName, // Para verificación
+                                "Nombre": encryptedName,
                                 "Fallas": row[colQD] || 0, // Columna QD
                                 "Fallas Justificadas": row[colQE] || 0, // Columna QE
                                 "Evasiones": row[colQG] || 0, // Columna QG
@@ -50,18 +58,18 @@
                             };
                         }).filter(student => student.Nombre !== "");
                         
-                        jsonData = jsonData.concat(students.map(({ Nombre_Desencriptado, ...rest }) => rest));
-                        jsonDataDecrypted = jsonDataDecrypted.concat(students);
+                        jsonData = jsonData.concat(students);
                     }
                 });
     
                 // Ordenar por nombre encriptado
                 jsonData.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
-                jsonDataDecrypted.sort((a, b) => a.Nombre_Desencriptado.localeCompare(b.Nombre_Desencriptado));
     
-                // Descargar JSONs
+                // Descargar JSON cifrado
                 downloadJson(jsonData, 'datos_cursos.json');
-                downloadJson(jsonDataDecrypted, 'datos_cursos_desencriptados.json');
+                
+                // Descargar JSON con nombres reales y contraseñas
+                downloadJson(decryptedData, 'datos_cursos_desenc.json');
             };
     
             reader.readAsBinaryString(file);
@@ -69,6 +77,15 @@
     
         function encryptText(text) {
             return text.split('').map(char => String.fromCharCode(char.charCodeAt(0) + 4)).join('');
+        }
+    
+        function generatePassword() {
+            const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let password = '';
+            for (let i = 0; i < 6; i++) {
+                password += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return password;
         }
     
         function downloadJson(data, filename) {
