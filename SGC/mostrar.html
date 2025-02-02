@@ -65,6 +65,17 @@
                     break;
             }
         }
+
+        // Calcular el último viernes
+            function getLastFriday() {
+                let today = new Date();
+                let dayOfWeek = today.getDay();
+                let lastFriday = new Date(today);
+                lastFriday.setDate(today.getDate() - ((dayOfWeek + 2) % 7));
+                return lastFriday.toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric' });
+            }
+            document.getElementById("lastUpdate").textContent = "Última actualización: " + getLastFriday();
+        
     </script>
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
@@ -91,6 +102,12 @@
             <p><strong>Fallas Justificadas:</strong> <span id="uniformes"></span></p>
         </div>
     </div>
+
+     <div class="container text-center my-4">
+        <p id="lastUpdate" class="text-muted"></p>
+    </div>
+
+    
     <footer class="bg-dark text-white text-center py-3 mt-auto">
         <p>&copy; 2024 Colegio León de Greiff (IED). Todos los derechos reservados.</p>
     </footer>
