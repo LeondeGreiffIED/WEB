@@ -22,6 +22,7 @@
                                 document.getElementById("fallasj").textContent = data[key]["Fallas Justificadas"];
                                 document.getElementById("retardos").textContent = data[key].Retardos;
                                 document.getElementById("evasiones").textContent = data[key].Evasiones;
+                                document.getElementById("uniforme").textContent = data[key].Uniforme;
                                 encontrado = true;
                                 break;
                             }
@@ -73,7 +74,7 @@
             <p><strong>Fallas Justificadas:</strong> <span id="fallasj"></span></p>
             <p><strong>Evasiones:</strong> <span id="evasiones"></span></p>
             <p><strong>Retardos:</strong> <span id="retardos"></span></p>
-           
+            <p><strong>Uniforme incompleto:</strong> <span id="uniforme"></span></p>
         </div>
     </div>
     <div class="container text-center my-4">
