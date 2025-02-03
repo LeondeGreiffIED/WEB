@@ -34,8 +34,11 @@
                         const colQE = XLSX.utils.decode_col("QE");
                         const colQG = XLSX.utils.decode_col("QG");
                         const colQI = XLSX.utils.decode_col("QI");
+                        const colQK = XLSX.utils.decode_col("QK"); 
                         const colTG = XLSX.utils.decode_col("TG"); // Columna TG - Clave
-    
+                       
+
+                        
                         // Extraer datos desde la fila de estudiantes (2 filas debajo de "NOMBRE DEL ESTUDIANTE")
                         const students = sheetData.slice(startRow + 2).map(row => {
                             let studentName = row[colB] ? row[colB] : ""; // Columna B - Nombre
@@ -49,6 +52,7 @@
                                 "Fallas Justificadas": row[colQE] || 0, // Columna QE
                                 "Evasiones": row[colQG] || 0, // Columna QG
                                 "Retardos": row[colQI] || 0,  // Columna QI
+                                "Uniforme": row[colQI] || 0,  // Columna Qk
                                 "Clave": clave
                             };
                         }).filter(student => student.Nombre !== "");
