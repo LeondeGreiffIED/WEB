@@ -18,8 +18,10 @@
                         for (let key in data) {
                             if (data[key].Clave === codigo) {
                                 document.getElementById("nombre").textContent = data[key].Nombre;
+                                document.getElementById("fallas").textContent = data[key].Fallas;
+                                document.getElementById("fallasj").textContent = data[key]["Fallas Justificadas"];
                                 document.getElementById("retardos").textContent = data[key].Retardos;
-                                document.getElementById("uniformes").textContent = data[key]["Fallas Justificadas"];
+                                document.getElementById("evasiones").textContent = data[key].Evasiones;
                                 encontrado = true;
                                 break;
                             }
@@ -62,12 +64,16 @@
             </div>
         </div>
     </nav>
+    <br>
     <div class="container my-5" style="margin-top: 100px;" id="contenido">
         <h1 class="text-center">Información de Convivencia</h1>
         <div class="card p-4 shadow">
             <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+            <p><strong>Fallas:</strong> <span id="fallas"></span></p>
+            <p><strong>Fallas Justificadas:</strong> <span id="fallasj"></span></p>
+            <p><strong>Evasiones:</strong> <span id="evasiones"></span></p>
             <p><strong>Retardos:</strong> <span id="retardos"></span></p>
-            <p><strong>Fallas Justificadas:</strong> <span id="uniformes"></span></p>
+           
         </div>
     </div>
     <div class="container text-center my-4">
