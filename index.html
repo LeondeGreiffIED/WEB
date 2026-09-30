@@ -321,21 +321,27 @@ Aquí podrás ampliar detalles sobre diversas actividades y proyectos que realiz
 <script type="text/javascript" src="js/main.js"></script>
 <!-- pop up
     ====================================== -->
-<div id="modal-matriculas" class="modal-fondo">
-    <div class="modal-contenido-imagen">
-        <!-- Botón para cerrar -->
-        <button onclick="cerrarModal()" class="modal-cerrar">&times;</button>
+<!-- BLOQUE DEL MODAL DE MATRÍCULAS -->
+<div id="modal-matriculas" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background-color: rgba(0, 0, 0, 0.8) !important; display: flex !important; justify-content: center !important; align-items: center !important; z-index: 999999 !important;">
+    <div style="position: relative; width: 90%; max-width: 500px; line-height: 0;">
         
-        <!-- Enlace para que al hacer clic en la imagen los lleve a la sección de matrículas -->
-        <a href="matricula.html">
-            <img src="img/services/matricula.png" alt="Información de Matrículas Colegio" class="img-modal">
+        <!-- Botón Cerrar -->
+        <button onclick="cerrarModal()" style="position: absolute; top: -15px; right: -15px; font-size: 24px; background: #ff3333; color: white; border: none; cursor: pointer; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.3); z-index: 100001;">&times;</button>
+        
+        <!-- Imagen con enlace -->
+        <a href="matricula">
+            <img src="img/services/matricula.png" alt="Matrículas" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 25px rgba(0,0,0,0.5);">
         </a>
+        
     </div>
 </div>
-    
+
+<script>
 function cerrarModal() {
     document.getElementById('modal-matriculas').style.display = 'none';
 }
+</script>
+<!-- FIN DEL BLOQUE -->
 
     <!-- ================================= -->
 </body>
