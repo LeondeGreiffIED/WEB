@@ -305,20 +305,29 @@
         $('closeBtn').disabled = !isConnected;
       }
 
-      async function sendCommand(command) {
-        if (!connected || !txCharacteristic) {
-          writeLog('Conecta la micro:bit antes de enviar comandos.');
-          return;
+   async function sendCommand(command) {
+    if (!device || !device.gatt || !device.gatt.connected || !tx) {
+        log("Error: la micro:bit no está conectada.");
+        return;
+    }
+
+    try {
+        const mensaje = new TextEncoder().encode(command + "\n");
+
+        if (tx.properties.writeWithoutResponse) {
+            await tx.writeValueWithoutResponse(mensaje);
+        } else if (tx.properties.write) {
+            await tx.writeValueWithResponse(mensaje);
+        } else {
+            log("Error: la característica UART no permite escribir.");
+            return;
         }
 
-        try {
-          const bytes = new TextEncoder().encode(command + '\n');
-          await txCharacteristic.writeValue(bytes);
-          writeLog('Comando enviado a la micro:bit: ' + command);
-        } catch (error) {
-          writeLog('Error al enviar el comando Bluetooth: ' + error.message);
-        }
-      }
+        log("Comando enviado correctamente: " + command);
+    } catch (error) {
+        log("Error Bluetooth GATT: " + error.name + " — " + error.message);
+    }
+}
 
       async function connectMicrobit() {
         if (!navigator.bluetooth) {
