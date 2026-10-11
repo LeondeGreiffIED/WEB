@@ -574,11 +574,34 @@ async function conectarMicrobit() {
 
     servidorBluetooth = await dispositivo.gatt.connect();
 
-    const servicio = await servidorBluetooth.getPrimaryService(
+  /*  const servicio = await servidorBluetooth.getPrimaryService(
       UART_SERVICE
     );
 
-    caracteristicaTX = await servicio.getCharacteristic(UART_RX);
+    caracteristicaTX = await servicio.getCharacteristic(UART_RX);*/
+    
+const servicio = await servidorBluetooth.getPrimaryService(
+  UART_SERVICE
+);
+
+console.log("Servicio UART:", servicio.uuid);
+
+const caracteristicas = await servicio.getCharacteristics();
+
+for (const caracteristica of caracteristicas) {
+  console.log("Característica:", caracteristica.uuid);
+  console.log("Propiedades:", caracteristica.properties);
+}
+
+caracteristicaTX = await servicio.getCharacteristic(UART_RX);
+
+console.log("Característica seleccionada:", caracteristicaTX.uuid);
+console.log("Permite escribir:", caracteristicaTX.properties.write);
+console.log(
+  "Permite escribir sin respuesta:",
+  caracteristicaTX.properties.writeWithoutResponse
+);
+
 
     registrar(
       "UART detectado. Escritura con respuesta: " +
