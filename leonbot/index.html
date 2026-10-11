@@ -1146,14 +1146,21 @@ Esperando conexión Bluetooth...</div>
         }
       };
 
-      utterance.onboundary = (evento) => {
+ /*     utterance.onboundary = (evento) => {
         if (!sincronizar || miSesion !== sesionVoz) return;
 
         const inicio = Math.max(0, Number(evento.charIndex) || 0);
         const resto = texto.slice(inicio);
         const coincidencia = resto.match(
           /^\s*([A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)/ 
-        );
+        );*/
+      
+utterance.onboundary = function (evento) {
+    if (evento.name && evento.name !== "word") return;
+
+    enviarSilabasPalabra(texto, evento.charIndex);
+};
+
 
         if (!coincidencia) return;
 
