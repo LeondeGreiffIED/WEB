@@ -580,46 +580,26 @@ async function conectarMicrobit() {
 
     caracteristicaTX = await servicio.getCharacteristic(UART_RX);*/
     
+
 const servicio = await servidorBluetooth.getPrimaryService(
   UART_SERVICE
 );
 
-console.log("Servicio UART:", servicio.uuid);
-
-const caracteristicas = await servicio.getCharacteristics();
-
-for (const caracteristica of caracteristicas) {
-  console.log("Característica:", caracteristica.uuid);
-  console.log("Propiedades:", caracteristica.properties);
-}
-
 caracteristicaTX = await servicio.getCharacteristic(UART_RX);
 
-console.log("Característica seleccionada:", caracteristicaTX.uuid);
-console.log("Permite escribir:", caracteristicaTX.properties.write);
-console.log(
-  "Permite escribir sin respuesta:",
+log("Servicio UART: " + servicio.uuid);
+log("Característica: " + caracteristicaTX.uuid);
+log("Escritura: " + caracteristicaTX.properties.write);
+log(
+  "Escritura sin respuesta: " +
   caracteristicaTX.properties.writeWithoutResponse
 );
+log("Notificaciones: " + caracteristicaTX.properties.notify);
+log("Lectura: " + caracteristicaTX.properties.read);
 
-console.log("UUID del servicio:", servicio.uuid);
-console.log("UUID de la característica:", caracteristicaTX.uuid);
 
-console.log("¿Admite escritura?", caracteristicaTX.properties.write);
-console.log(
-  "¿Admite escritura sin respuesta?",
-  caracteristicaTX.properties.writeWithoutResponse
-);
-console.log("¿Admite notificaciones?", caracteristicaTX.properties.notify);
-console.log("¿Admite lectura?", caracteristicaTX.properties.read);
-
-    registrar(
-      "UART detectado. Escritura con respuesta: " +
-      caracteristicaTX.properties.write +
-      " | sin respuesta: " +
-      caracteristicaTX.properties.writeWithoutResponse
-    );
-
+/*========================================*/
+    
     actualizarConexion(true);
     estadoRobot.textContent = "Conectada. Puedes probar la boca.";
 
