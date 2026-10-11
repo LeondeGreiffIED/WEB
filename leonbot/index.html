@@ -2,1370 +2,1555 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101827">
-<title>LeonBot · Asistente Leonista</title>
-
-<style>
-:root {
-  color-scheme: dark;
-  --bg: #101827;
-  --panel: #172338;
-  --panel2: #1d2c43;
-  --border: #30435d;
-  --text: #edf4ff;
-  --muted: #a7b8ce;
-  --accent: #51d6c4;
-  --accent2: #78a9ff;
-  --danger: #ff7373;
-  --radius: 18px;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse at top, #203858 0%, transparent 52%),
-    var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-}
-
-button, input, select { font: inherit; }
-
-button {
-  cursor: pointer;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 11px 14px;
-  background: var(--panel2);
-  color: var(--text);
-  transition: background .2s, transform .2s;
-}
-
-button:hover { background: #2b405e; }
-button:active { transform: scale(.98); }
-button:disabled { opacity: .5; cursor: not-allowed; }
-
-button.primary {
-  background: #167f7b;
-  border-color: #2cbbb0;
-}
-
-button.primary:hover { background: #19978e; }
-
-button.danger {
-  background: #572d3a;
-  border-color: #874858;
-}
-
-button.small {
-  padding: 7px 10px;
-  font-size: .85rem;
-}
-
-input, select {
-  width: 100%;
-  min-width: 0;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #0f1929;
-  color: var(--text);
-}
-
-input[type="checkbox"] {
-  width: auto;
-  accent-color: var(--accent);
-}
-
-input[type="range"] {
-  padding: 0;
-  accent-color: var(--accent);
-}
-
-label {
-  display: block;
-  font-size: .9rem;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
-header {
-  max-width: 1150px;
-  margin: auto;
-  padding: 22px 18px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.brand-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  font-size: 27px;
-  background: linear-gradient(135deg, #167f7b, #3158a4);
-  box-shadow: 0 8px 30px #0004;
-}
-
-h1 {
-  margin: 0;
-  font-size: 1.65rem;
-  letter-spacing: -.5px;
-}
-
-.subtitle {
-  margin-top: 3px;
-  font-size: .9rem;
-  color: var(--muted);
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  background: #121d2e;
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: .85rem;
-}
-
-.status-dot {
-  width: 9px;
-  height: 9px;
-  background: #8b9ab0;
-  border-radius: 50%;
-}
-
-.status-dot.online { background: var(--accent); }
-.status-dot.error { background: var(--danger); }
-
-main {
-  max-width: 1150px;
-  margin: auto;
-  padding: 12px 18px 30px;
-  display: grid;
-  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
-  gap: 18px;
-}
-
-.panel {
-  background: color-mix(in srgb, var(--panel) 92%, transparent);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  min-width: 0;
-  box-shadow: 0 15px 45px #0002;
-}
-
-.panel h2 {
-  font-size: 1.05rem;
-  margin: 0 0 14px;
-}
-
-.robot-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.robot-stage {
-  min-height: 250px;
-  display: grid;
-  place-items: center;
-  border-radius: 16px;
-  background:
-    radial-gradient(circle at center, #294664 0%, #17283e 52%, #121d2d 100%);
-  border: 1px solid #354b66;
-  overflow: hidden;
-  position: relative;
-}
-
-.robot {
-  width: 180px;
-  text-align: center;
-  position: relative;
-}
-
-.robot-head {
-  width: 150px;
-  height: 145px;
-  margin: auto;
-  border: 5px solid #b5d5e8;
-  border-radius: 42px;
-  background: linear-gradient(145deg, #f1f8ff, #9ebed5);
-  box-shadow: 0 10px 25px #0005, inset 0 -8px 15px #6285a0;
-  position: relative;
-}
-
-.antenna {
-  position: absolute;
-  top: -26px;
-  left: 68px;
-  width: 8px;
-  height: 24px;
-  background: #83b9d7;
-  border-radius: 5px;
-}
-
-.antenna::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: -8px;
-  left: -4px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 15px #51d6c4aa;
-}
-
-.eyes {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  padding-top: 34px;
-}
-
-.eye {
-  width: 21px;
-  height: 25px;
-  border-radius: 50%;
-  background: #153b5a;
-  border: 3px solid #6f9fbc;
-  box-shadow: inset 0 0 0 4px #245c7c;
-}
-
-.mouth {
-  width: 49px;
-  height: 10px;
-  margin: 20px auto 0;
-  border-radius: 8px;
-  background: #173b52;
-  border: 3px solid #6b99b2;
-  transition: height .09s ease, width .09s ease;
-  overflow: hidden;
-}
-
-.mouth.talking {
-  height: 27px;
-  width: 40px;
-  border-radius: 12px 12px 18px 18px;
-  background: #173044;
-  border-color: #4c7189;
-}
-
-.robot-body {
-  width: 112px;
-  height: 48px;
-  margin: -3px auto 0;
-  border-radius: 12px 12px 25px 25px;
-  background: linear-gradient(135deg, #8fc1df, #436e98);
-  border: 3px solid #a6d2e9;
-}
-
-.robot-label {
-  color: #b9cce1;
-  font-size: .8rem;
-  margin-top: 10px;
-}
-
-.robot-state {
-  text-align: center;
-  font-size: .9rem;
-  color: var(--muted);
-}
-
-.controls {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px;
-}
-
-.control-group {
-  padding: 14px;
-  background: #101b2c;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-}
-
-.control-group + .control-group { margin-top: 0; }
-
-.control-title {
-  font-weight: 650;
-  font-size: .92rem;
-  margin-bottom: 10px;
-}
-
-.button-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.button-row > button { flex: 1; }
-
-.setting {
-  margin-top: 12px;
-}
-
-.setting:first-of-type { margin-top: 0; }
-
-.check-row {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--text);
-  font-size: .9rem;
-  margin: 10px 0;
-}
-
-.hint {
-  font-size: .8rem;
-  color: var(--muted);
-  line-height: 1.5;
-  margin: 9px 0 0;
-}
-
-.chat-panel {
-  display: flex;
-  flex-direction: column;
-  min-height: 680px;
-}
-
-.chat-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.chat-log {
-  flex: 1;
-  min-height: 300px;
-  max-height: 510px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 4px 3px 15px;
-  scroll-behavior: smooth;
-}
-
-.message {
-  max-width: 92%;
-  padding: 12px 14px;
-  border-radius: 15px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-  white-space: pre-wrap;
-}
-
-.message.bot {
-  align-self: flex-start;
-  background: #23344b;
-  border: 1px solid #344b67;
-  border-bottom-left-radius: 5px;
-}
-
-.message.user {
-  align-self: flex-end;
-  background: #126b6b;
-  border: 1px solid #238f89;
-  border-bottom-right-radius: 5px;
-}
-
-.message.system {
-  align-self: center;
-  max-width: 100%;
-  font-size: .82rem;
-  color: var(--muted);
-  padding: 7px 10px;
-  text-align: center;
-}
-
-.chat-form {
-  display: flex;
-  gap: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-}
-
-.chat-form input { flex: 1; }
-.chat-form button { flex-shrink: 0; }
-
-.mic-button.listening {
-  background: #7b2c43;
-  border-color: #ff718e;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  50% { box-shadow: 0 0 0 5px #ff718e22; }
-}
-
-.thinking {
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.thinking span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--muted);
-  animation: blink 1s infinite alternate;
-}
-
-.thinking span:nth-child(2) { animation-delay: .2s; }
-.thinking span:nth-child(3) { animation-delay: .4s; }
-
-@keyframes blink {
-  to { opacity: .25; transform: translateY(-3px); }
-}
-
-footer {
-  max-width: 1150px;
-  margin: auto;
-  padding: 0 18px 24px;
-  color: var(--muted);
-  font-size: .78rem;
-  text-align: center;
-}
-
-@media (max-width: 800px) {
-  main { grid-template-columns: 1fr; }
-  .chat-panel { min-height: 570px; }
-  .chat-log { max-height: 430px; }
-}
-
-@media (max-width: 420px) {
-  header { padding-top: 16px; }
-  h1 { font-size: 1.35rem; }
-  .panel { padding: 13px; }
-  .controls { grid-template-columns: 1fr; }
-  .chat-form { flex-wrap: wrap; }
-  .chat-form input { flex-basis: 100%; }
-  .chat-form button { flex: 1; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101827">
+  <title>LeonBot | Robot Leonista</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101827;
+      --panel: #182337;
+      --panel2: #202e45;
+      --border: #34445e;
+      --text: #f1f5f9;
+      --muted: #a7b4c8;
+      --primary: #60a5fa;
+      --green: #34d399;
+      --red: #fb7185;
+      --yellow: #fbbf24;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 16px;
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+      background: radial-gradient(circle at top, #263b5a 0, transparent 45%), var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+
+    button {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel2);
+      color: var(--text);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    button:active { transform: scale(.98); }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+
+    .app { width: 100%; max-width: 760px; margin: 0 auto; }
+
+    header {
+      text-align: center;
+      padding: 12px 4px 22px;
+    }
+
+    .brand {
+      margin: 0;
+      font-size: clamp(30px, 8vw, 44px);
+      letter-spacing: -1.5px;
+    }
+
+    .brand span { color: var(--primary); }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 6px 0 0;
+      font-size: 14px;
+    }
+
+    .panel {
+      padding: 16px;
+      margin-bottom: 14px;
+      background: rgba(24, 35, 55, .95);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .15);
+    }
+
+    .panel h2 { font-size: 17px; margin: 0 0 12px; }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg);
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+
+    .dot.connected { background: var(--green); }
+    .dot.disconnected { background: var(--red); }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 12px 0 0;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .button-row button { flex: 1 1 135px; }
+
+    .primary {
+      background: #2563eb;
+      border-color: #3b82f6;
+    }
+
+    .success {
+      background: #065f46;
+      border-color: #059669;
+    }
+
+    .danger {
+      background: #7f1d1d;
+      border-color: #be123c;
+    }
+
+    .robot-stage {
+      min-height: 230px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 16px;
+      background: radial-gradient(ellipse at center, #314766 0, #17243a 65%, #131e30 100%);
+    }
+
+    .robot {
+      width: 180px;
+      height: 180px;
+      border-radius: 45% 45% 40% 40%;
+      border: 4px solid #8299b8;
+      background: linear-gradient(145deg, #dce8f5, #849bb7);
+      position: relative;
+      box-shadow: 0 15px 35px #0005, inset -10px -12px 20px #24365055;
+      transition: transform .15s ease;
+    }
+
+    .robot.talking { transform: translateY(-2px); }
+
+    .antenna {
+      position: absolute;
+      width: 8px;
+      height: 25px;
+      top: -27px;
+      left: calc(50% - 4px);
+      background: #8299b8;
+      border-radius: 5px;
+    }
+
+    .antenna::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: -9px;
+      left: -4px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 16px #60a5fa;
+    }
+
+    .eye {
+      position: absolute;
+      top: 50px;
+      width: 29px;
+      height: 34px;
+      border-radius: 50%;
+      background: #101827;
+      border: 3px solid #526984;
+      overflow: hidden;
+    }
+
+    .eye.left { left: 35px; }
+    .eye.right { right: 35px; }
+
+    .eye::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #93c5fd;
+    }
+
+    .cheek {
+      position: absolute;
+      top: 99px;
+      width: 20px;
+      height: 10px;
+      background: #e99aa6;
+      opacity: .75;
+      border-radius: 50%;
+    }
+
+    .cheek.left { left: 18px; }
+    .cheek.right { right: 18px; }
+
+    .mouth {
+      position: absolute;
+      left: 50%;
+      top: 105px;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 17px;
+      border-radius: 5px 5px 18px 18px;
+      background: #182337;
+      border: 3px solid #435772;
+      transition: height .07s ease, border-radius .07s ease;
+    }
+
+    .mouth.open {
+      height: 33px;
+      border-radius: 8px 8px 18px 18px;
+      background: #351f35;
+    }
+
+    .robot-label {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    .chat {
+      height: 250px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #101827;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      max-width: 90%;
+      width: fit-content;
+      padding: 10px 12px;
+      margin: 7px 0;
+      border-radius: 12px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .message.user {
+      margin-left: auto;
+      background: #1d4ed8;
+    }
+
+    .message.bot { background: #29384f; }
+
+    .chat-form {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .chat-form input {
+      min-width: 0;
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .mic-button {
+      flex: 0 0 48px;
+      padding: 8px;
+      font-size: 21px;
+      background: #334155;
+    }
+
+    .mic-button.listening {
+      background: #991b1b;
+      border-color: #fb7185;
+      animation: pulsoMic 1s infinite;
+    }
+
+    @keyframes pulsoMic {
+      50% { box-shadow: 0 0 0 5px #fb718533; }
+    }
+
+    .voice-status {
+      min-height: 18px;
+      margin: 8px 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .log {
+      height: 175px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: #b9d5f6;
+      font: 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+
+    .log-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .log-actions button { flex: 1; font-size: 13px; }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .field input[type="range"] { width: 48%; }
+
+    .field select {
+      max-width: 60%;
+      padding: 8px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .notice {
+      color: #fde68a;
+      background: #42200655;
+      border: 1px solid #92400e;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 12px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 12px;
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 10px; }
+      .panel { padding: 13px; }
+      .button-row button { flex-basis: 115px; }
+      .robot-stage { min-height: 215px; }
+      .chat-form { gap: 6px; }
+      .chat-form input { width: 100%; }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-  <div class="brand">
-    <div class="brand-icon" aria-hidden="true">🤖</div>
-    <div>
-      <h1>LeonBot</h1>
-      <div class="subtitle">Asistente virtual leonista</div>
-    </div>
-  </div>
+  <main class="app">
+    <header>
+      <h1 class="brand">Leon<span>Bot</span></h1>
+      <p class="subtitle">Prototipo interactivo · Robot Leonista</p>
+    </header>
 
-  <div class="status-pill" id="estadoGeneral">
-    <span class="status-dot" id="estadoPunto"></span>
-    <span id="estadoTexto">Listo para iniciar</span>
-  </div>
-</header>
+    <section class="panel">
+      <h2>Conexión con micro:bit V2</h2>
 
-<main>
-  <section class="panel robot-panel">
-    <h2>Mi robot</h2>
+      <div class="status-row">
+        <span class="status">
+          <span id="statusDot" class="dot disconnected"></span>
+          <span id="statusText">Desconectado</span>
+        </span>
+      </div>
 
-    <div class="robot-stage">
-      <div class="robot">
-        <div class="robot-head">
-          <div class="antenna"></div>
-          <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
+      <div class="button-row" style="margin-top:13px">
+        <button id="connectBtn" class="primary">Conectar micro:bit</button>
+        <button id="disconnectBtn" class="danger" disabled>Desconectar</button>
+      </div>
+
+      <p class="hint">
+        Abre esta página en Chrome desde tu celular Android. Enciende la
+        micro:bit y pulsa Conectar. La página debe estar abierta mediante HTTPS.
+      </p>
+
+      <div id="bluetoothNotice" class="notice" hidden></div>
+    </section>
+
+    <section class="panel">
+      <h2>Mi robot</h2>
+
+      <div class="robot-stage">
+        <div>
+          <div id="robot" class="robot">
+            <div class="antenna"></div>
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+            <div id="mouth" class="mouth"></div>
           </div>
-          <div class="mouth" id="boca"></div>
+          <div class="robot-label" id="mouthStatus">Boca cerrada</div>
         </div>
-        <div class="robot-body"></div>
-        <div class="robot-label">LEONBOT · MICRO:BIT V2</div>
-      </div>
-    </div>
-
-    <div class="robot-state" id="estadoBoca">
-      Boca en reposo
-    </div>
-
-    <div class="button-row">
-      <button class="primary" id="btnBluetooth">
-        Conectar micro:bit
-      </button>
-      <button id="btnProbarVoz">
-        Probar voz
-      </button>
-    </div>
-
-    <div class="controls">
-      <div class="control-group">
-        <div class="control-title">Prueba del servo</div>
-        <div class="button-row">
-          <button class="small" id="btnAbrir">Abrir boca</button>
-          <button class="small" id="btnCerrar">Cerrar boca</button>
-        </div>
-        <p class="hint">El servo debe estar conectado al pin P0.</p>
       </div>
 
-      <div class="control-group">
-        <div class="control-title">Conexión</div>
-        <div class="hint" id="estadoBluetooth">
-          Bluetooth desconectado.
-        </div>
-        <p class="hint" id="estadoUART">
-          Los comandos de la boca se envían mediante UART.
-        </p>
+      <div class="button-row" style="margin-top:14px">
+        <button id="openBtn" class="success">Abrir boca</button>
+        <button id="closeBtn">Cerrar boca</button>
+        <button id="testBtn">Probar movimiento</button>
       </div>
-    </div>
 
-    <div class="control-group">
-      <div class="control-title">Voz y sincronización</div>
+      <p class="hint">
+        Estos botones envían OPEN y CLOSE por Bluetooth UART. El movimiento
+        físico depende de la conexión y del programa instalado en la micro:bit.
+      </p>
+    </section>
 
-      <div class="setting">
-        <label for="vozSelect">Voz del navegador</label>
-        <select id="vozSelect">
-          <option value="">Voz predeterminada en español</option>
+    <section class="panel">
+      <h2>Voz del robot</h2>
+
+      <div class="button-row">
+        <button id="speakTestBtn" class="primary">Probar voz</button>
+        <button id="stopSpeechBtn">Detener voz</button>
+      </div>
+
+      <div class="field">
+        <label for="voiceSelect">Voz disponible</label>
+        <select id="voiceSelect">
+          <option value="">Voz predeterminada</option>
         </select>
       </div>
 
-      <div class="setting">
-        <label for="rateRange">
-          Velocidad de voz: <span id="rateValue">1.0×</span>
-        </label>
-        <input id="rateRange" type="range"
-          min="0.7" max="1.4" step="0.1" value="1">
+      <div class="field">
+        <label for="rateRange">Velocidad</label>
+        <input id="rateRange" type="range" min="0.6" max="1.5" step="0.1" value="1">
+        <span id="rateValue">1.0</span>
       </div>
 
-      <label class="check-row">
+      <div class="field">
+        <label for="syncCheck">Sincronizar boca</label>
         <input id="syncCheck" type="checkbox" checked>
-        Sincronización silábica de la boca
-      </label>
-
-      <label class="check-row">
-        <input id="autoVoiceCheck" type="checkbox" checked>
-        Leer automáticamente las respuestas
-      </label>
+      </div>
 
       <p class="hint">
-        La sincronización utiliza los eventos de palabra de la voz del
-        navegador. La precisión depende del navegador y de la voz elegida.
+        LeonBot estima las sílabas de las palabras y aprovecha los eventos de
+        pronunciación del navegador. La sincronización es aproximada y depende
+        de la voz instalada y del navegador.
       </p>
-    </div>
-  </section>
+    </section>
 
-  <section class="panel chat-panel">
-    <div class="chat-heading">
-      <h2>Conversa con LeonBot</h2>
-      <button class="small" id="btnLimpiar">Limpiar chat</button>
-    </div>
+    <section class="panel">
+      <h2>Conversación con LeonBot</h2>
 
-    <div class="chat-log" id="chatLog" aria-live="polite">
-      <div class="message bot">
-        ¡Hola! Puedes escribirme o utilizar el micrófono para hacerme una pregunta.
+      <div id="chat" class="chat" aria-live="polite">
+        <div class="message bot">
+          ¡Hola! Soy LeonBot. Puedes preguntarme hablando o escribiendo.
+        </div>
       </div>
-    </div>
 
-    <div class="button-row" style="margin-bottom:10px">
-      <button id="btnMicrofono" class="mic-button">
-        🎙️ Hablar
-      </button>
-      <button id="btnDetenerVoz">⏹ Detener voz</button>
-    </div>
+      <form id="chatForm" class="chat-form">
+        <button id="micBtn" class="mic-button" type="button"
+          aria-label="Dictar pregunta" title="Dictar pregunta">🎙️</button>
 
-    <form class="chat-form" id="chatForm">
-      <input id="preguntaInput" type="text"
-        placeholder="Escribe tu pregunta..."
-        autocomplete="off" aria-label="Escribe tu pregunta">
-      <button class="primary" id="btnEnviar" type="submit">Enviar</button>
-    </form>
+        <input id="chatInput" type="text" maxlength="500"
+          placeholder="Habla o escribe tu pregunta..."
+          autocomplete="off" aria-label="Pregunta para LeonBot">
 
-    <p class="hint">
-      LeonBot utiliza Cloudflare Workers AI para generar las respuestas.
-      El reconocimiento de voz y la lectura de las respuestas se ejecutan
-      en el navegador.
-    </p>
-  </section>
-</main>
+        <button id="sendBtn" class="primary" type="submit">Enviar</button>
+      </form>
 
-<footer>
-  LeonBot · Prototipo educativo · Colegio Distrital León de Greiff I.E.D.
-</footer>
+      <p id="voiceInputStatus" class="voice-status" aria-live="polite">
+        Pulsa el micrófono para dictar tu pregunta.
+      </p>
 
-<script>
-"use strict";
+      <p class="hint">
+        El dictado requiere permiso para usar el micrófono. Si no funciona,
+        puedes escribir la pregunta normalmente.
+      </p>
+    </section>
 
-/* =========================================================
-   CONFIGURACIÓN
-   ========================================================= */
+    <section class="panel">
+      <h2>Diagnóstico Bluetooth</h2>
 
-// Endpoint de Cloudflare Workers AI.
-const AI_ENDPOINT =
-  "https://leonbot-api.alejandro-guzman310.workers.dev/chat";
+      <div class="button-row">
+        <button id="diagnosticBtn">Revisar conexión</button>
+        <button id="clearLogBtn">Limpiar registro</button>
+      </div>
 
-// Servicio Bluetooth UART de la micro:bit.
-const UART_SERVICE_UUID =
-  "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+      <div id="log" class="log" role="log" aria-live="polite"
+        style="margin-top:12px">LeonBot iniciado.
+Esperando conexión Bluetooth...</div>
 
-// Característica RX: el navegador escribe comandos hacia la micro:bit.
-const UART_RX_UUID =
-  "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+      <div class="notice">
+        Si Escritura y Escritura sin respuesta aparecen como false, la
+        característica UART seleccionada no permite enviar comandos.
+      </div>
+    </section>
 
-// Característica TX: la micro:bit puede enviar datos al navegador.
-const UART_TX_UUID =
-  "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+    <footer>
+      LeonBot · Prototipo educativo · Colegio León de Greiff I.E.D.
+    </footer>
+  </main>
 
-const INSTRUCCIONES_SISTEMA = `
-Eres LeonBot, un asistente virtual educativo del Colegio Distrital
-León de Greiff I.E.D. Responde en español claro, cordial y apropiado
-para la comunidad educativa. No te presentes ni repitas tu nombre
-en cada respuesta. No empieces todas las respuestas con saludos.
-Contesta directamente la pregunta del usuario. Si no sabes algo,
-reconócelo. Explica los temas de forma comprensible y organizada.
-`.trim();
+  <script>
+    "use strict";
 
-/* =========================================================
-   ELEMENTOS DE LA INTERFAZ
-   ========================================================= */
+    // =========================================================
+    // 1. CONFIGURACIÓN
+    // =========================================================
 
-const chatLog = document.getElementById("chatLog");
-const chatForm = document.getElementById("chatForm");
-const preguntaInput = document.getElementById("preguntaInput");
-const btnEnviar = document.getElementById("btnEnviar");
-const btnMicrofono = document.getElementById("btnMicrofono");
-const btnBluetooth = document.getElementById("btnBluetooth");
-const btnProbarVoz = document.getElementById("btnProbarVoz");
-const btnAbrir = document.getElementById("btnAbrir");
-const btnCerrar = document.getElementById("btnCerrar");
-const btnDetenerVoz = document.getElementById("btnDetenerVoz");
-const btnLimpiar = document.getElementById("btnLimpiar");
+    const UART_SERVICE =
+      "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
 
-const estadoTexto = document.getElementById("estadoTexto");
-const estadoPunto = document.getElementById("estadoPunto");
-const estadoBluetooth = document.getElementById("estadoBluetooth");
-const estadoUART = document.getElementById("estadoUART");
-const estadoBoca = document.getElementById("estadoBoca");
-const boca = document.getElementById("boca");
+    // UUID usado por esta versión para enviar comandos UART.
+    const UART_RX =
+      "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
 
-const vozSelect = document.getElementById("vozSelect");
-const rateRange = document.getElementById("rateRange");
-const rateValue = document.getElementById("rateValue");
-const syncCheck = document.getElementById("syncCheck");
-const autoVoiceCheck = document.getElementById("autoVoiceCheck");
+    // API de Cloudflare Workers AI que ya está funcionando.
+    const AI_ENDPOINT =
+      "https://leonbot-api.alejandro-guzman310.workers.dev/chat";
 
-/* =========================================================
-   ESTADO
-   ========================================================= */
+    // =========================================================
+    // 2. ESTADO
+    // =========================================================
 
-let dispositivoBluetooth = null;
-let servidorBluetooth = null;
-let servicioUART = null;
-let uartCaracteristica = null;
-let uartNotificacion = null;
+    let dispositivoBluetooth = null;
+    let servidorBluetooth = null;
+    let servicioUART = null;
+    let caracteristicaTX = null;
 
-let colaUART = Promise.resolve();
-let reconocimiento = null;
-let escuchando = false;
-let procesandoPregunta = false;
-let vozActual = null;
-let ultimaPalabraIndice = -1;
-let temporizadorFallback = null;
+    let colaEscrituras = Promise.resolve();
 
-const historial = [
-  { role: "system", content: INSTRUCCIONES_SISTEMA }
-];
+    let estadoBoca = "CLOSE";
+    let temporizadorBoca = null;
+    let temporizadorRespaldo = null;
+    let temporizadorSilabas = null;
 
-/* =========================================================
-   ESTADO VISUAL
-   ========================================================= */
+    let vocesDisponibles = [];
+    let sesionVoz = 0;
 
-function cambiarEstadoGeneral(texto, tipo = "normal") {
-  estadoTexto.textContent = texto;
-  estadoPunto.className = "status-dot";
+    let reconocimientoVoz = null;
+    let escuchando = false;
+    let enviandoPregunta = false;
 
-  if (tipo === "online") {
-    estadoPunto.classList.add("online");
-  } else if (tipo === "error") {
-    estadoPunto.classList.add("error");
-  }
-}
+    // Historial de conversación para que la IA tenga contexto.
+    const historialChat = [];
 
-function actualizarEstadoBluetooth() {
-  const conectado =
-    !!(uartCaracteristica && dispositivoBluetooth &&
-       dispositivoBluetooth.gatt &&
-       dispositivoBluetooth.gatt.connected);
+    const encoder = new TextEncoder();
 
-  if (conectado) {
-    estadoBluetooth.textContent =
-      "Conectado a " + (dispositivoBluetooth.name || "micro:bit");
-    btnBluetooth.textContent = "Desconectar micro:bit";
-    cambiarEstadoGeneral("Micro:bit conectada", "online");
-  } else {
-    estadoBluetooth.textContent = "Bluetooth desconectado.";
-    btnBluetooth.textContent = "Conectar micro:bit";
-    estadoUART.textContent = "Conecta la micro:bit para mover el servo.";
-    cambiarEstadoGeneral("Listo para iniciar");
-  }
-}
+    // =========================================================
+    // 3. ELEMENTOS DE LA INTERFAZ
+    // =========================================================
 
-function mostrarEstadoBoca(texto, hablando = false) {
-  estadoBoca.textContent = texto;
-  boca.classList.toggle("talking", hablando);
-}
+    const $ = (id) => document.getElementById(id);
 
-/* =========================================================
-   CHAT
-   ========================================================= */
+    const connectBtn = $("connectBtn");
+    const disconnectBtn = $("disconnectBtn");
+    const statusDot = $("statusDot");
+    const statusText = $("statusText");
+    const bluetoothNotice = $("bluetoothNotice");
 
-function agregarMensaje(texto, tipo = "bot") {
-  const mensaje = document.createElement("div");
-  mensaje.className = "message " + tipo;
-  mensaje.textContent = texto;
-  chatLog.appendChild(mensaje);
-  chatLog.scrollTop = chatLog.scrollHeight;
-  return mensaje;
-}
+    const mouth = $("mouth");
+    const mouthStatus = $("mouthStatus");
+    const robot = $("robot");
 
-function mostrarPensando() {
-  const mensaje = document.createElement("div");
-  mensaje.className = "message bot";
-  mensaje.id = "mensajePensando";
+    const logElement = $("log");
+    const chatElement = $("chat");
+    const chatForm = $("chatForm");
+    const chatInput = $("chatInput");
+    const micBtn = $("micBtn");
+    const sendBtn = $("sendBtn");
+    const voiceInputStatus = $("voiceInputStatus");
 
-  const contenedor = document.createElement("div");
-  contenedor.className = "thinking";
-  contenedor.setAttribute("aria-label", "LeonBot está pensando");
+    // =========================================================
+    // 4. REGISTRO Y AVISOS
+    // =========================================================
 
-  for (let i = 0; i < 3; i++) {
-    contenedor.appendChild(document.createElement("span"));
-  }
+    function log(mensaje) {
+      const hora = new Date().toLocaleTimeString("es-CO", {
+        hour12: false
+      });
 
-  mensaje.appendChild(contenedor);
-  chatLog.appendChild(mensaje);
-  chatLog.scrollTop = chatLog.scrollHeight;
-}
+      const linea = "[" + hora + "] " + String(mensaje);
 
-function quitarPensando() {
-  const elemento = document.getElementById("mensajePensando");
-  if (elemento) elemento.remove();
-}
+      logElement.textContent +=
+        (logElement.textContent ? "\n" : "") + linea;
 
-function limpiarRespuesta(texto) {
-  let respuesta = String(texto || "").trim();
-
-  // Evita introducciones repetitivas si el modelo las genera.
-  respuesta = respuesta.replace(
-    /^(?:hola[,!]?\s*)?(?:soy|me llamo)\s+LeonBot[.!,:;\s-]*/i,
-    ""
-  );
-
-  return respuesta.trim() || "No pude generar una respuesta. Inténtalo de nuevo.";
-}
-
-function obtenerMensajesContexto() {
-  // Conserva las instrucciones del sistema y los mensajes recientes.
-  return [
-    historial[0],
-    ...historial.slice(1).slice(-12)
-  ];
-}
-
-async function enviarPregunta(texto) {
-  const pregunta = String(texto || "").trim();
-
-  if (!pregunta || procesandoPregunta) return;
-
-  preguntaInput.value = "";
-  agregarMensaje(pregunta, "user");
-
-  historial.push({ role: "user", content: pregunta });
-
-  procesandoPregunta = true;
-  btnEnviar.disabled = true;
-  mostrarPensando();
-  cambiarEstadoGeneral("LeonBot está pensando");
-
-  try {
-    const respuestaHTTP = await fetch(AI_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        messages: obtenerMensajesContexto()
-      })
-    });
-
-    if (!respuestaHTTP.ok) {
-      throw new Error("El servidor respondió con HTTP " +
-        respuestaHTTP.status);
+      logElement.scrollTop = logElement.scrollHeight;
     }
 
-    const datos = await respuestaHTTP.json();
-
-    if (!datos || typeof datos.reply !== "string") {
-      throw new Error("La respuesta del servidor no contiene el campo reply.");
+    function mostrarAviso(mensaje) {
+      bluetoothNotice.textContent = mensaje;
+      bluetoothNotice.hidden = false;
     }
 
-    const respuesta = limpiarRespuesta(datos.reply);
-
-    historial.push({ role: "assistant", content: respuesta });
-    quitarPensando();
-    agregarMensaje(respuesta, "bot");
-
-    cambiarEstadoGeneral("Respuesta recibida", "online");
-
-    if (autoVoiceCheck.checked) {
-      hablar(respuesta);
+    function ocultarAviso() {
+      bluetoothNotice.textContent = "";
+      bluetoothNotice.hidden = true;
     }
-  } catch (error) {
-    quitarPensando();
-    agregarMensaje(
-      "No pude conectarme con el servicio de IA. Comprueba la conexión a Internet e inténtalo de nuevo.",
-      "bot"
-    );
-    cambiarEstadoGeneral("Error de conexión con IA", "error");
-    console.error("Error al consultar Cloudflare Workers AI:", error);
-  } finally {
-    procesandoPregunta = false;
-    btnEnviar.disabled = false;
-    preguntaInput.focus();
-  }
-}
 
-chatForm.addEventListener("submit", function(evento) {
-  evento.preventDefault();
-  enviarPregunta(preguntaInput.value);
-});
+    // =========================================================
+    // 5. ESTADO DE BLUETOOTH
+    // =========================================================
 
-/* =========================================================
-   CÁLCULO ESTIMADO DE SÍLABAS EN ESPAÑOL
-   ========================================================= */
+    function actualizarEstadoConexion(conectado) {
+      statusText.textContent = conectado
+        ? "Micro:bit conectada"
+        : "Desconectado";
 
-function contarSilabas(palabra) {
-  let texto = String(palabra || "").toLowerCase();
+      statusDot.className = conectado
+        ? "dot connected"
+        : "dot disconnected";
 
-  // La u de "que", "qui", "gue" y "gui" suele ser muda.
-  // La ü de "pingüino" sí se pronuncia.
-  texto = texto
-    .replace(/qu(?=[eéií])/g, "q")
-    .replace(/gu(?=[eéií])/g, "g");
-
-  // Cada grupo de vocales suele corresponder a una sílaba.
-  const grupos = texto.match(/[aeiouáéíóúü]+/g);
-
-  if (!grupos) return 1;
-
-  let total = grupos.length;
-
-  // La í y la ú tónicas pueden romper un diptongo:
-  // pa-ís, ba-úl, rí-o.
-  for (const grupo of grupos) {
-    const acentuadas = grupo.match(/[íú]/g);
-    if (acentuadas && grupo.length > 1) {
-      total += acentuadas.length;
+      connectBtn.disabled = conectado;
+      disconnectBtn.disabled = !conectado;
     }
-  }
 
-  return Math.max(1, Math.min(8, total));
-}
+    function estaConectado() {
+      return Boolean(
+        dispositivoBluetooth &&
+        dispositivoBluetooth.gatt &&
+        dispositivoBluetooth.gatt.connected &&
+        caracteristicaTX
+      );
+    }
 
-/* =========================================================
-   BLUETOOTH UART
-   ========================================================= */
+    // =========================================================
+    // 6. CONEXIÓN BLUETOOTH
+    // =========================================================
 
-function bluetoothConectado() {
-  return !!(
-    dispositivoBluetooth &&
-    dispositivoBluetooth.gatt &&
-    dispositivoBluetooth.gatt.connected &&
-    uartCaracteristica
-  );
-}
+    async function conectarBluetooth() {
+      ocultarAviso();
 
-async function enviarComando(comando) {
-  if (!bluetoothConectado()) {
-    estadoUART.textContent =
-      "Sin conexión: no se pudo enviar " + comando;
-    return false;
-  }
-
-  // El comando termina con salto de línea para que MakeCode
-  // lo pueda leer usando Delimiters.NewLine.
-  const bytes = new TextEncoder().encode(comando + "\n");
-
-  // Serializa las escrituras para evitar varias operaciones BLE
-  // simultáneas cuando la voz pronuncia palabras rápidamente.
-  colaUART = colaUART
-    .catch(() => {})
-    .then(async () => {
-      if (!bluetoothConectado()) {
-        throw new Error("Bluetooth se desconectó.");
+      if (!("bluetooth" in navigator)) {
+        mostrarAviso(
+          "Este navegador no ofrece Web Bluetooth. " +
+          "Prueba Chrome en Android mediante HTTPS."
+        );
+        log("ERROR: navigator.bluetooth no está disponible.");
+        return;
       }
 
-      if (uartCaracteristica.properties.write &&
-          uartCaracteristica.writeValueWithResponse) {
-        await uartCaracteristica.writeValueWithResponse(bytes);
-      } else if (
-        uartCaracteristica.properties.writeWithoutResponse &&
-        uartCaracteristica.writeValueWithoutResponse
+      if (!window.isSecureContext) {
+        mostrarAviso(
+          "La página no está en un contexto seguro. " +
+          "Usa la dirección HTTPS de tu sitio."
+        );
+        log("ERROR: la página no está en un contexto seguro.");
+        return;
+      }
+
+      try {
+        log("Buscando una micro:bit Bluetooth...");
+
+        dispositivoBluetooth = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
+          optionalServices: [UART_SERVICE]
+        });
+
+        log("Dispositivo seleccionado: " +
+          (dispositivoBluetooth.name || "Nombre no disponible"));
+
+        dispositivoBluetooth.addEventListener(
+          "gattserverdisconnected",
+          manejarDesconexion
+        );
+
+        servidorBluetooth = await dispositivoBluetooth.gatt.connect();
+
+        log("Conexión GATT establecida.");
+
+        servicioUART = await servidorBluetooth.getPrimaryService(
+          UART_SERVICE
+        );
+
+        log("Servicio UART encontrado: " + servicioUART.uuid);
+
+        const caracteristicas =
+          await servicioUART.getCharacteristics();
+
+        log("Características encontradas: " + caracteristicas.length);
+
+        for (const caracteristica of caracteristicas) {
+          const p = caracteristica.properties;
+
+          log("UUID: " + caracteristica.uuid);
+          log(
+            "Propiedades: write=" + p.write +
+            ", writeWithoutResponse=" + p.writeWithoutResponse +
+            ", notify=" + p.notify +
+            ", read=" + p.read
+          );
+        }
+
+        caracteristicaTX =
+          await servicioUART.getCharacteristic(UART_RX);
+
+        log("Característica seleccionada: " + caracteristicaTX.uuid);
+
+        mostrarPropiedadesTX();
+        actualizarEstadoConexion(true);
+
+        if (
+          !caracteristicaTX.properties.write &&
+          !caracteristicaTX.properties.writeWithoutResponse
+        ) {
+          mostrarAviso(
+            "Bluetooth conectado, pero la característica UART " +
+            "seleccionada no admite escritura. Revisa el diagnóstico."
+          );
+        } else {
+          ocultarAviso();
+          log("UART listo para enviar comandos.");
+        }
+      } catch (error) {
+        log("ERROR de conexión: " + error.name + " — " + error.message);
+
+        if (error.name === "NotFoundError") {
+          log("No se seleccionó ningún dispositivo.");
+        } else if (error.name === "SecurityError") {
+          log("Revisa HTTPS y los permisos Bluetooth.");
+        } else if (error.name === "NetworkError") {
+          log("No se pudo establecer la conexión GATT.");
+        }
+
+        mostrarAviso(
+          "No se completó la conexión. Revisa el registro e inténtalo de nuevo."
+        );
+
+        actualizarEstadoConexion(false);
+      }
+    }
+
+    function mostrarPropiedadesTX() {
+      if (!caracteristicaTX) {
+        log("No hay característica UART seleccionada.");
+        return;
+      }
+
+      const p = caracteristicaTX.properties;
+
+      log("----- DIAGNÓSTICO UART -----");
+      log("Servicio: " + (servicioUART?.uuid || "No disponible"));
+      log("Característica: " + caracteristicaTX.uuid);
+      log("Escritura: " + p.write);
+      log("Escritura sin respuesta: " + p.writeWithoutResponse);
+      log("Notificaciones: " + p.notify);
+      log("Lectura: " + p.read);
+      log("----------------------------");
+    }
+
+    function manejarDesconexion() {
+      log("La conexión Bluetooth se ha interrumpido.");
+
+      caracteristicaTX = null;
+      servicioUART = null;
+      servidorBluetooth = null;
+      colaEscrituras = Promise.resolve();
+
+      actualizarEstadoConexion(false);
+      detenerTemporizadoresBoca();
+    }
+
+    async function desconectarBluetooth() {
+      detenerTemporizadoresBoca();
+
+      if (
+        dispositivoBluetooth &&
+        dispositivoBluetooth.gatt &&
+        dispositivoBluetooth.gatt.connected
       ) {
-        await uartCaracteristica.writeValueWithoutResponse(bytes);
-      } else {
-        await uartCaracteristica.writeValue(bytes);
+        dispositivoBluetooth.gatt.disconnect();
       }
 
-      estadoUART.textContent = "Último comando enviado: " + comando;
-      return true;
-    })
-    .catch(error => {
-      estadoUART.textContent = "Error enviando comando Bluetooth.";
-      console.error("Error UART:", error);
-      return false;
-    });
+      caracteristicaTX = null;
+      servicioUART = null;
+      servidorBluetooth = null;
 
-  return colaUART;
-}
+      actualizarEstadoConexion(false);
+      log("Desconexión solicitada.");
+    }
 
-async function conectarBluetooth() {
-  if (!("bluetooth" in navigator)) {
-    agregarMensaje(
-      "Este navegador no ofrece Web Bluetooth. Prueba con una versión compatible de Chrome o Edge en un sitio HTTPS.",
-      "system"
-    );
-    return;
-  }
+    // =========================================================
+    // 7. ENVÍO DE COMANDOS UART
+    // =========================================================
 
-  try {
-    cambiarEstadoGeneral("Buscando micro:bit");
+    function enviarComando(comando) {
+      colaEscrituras = colaEscrituras
+        .catch(() => {})
+        .then(async () => {
+          if (!estaConectado()) {
+            return;
+          }
 
-    dispositivoBluetooth = await navigator.bluetooth.requestDevice({
-      filters: [{ services: [UART_SERVICE_UUID] }]
-    });
+          const propiedades = caracteristicaTX.properties;
 
-    dispositivoBluetooth.addEventListener(
-      "gattserverdisconnected",
-      alDesconectarBluetooth
-    );
+          if (
+            !propiedades.write &&
+            !propiedades.writeWithoutResponse
+          ) {
+            log("ERROR: UART no permite escritura.");
+            return;
+          }
 
-    servidorBluetooth = await dispositivoBluetooth.gatt.connect();
+          try {
+            const datos = encoder.encode(comando + "\n");
 
-    servicioUART = await servidorBluetooth.getPrimaryService(
-      UART_SERVICE_UUID
-    );
+            if (
+              propiedades.writeWithoutResponse &&
+              typeof caracteristicaTX.writeValueWithoutResponse === "function"
+            ) {
+              await caracteristicaTX.writeValueWithoutResponse(datos);
+            } else if (
+              propiedades.write &&
+              typeof caracteristicaTX.writeValueWithResponse === "function"
+            ) {
+              await caracteristicaTX.writeValueWithResponse(datos);
+            } else if (propiedades.write) {
+              await caracteristicaTX.writeValue(datos);
+            } else {
+              throw new Error("No existe un método compatible de escritura.");
+            }
+          } catch (error) {
+            log("ERROR Bluetooth GATT: " +
+              error.name + " — " + error.message);
+          }
+        });
 
-    uartCaracteristica = await servicioUART.getCharacteristic(
-      UART_RX_UUID
-    );
+      return colaEscrituras;
+    }
 
-    // TX es opcional para este proyecto. Se intenta habilitar
-    // para futuras respuestas de la micro:bit al navegador.
-    try {
-      uartNotificacion = await servicioUART.getCharacteristic(
-        UART_TX_UUID
+    // =========================================================
+    // 8. CONTROL Y ANIMACIÓN DE LA BOCA
+    // =========================================================
+
+    function cambiarBoca(abrir, forzar = false) {
+      const nuevoEstado = abrir ? "OPEN" : "CLOSE";
+
+      if (!forzar && estadoBoca === nuevoEstado) {
+        return;
+      }
+
+      estadoBoca = nuevoEstado;
+
+      mouth.classList.toggle("open", abrir);
+      robot.classList.toggle("talking", abrir);
+
+      mouthStatus.textContent = abrir
+        ? "Boca abierta"
+        : "Boca cerrada";
+
+      enviarComando(nuevoEstado);
+    }
+
+    function cancelarPulsoSilabas() {
+      if (temporizadorSilabas !== null) {
+        clearTimeout(temporizadorSilabas);
+        temporizadorSilabas = null;
+      }
+    }
+
+    function detenerTemporizadoresBoca() {
+      if (temporizadorBoca !== null) {
+        clearTimeout(temporizadorBoca);
+        temporizadorBoca = null;
+      }
+
+      if (temporizadorRespaldo !== null) {
+        clearInterval(temporizadorRespaldo);
+        temporizadorRespaldo = null;
+      }
+
+      cancelarPulsoSilabas();
+
+      mouth.classList.remove("open");
+      robot.classList.remove("talking");
+      mouthStatus.textContent = "Boca cerrada";
+      estadoBoca = "CLOSE";
+    }
+
+    function abrirDurante(duracion = 100) {
+      if (temporizadorBoca !== null) {
+        clearTimeout(temporizadorBoca);
+      }
+
+      cambiarBoca(true);
+
+      temporizadorBoca = setTimeout(() => {
+        temporizadorBoca = null;
+        cambiarBoca(false);
+      }, duracion);
+    }
+
+    async function probarMovimiento() {
+      if (!estaConectado()) {
+        log("Conecta la micro:bit antes de probar el servomotor.");
+        return;
+      }
+
+      log("Iniciando prueba OPEN / CLOSE.");
+
+      cambiarBoca(true, true);
+      await new Promise(resolve => setTimeout(resolve, 700));
+
+      cambiarBoca(false, true);
+      await new Promise(resolve => setTimeout(resolve, 700));
+
+      cambiarBoca(true, true);
+      await new Promise(resolve => setTimeout(resolve, 700));
+
+      cambiarBoca(false, true);
+      log("Prueba de comandos finalizada.");
+    }
+
+    // =========================================================
+    // 9. CONTEO APROXIMADO DE SÍLABAS
+    // =========================================================
+
+    function estimarSilabasPalabra(palabra) {
+      let w = String(palabra || "")
+        .toLocaleLowerCase("es-CO")
+        .replace(/[^a-záéíóúüñ]/gi, "");
+
+      if (!w) return 1;
+
+      // La u normalmente no suena en que/qui y gue/gui sin diéresis.
+      w = w.replace(/qu(?=[eéií])/g, "q");
+      w = w.replace(/gu(?=[eéií])/g, "g");
+
+      const grupos = w.match(/[aeiouáéíóúü]+/g) || [];
+      let cantidad = grupos.length;
+
+      // Aproximación para algunos hiatos frecuentes.
+      const hiatos = w.match(/[aáeéoó][íú]|[íú][aáeéoó]/g) || [];
+      cantidad += hiatos.length;
+
+      return Math.max(1, cantidad);
+    }
+
+    function estimarSilabas(texto) {
+      const palabras = String(texto || "").match(
+        /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+/g
+      ) || [];
+
+      return palabras.reduce(
+        (total, palabra) => total + estimarSilabasPalabra(palabra),
+        0
+      );
+    }
+
+    // Anima la boca con los grupos vocálicos estimados de una palabra.
+    function animarSilabasPalabra(palabra, velocidad, miSesion) {
+      cancelarPulsoSilabas();
+
+      if (temporizadorBoca !== null) {
+        clearTimeout(temporizadorBoca);
+        temporizadorBoca = null;
+      }
+
+      const cantidad = Math.min(
+        10,
+        estimarSilabasPalabra(palabra)
       );
 
-      if (uartNotificacion.properties.notify) {
-        await uartNotificacion.startNotifications();
+      const duracion = Math.max(
+        65,
+        Math.round(115 / velocidad)
+      );
 
-        uartNotificacion.addEventListener(
-          "characteristicvaluechanged",
-          function(evento) {
-            const valor = new TextDecoder().decode(
-              evento.target.value
-            );
-            console.log("Mensaje desde micro:bit:", valor);
-          }
+      let indice = 0;
+
+      function siguientePulso() {
+        if (
+          miSesion !== sesionVoz ||
+          indice >= cantidad
+        ) {
+          temporizadorSilabas = null;
+          return;
+        }
+
+        indice++;
+        cambiarBoca(true);
+
+        temporizadorSilabas = setTimeout(() => {
+          if (miSesion !== sesionVoz) return;
+
+          cambiarBoca(false);
+
+          temporizadorSilabas = setTimeout(
+            siguientePulso,
+            Math.max(20, duracion * 0.25)
+          );
+        }, duracion * 0.75);
+      }
+
+      siguientePulso();
+    }
+
+    // Animación alternativa si el navegador no informa los límites de palabras.
+    function iniciarRespaldoSilabico(texto, velocidad, miSesion) {
+      if (temporizadorRespaldo !== null) {
+        clearInterval(temporizadorRespaldo);
+      }
+
+      const totalSilabas = Math.max(1, estimarSilabas(texto));
+
+      // Estimación de duración según longitud y velocidad de lectura.
+      const duracionMs = Math.max(
+        1800,
+        (String(texto).length / (13 * velocidad)) * 1000
+      );
+
+      const intervalo = Math.max(
+        100,
+        duracionMs / totalSilabas
+      );
+
+      let ultimoPulso = 0;
+
+      temporizadorRespaldo = setInterval(() => {
+        if (miSesion !== sesionVoz) {
+          clearInterval(temporizadorRespaldo);
+          temporizadorRespaldo = null;
+          return;
+        }
+
+        // Evita que la animación de respaldo compita con los eventos reales.
+        if (ultimoPulso === 0) {
+          abrirDurante(Math.max(55, intervalo * 0.7));
+        }
+
+        ultimoPulso = (ultimoPulso + 1) % 2;
+      }, intervalo);
+    }
+
+    // =========================================================
+    // 10. VOZ DEL NAVEGADOR
+    // =========================================================
+
+    function cargarVoces() {
+      if (!("speechSynthesis" in window)) {
+        log("Este navegador no ofrece síntesis de voz.");
+        $("speakTestBtn").disabled = true;
+        return;
+      }
+
+      vocesDisponibles = speechSynthesis.getVoices();
+
+      const selector = $("voiceSelect");
+      const seleccionAnterior = selector.value;
+
+      selector.innerHTML =
+        '<option value="">Voz predeterminada</option>';
+
+      vocesDisponibles.forEach((voz, indice) => {
+        const opcion = document.createElement("option");
+        opcion.value = String(indice);
+        opcion.textContent = voz.name + " (" + voz.lang + ")";
+        selector.appendChild(opcion);
+      });
+
+      if (
+        seleccionAnterior !== "" &&
+        Number(seleccionAnterior) < vocesDisponibles.length
+      ) {
+        selector.value = seleccionAnterior;
+      }
+    }
+
+    if ("speechSynthesis" in window) {
+      speechSynthesis.addEventListener?.("voiceschanged", cargarVoces);
+      cargarVoces();
+    }
+
+    $("rateRange").addEventListener("input", () => {
+      $("rateValue").textContent =
+        Number($("rateRange").value).toFixed(1);
+    });
+
+    function hablar(texto) {
+      if (!("speechSynthesis" in window)) {
+        log("Síntesis de voz no disponible.");
+        return;
+      }
+
+      speechSynthesis.cancel();
+
+      const miSesion = ++sesionVoz;
+      detenerTemporizadoresBoca();
+
+      const utterance = new SpeechSynthesisUtterance(texto);
+      utterance.lang = "es-CO";
+      utterance.rate = Number($("rateRange").value);
+      utterance.pitch = 1.05;
+      utterance.volume = 1;
+
+      const indiceVoz = $("voiceSelect").value;
+
+      if (
+        indiceVoz !== "" &&
+        vocesDisponibles[Number(indiceVoz)]
+      ) {
+        utterance.voice = vocesDisponibles[Number(indiceVoz)];
+      }
+
+      const sincronizar = $("syncCheck").checked;
+      let recibioLimitesPalabra = false;
+
+      utterance.onstart = () => {
+        log("Voz iniciada. Sílabas estimadas: " + estimarSilabas(texto));
+
+        if (sincronizar) {
+          iniciarRespaldoSilabico(texto, utterance.rate, miSesion);
+        }
+      };
+
+      utterance.onboundary = (evento) => {
+        if (!sincronizar || miSesion !== sesionVoz) return;
+
+        const inicio = Math.max(0, Number(evento.charIndex) || 0);
+        const resto = texto.slice(inicio);
+        const coincidencia = resto.match(
+          /^\s*([A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)/ 
+        );
+
+        if (!coincidencia) return;
+
+        recibioLimitesPalabra = true;
+
+        if (temporizadorRespaldo !== null) {
+          clearInterval(temporizadorRespaldo);
+          temporizadorRespaldo = null;
+        }
+
+        animarSilabasPalabra(
+          coincidencia[1],
+          utterance.rate,
+          miSesion
+        );
+      };
+
+      utterance.onend = () => {
+        if (temporizadorRespaldo !== null) {
+          clearInterval(temporizadorRespaldo);
+          temporizadorRespaldo = null;
+        }
+
+        cancelarPulsoSilabas();
+
+        if (miSesion === sesionVoz) {
+          detenerTemporizadoresBoca();
+          cambiarBoca(false, true);
+        }
+
+        log("Terminó la reproducción de voz.");
+      };
+
+      utterance.onerror = (evento) => {
+        if (temporizadorRespaldo !== null) {
+          clearInterval(temporizadorRespaldo);
+          temporizadorRespaldo = null;
+        }
+
+        if (miSesion === sesionVoz) {
+          detenerTemporizadoresBoca();
+        }
+
+        log("Error de voz: " + evento.error);
+      };
+
+      speechSynthesis.speak(utterance);
+    }
+
+    function detenerVoz() {
+      sesionVoz++;
+
+      if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+      }
+
+      detenerTemporizadoresBoca();
+      cambiarBoca(false, true);
+
+      log("Voz detenida.");
+    }
+
+    // =========================================================
+    // 11. CHAT E INTELIGENCIA ARTIFICIAL
+    // =========================================================
+
+    function agregarMensaje(texto, tipo) {
+      const mensaje = document.createElement("div");
+      mensaje.className = "message " + tipo;
+      mensaje.textContent = texto;
+
+      chatElement.appendChild(mensaje);
+      chatElement.scrollTop = chatElement.scrollHeight;
+
+      return mensaje;
+    }
+
+    // Elimina presentaciones comunes si el modelo vuelve a incluirlas.
+    function quitarPresentacionRepetida(texto) {
+      let limpio = String(texto || "").trim();
+
+      const patrones = [
+        /^(?:¡?\s*)?hola[!,.\s]*(?:soy|me llamo)\s+leonbot\b[,.!:\s-]*/i,
+        /^(?:soy|me llamo)\s+leonbot\b[,.!:\s-]*/i,
+        /^(?:¡?\s*)?hola[!,.:\s]+(?:soy\s+)?tu\s+asistente\s+virtual[,.!:\s-]*/i,
+        /^como\s+leonbot[,.!:\s-]*/i,
+        /^soy\s+tu\s+asistente\s+virtual[,.!:\s-]*/i
+      ];
+
+      for (const patron of patrones) {
+        limpio = limpio.replace(patron, "").trim();
+      }
+
+      return limpio || String(texto || "").trim();
+    }
+
+    async function consultarLeonBot(texto) {
+      historialChat.push({
+        role: "user",
+        content: texto
+      });
+
+      // Mantiene un historial limitado para no enviar una conversación enorme.
+      const mensajes = historialChat.slice(-12).map((m) => ({
+        role: m.role,
+        content: m.content
+      }));
+
+      const respuesta = await fetch(AI_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          messages: mensajes
+        })
+      });
+
+      let datos;
+
+      try {
+        datos = await respuesta.json();
+      } catch {
+        throw new Error("El servidor devolvió una respuesta que no es JSON.");
+      }
+
+      if (!respuesta.ok) {
+        throw new Error(
+          datos.error || ("Error del servidor: " + respuesta.status)
         );
       }
-    } catch (errorTX) {
-      console.info("La característica TX no está disponible:", errorTX);
+
+      if (!datos.reply || typeof datos.reply !== "string") {
+        throw new Error("La respuesta de la IA no contiene el campo reply.");
+      }
+
+      const respuestaLimpia = quitarPresentacionRepetida(datos.reply);
+
+      historialChat.push({
+        role: "assistant",
+        content: respuestaLimpia
+      });
+
+      // Mantener el historial interno en un tamaño manejable.
+      if (historialChat.length > 12) {
+        historialChat.splice(0, historialChat.length - 12);
+      }
+
+      return respuestaLimpia;
     }
 
-    actualizarEstadoBluetooth();
-    estadoUART.textContent =
-      "UART listo. Servo configurado en P0.";
+    async function enviarPregunta(texto) {
+      if (enviandoPregunta) return;
 
-    agregarMensaje(
-      "La micro:bit está conectada. Ya puedes probar el movimiento de la boca.",
-      "system"
-    );
-  } catch (error) {
-    console.error("No se pudo conectar por Bluetooth:", error);
-    cambiarEstadoGeneral("Error Bluetooth", "error");
+      const pregunta = String(texto || "").trim();
+      if (!pregunta) return;
 
-    agregarMensaje(
-      "No se pudo conectar con la micro:bit. Comprueba que esté encendida y que el programa MakeCode con UART esté ejecutándose.",
-      "system"
-    );
-  }
-}
+      enviandoPregunta = true;
+      chatInput.value = "";
+      agregarMensaje(pregunta, "user");
 
-function alDesconectarBluetooth() {
-  uartCaracteristica = null;
-  uartNotificacion = null;
-  servicioUART = null;
-  servidorBluetooth = null;
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+      micBtn.disabled = true;
+      sendBtn.textContent = "Pensando…";
 
-  actualizarEstadoBluetooth();
-  mostrarEstadoBoca("Boca en reposo", false);
-}
+      const mensajeRespuesta = agregarMensaje(
+        "Estoy pensando…",
+        "bot"
+      );
 
-async function desconectarBluetooth() {
-  try {
-    if (dispositivoBluetooth &&
-        dispositivoBluetooth.gatt &&
-        dispositivoBluetooth.gatt.connected) {
-      dispositivoBluetooth.gatt.disconnect();
+      try {
+        const respuesta = await consultarLeonBot(pregunta);
+
+        mensajeRespuesta.textContent = respuesta;
+        chatElement.scrollTop = chatElement.scrollHeight;
+
+        log("Respuesta recibida desde Cloudflare Workers AI.");
+        hablar(respuesta);
+      } catch (error) {
+        mensajeRespuesta.textContent =
+          "No pude obtener una respuesta en este momento. " +
+          "Revisa tu conexión a internet e inténtalo de nuevo.";
+
+        log("ERROR al consultar la IA: " + error.message);
+      } finally {
+        enviandoPregunta = false;
+        chatInput.disabled = false;
+        sendBtn.disabled = false;
+        micBtn.disabled = !reconocimientoVoz;
+        sendBtn.textContent = "Enviar";
+        chatInput.focus();
+      }
     }
-  } catch (error) {
-    console.error("Error al desconectar:", error);
-  }
 
-  uartCaracteristica = null;
-  uartNotificacion = null;
-  servicioUART = null;
-  servidorBluetooth = null;
-  actualizarEstadoBluetooth();
-}
+    chatForm.addEventListener("submit", async (evento) => {
+      evento.preventDefault();
+      await enviarPregunta(chatInput.value);
+    });
 
-btnBluetooth.addEventListener("click", async function() {
-  if (bluetoothConectado()) {
-    await desconectarBluetooth();
-  } else {
-    await conectarBluetooth();
-  }
-});
+    // =========================================================
+    // 12. RECONOCIMIENTO DE VOZ PARA DICTAR PREGUNTAS
+    // =========================================================
 
-btnAbrir.addEventListener("click", function() {
-  enviarComando("OPEN");
-  mostrarEstadoBoca("Boca abierta · prueba manual", true);
-});
+    function configurarReconocimientoVoz() {
+      const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
 
-btnCerrar.addEventListener("click", function() {
-  enviarComando("CLOSE");
-  mostrarEstadoBoca("Boca cerrada", false);
-});
+      if (!SpeechRecognition) {
+        micBtn.disabled = true;
+        voiceInputStatus.textContent =
+          "El dictado no está disponible en este navegador. " +
+          "Prueba Chrome o Edge; también puedes escribir tu pregunta.";
 
-/* =========================================================
-   VOZ SINTETIZADA Y SINCRONIZACIÓN SILÁBICA
-   ========================================================= */
+        log("Reconocimiento de voz no disponible.");
+        return;
+      }
 
-function elegirVoz() {
-  const voces = window.speechSynthesis
-    ? window.speechSynthesis.getVoices()
-    : [];
+      reconocimientoVoz = new SpeechRecognition();
+      reconocimientoVoz.lang = "es-CO";
+      reconocimientoVoz.continuous = false;
+      reconocimientoVoz.interimResults = true;
+      reconocimientoVoz.maxAlternatives = 1;
 
-  const seleccionada = vozSelect.value;
+      let textoFinalReconocido = "";
+      let preguntaEnviada = false;
 
-  if (seleccionada) {
-    return voces.find(voz => voz.name === seleccionada) || null;
-  }
+      reconocimientoVoz.onstart = () => {
+        escuchando = true;
+        textoFinalReconocido = "";
+        preguntaEnviada = false;
 
-  return voces.find(voz => /^es(-|_)?CO$/i.test(voz.lang)) ||
-    voces.find(voz => /^es/i.test(voz.lang)) ||
-    null;
-}
+        micBtn.classList.add("listening");
+        micBtn.textContent = "⏹️";
+        micBtn.title = "Detener dictado";
 
-function cargarVoces() {
-  if (!("speechSynthesis" in window)) return;
+        voiceInputStatus.textContent = "Escuchando… habla ahora.";
+        log("Reconocimiento de voz iniciado.");
+      };
 
-  const voces = window.speechSynthesis.getVoices();
-  const seleccionAnterior = vozSelect.value;
+      reconocimientoVoz.onresult = (evento) => {
+        let parcial = "";
+        let final = "";
 
-  vozSelect.innerHTML = "";
+        for (
+          let i = evento.resultIndex;
+          i < evento.results.length;
+          i++
+        ) {
+          const transcripcion =
+            evento.results[i][0].transcript;
 
-  const predeterminada = document.createElement("option");
-  predeterminada.value = "";
-  predeterminada.textContent = "Voz predeterminada en español";
-  vozSelect.appendChild(predeterminada);
+          if (evento.results[i].isFinal) {
+            final += transcripcion;
+          } else {
+            parcial += transcripcion;
+          }
+        }
 
-  const vocesEspanol = voces.filter(
-    voz => /^es/i.test(voz.lang)
-  );
+        if (parcial.trim()) {
+          chatInput.value = parcial.trim();
+          voiceInputStatus.textContent =
+            "Reconociendo: " + parcial.trim();
+        }
 
-  vocesEspanol.forEach(voz => {
-    const opcion = document.createElement("option");
-    opcion.value = voz.name;
-    opcion.textContent = voz.name + " (" + voz.lang + ")";
-    vozSelect.appendChild(opcion);
-  });
+        if (final.trim()) {
+          textoFinalReconocido += " " + final.trim();
+          chatInput.value = textoFinalReconocido.trim();
 
-  if ([...vozSelect.options].some(
-    opcion => opcion.value === seleccionAnterior
-  )) {
-    vozSelect.value = seleccionAnterior;
-  }
-}
+          voiceInputStatus.textContent =
+            "Pregunta reconocida: “" +
+            textoFinalReconocido.trim() + "”";
+        }
+      };
 
-if ("speechSynthesis" in window) {
-  cargarVoces();
-  window.speechSynthesis.addEventListener?.(
-    "voiceschanged",
-    cargarVoces
-  );
-}
+      reconocimientoVoz.onerror = (evento) => {
+        const mensajes = {
+          "not-allowed": "Permite el acceso al micrófono en el navegador.",
+          "no-speech": "No detecté voz. Pulsa el micrófono e inténtalo otra vez.",
+          "audio-capture": "No se encontró un micrófono disponible.",
+          "network": "El reconocimiento de voz tuvo un problema de red."
+        };
 
-rateRange.addEventListener("input", function() {
-  rateValue.textContent = Number(rateRange.value).toFixed(1) + "×";
-});
+        voiceInputStatus.textContent =
+          mensajes[evento.error] ||
+          ("No pude reconocer la voz (" + evento.error + ").");
 
-function encontrarPalabra(texto, indice) {
-  const palabras = [...texto.matchAll(
-    /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+/g
-  )];
+        log("Error de reconocimiento de voz: " + evento.error);
+      };
 
-  if (!palabras.length) return null;
+      reconocimientoVoz.onend = () => {
+        escuchando = false;
 
-  // Busca la palabra que contiene el carácter señalado por el navegador.
-  let palabra = palabras.find(p =>
-    indice >= p.index && indice < p.index + p[0].length
-  );
+        micBtn.classList.remove("listening");
+        micBtn.textContent = "🎙️";
+        micBtn.title = "Dictar pregunta";
 
-  if (palabra) return palabra;
+        const pregunta = textoFinalReconocido.trim();
 
-  // Algunos motores de voz informan un índice aproximado.
-  palabra = palabras.find(p => p.index >= indice);
+        if (pregunta && !preguntaEnviada) {
+          preguntaEnviada = true;
+          chatInput.value = pregunta;
 
-  if (palabra && palabra.index - indice <= 3) return palabra;
+          voiceInputStatus.textContent =
+            "Enviando la pregunta reconocida…";
 
-  return null;
-}
-
-function enviarSilabasPalabra(texto, indice) {
-  if (!syncCheck.checked || !bluetoothConectado()) return;
-
-  const palabra = encontrarPalabra(texto, indice);
-  if (!palabra) return;
-
-  // Evita enviar el mismo comando varias veces para una palabra.
-  if (palabra.index === ultimaPalabraIndice) return;
-  ultimaPalabraIndice = palabra.index;
-
-  const cantidad = contarSilabas(palabra[0]);
-  const velocidad = Math.max(
-    0.5,
-    Math.min(2, Number(rateRange.value) || 1)
-  );
-
-  // Duración estimada por sílaba en milisegundos.
-  // MakeCode la limita también a un rango seguro.
-  const duracion = Math.max(
-    120,
-    Math.min(450, Math.round(220 / velocidad))
-  );
-
-  enviarComando(`SYL:${cantidad}:${duracion}`);
-
-  mostrarEstadoBoca(
-    `"${palabra[0]}" · ${cantidad} sílaba(s) estimadas`,
-    true
-  );
-}
-
-function cancelarFallback() {
-  if (temporizadorFallback !== null) {
-    clearTimeout(temporizadorFallback);
-    temporizadorFallback = null;
-  }
-}
-
-function hablar(texto) {
-  if (!("speechSynthesis" in window)) {
-    agregarMensaje(
-      "Este navegador no permite reproducir voz sintetizada.",
-      "system"
-    );
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-  cancelarFallback();
-
-  ultimaPalabraIndice = -1;
-
-  const utterance = new SpeechSynthesisUtterance(texto);
-  utterance.lang = "es-CO";
-  utterance.rate = Number(rateRange.value) || 1;
-  utterance.pitch = 1;
-  utterance.volume = 1;
-
-  const voz = elegirVoz();
-  if (voz) {
-    utterance.voice = voz;
-    utterance.lang = voz.lang;
-  }
-
-  // El evento boundary puede informar el inicio de cada palabra.
-  // Cuando el navegador lo proporciona, enviamos su cantidad de
-  // sílabas estimada a la micro:bit por UART.
-  let recibioEventoPalabra = false;
-
-  utterance.onboundary = function(evento) {
-    if (evento.name && evento.name !== "word") return;
-
-    recibioEventoPalabra = true;
-    enviarSilabasPalabra(texto, evento.charIndex);
-  };
-
-  utterance.onstart = function() {
-    mostrarEstadoBoca("LeonBot está hablando", true);
-    cambiarEstadoGeneral("Reproduciendo respuesta", "online");
-  };
-
-  utterance.onend = function() {
-    cancelarFallback();
-    enviarComando("CLOSE");
-    mostrarEstadoBoca("Boca en reposo", false);
-    cambiarEstadoGeneral("Listo", "online");
-  };
-
-  utterance.onerror = function(evento) {
-    cancelarFallback();
-    enviarComando("CLOSE");
-    mostrarEstadoBoca("Boca en reposo", false);
-    console.warn("Error de voz:", evento.error);
-  };
-
-  // No se simulan tiempos con temporizadores porque podrían desfasarse
-  // respecto a la voz. Si no hay eventos boundary, la sincronización
-  // automática no estará disponible en ese navegador.
-  window.speechSynthesis.speak(utterance);
-}
-
-btnProbarVoz.addEventListener("click", function() {
-  hablar("Hola. Estoy listo para ayudarte.");
-});
-
-btnDetenerVoz.addEventListener("click", function() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
-
-  cancelarFallback();
-  enviarComando("CLOSE");
-  mostrarEstadoBoca("Boca en reposo", false);
-  cambiarEstadoGeneral("Voz detenida");
-});
-
-/* =========================================================
-   RECONOCIMIENTO DE VOZ
-   ========================================================= */
-
-const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
-
-if (SpeechRecognition) {
-  reconocimiento = new SpeechRecognition();
-  reconocimiento.lang = "es-CO";
-  reconocimiento.continuous = false;
-  reconocimiento.interimResults = false;
-  reconocimiento.maxAlternatives = 1;
-
-  reconocimiento.onstart = function() {
-    escuchando = true;
-    btnMicrofono.classList.add("listening");
-    btnMicrofono.textContent = "🔴 Escuchando...";
-    cambiarEstadoGeneral("Escuchando pregunta");
-  };
-
-  reconocimiento.onresult = function(evento) {
-    const transcripcion =
-      evento.results[evento.results.length - 1][0].transcript.trim();
-
-    if (transcripcion) {
-      preguntaInput.value = transcripcion;
-      enviarPregunta(transcripcion);
+          enviarPregunta(pregunta);
+        } else if (!pregunta) {
+          voiceInputStatus.textContent =
+            "No se detectó una pregunta. Pulsa el micrófono e inténtalo de nuevo.";
+        }
+      };
     }
-  };
 
-  reconocimiento.onerror = function(evento) {
-    console.warn("Error de reconocimiento de voz:", evento.error);
+    micBtn.addEventListener("click", () => {
+      if (!reconocimientoVoz) return;
 
-    if (evento.error !== "no-speech" &&
-        evento.error !== "aborted") {
-      agregarMensaje(
-        "No pude reconocer la voz. Revisa el permiso del micrófono e inténtalo de nuevo.",
-        "system"
+      if (escuchando) {
+        reconocimientoVoz.stop();
+        return;
+      }
+
+      if (enviandoPregunta) return;
+
+      try {
+        chatInput.value = "";
+        voiceInputStatus.textContent = "Preparando el micrófono…";
+        reconocimientoVoz.start();
+      } catch (error) {
+        voiceInputStatus.textContent =
+          "No se pudo iniciar el micrófono. Espera un momento e inténtalo otra vez.";
+
+        log("No se pudo iniciar el reconocimiento: " + error.message);
+      }
+    });
+
+    configurarReconocimientoVoz();
+
+    // =========================================================
+    // 13. BOTONES Y PRUEBAS
+    // =========================================================
+
+    connectBtn.addEventListener("click", conectarBluetooth);
+    disconnectBtn.addEventListener("click", desconectarBluetooth);
+
+    $("openBtn").addEventListener("click", () => {
+      cambiarBoca(true, true);
+    });
+
+    $("closeBtn").addEventListener("click", () => {
+      cambiarBoca(false, true);
+    });
+
+    $("testBtn").addEventListener("click", probarMovimiento);
+
+    $("speakTestBtn").addEventListener("click", () => {
+      hablar(
+        "Hola. Estoy probando mi voz y la sincronización silábica de mi boca."
+      );
+    });
+
+    $("stopSpeechBtn").addEventListener("click", detenerVoz);
+
+    $("diagnosticBtn").addEventListener("click", () => {
+      if (!estaConectado()) {
+        log("Diagnóstico: no hay una conexión GATT activa.");
+        log("Conecta la micro:bit para consultar las características UART.");
+        return;
+      }
+
+      mostrarPropiedadesTX();
+    });
+
+    $("clearLogBtn").addEventListener("click", () => {
+      logElement.textContent = "";
+      log("Registro limpiado.");
+    });
+
+    // =========================================================
+    // 14. INICIALIZACIÓN
+    // =========================================================
+
+    actualizarEstadoConexion(false);
+
+    if (!("bluetooth" in navigator)) {
+      mostrarAviso(
+        "Web Bluetooth no está disponible en este navegador. " +
+        "Prueba Chrome en Android y una página HTTPS."
       );
     }
-  };
 
-  reconocimiento.onend = function() {
-    escuchando = false;
-    btnMicrofono.classList.remove("listening");
-    btnMicrofono.textContent = "🎙️ Hablar";
-
-    if (!procesandoPregunta) {
-      cambiarEstadoGeneral(
-        bluetoothConectado() ? "Micro:bit conectada" : "Listo para iniciar",
-        bluetoothConectado() ? "online" : "normal"
-      );
-    }
-  };
-
-  btnMicrofono.addEventListener("click", function() {
-    if (escuchando) {
-      reconocimiento.stop();
-      return;
-    }
-
-    try {
-      reconocimiento.start();
-    } catch (error) {
-      console.warn("No se pudo iniciar el micrófono:", error);
-    }
-  });
-} else {
-  btnMicrofono.disabled = true;
-  btnMicrofono.textContent = "Micrófono no disponible";
-
-  btnMicrofono.title =
-    "El reconocimiento de voz no está disponible en este navegador.";
-
-  agregarMensaje(
-    "El reconocimiento de voz no está disponible en este navegador. Puedes escribir tus preguntas.",
-    "system"
-  );
-}
-
-/* =========================================================
-   LIMPIAR CHAT Y ARRANQUE
-   ========================================================= */
-
-btnLimpiar.addEventListener("click", function() {
-  chatLog.innerHTML = "";
-
-  // Mantiene el mensaje de sistema en el historial para la IA.
-  historial.length = 1;
-
-  agregarMensaje(
-    "Chat limpio. Puedes escribir o dictar una nueva pregunta.",
-    "system"
-  );
-});
-
-actualizarEstadoBluetooth();
-mostrarEstadoBoca("Boca en reposo", false);
-rateValue.textContent = Number(rateRange.value).toFixed(1) + "×";
-</script>
+    log("LeonBot iniciado correctamente.");
+    log("API configurada: " + AI_ENDPOINT);
+    log("UUID UART: " + UART_RX);
+    log("Dictado por voz preparado si el navegador lo admite.");
+    log("Listo para conectar la micro:bit V2.");
+  </script>
 </body>
 </html>
