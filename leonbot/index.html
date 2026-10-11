@@ -531,8 +531,8 @@
       </form>
 
       <p class="hint">
-        Esta versión contiene respuestas de demostración; todavía no está
-        conectada a una inteligencia artificial externa.
+        LeonBot utiliza Cloudflare Workers AI para generar respuestas.
+        Se necesita conexión a internet para conversar con la IA.
       </p>
     </section>
 
@@ -595,6 +595,13 @@ Esperando conexión Bluetooth...</div>
     let ultimaPalabra = "";
 
     const encoder = new TextEncoder();
+
+    // Endpoint público de Cloudflare Workers AI.
+    const AI_ENDPOINT =
+      "https://leonbot-api.alejandro-guzman310.workers.dev/chat";
+
+    // Historial breve para que LeonBot recuerde el contexto reciente.
+    let historialChat = [];
 
     // =========================================================
     // 3. ELEMENTOS DE LA INTERFAZ
@@ -1162,76 +1169,90 @@ Esperando conexión Bluetooth...</div>
     }
 
     // =========================================================
-    // 10. CONVERSACIÓN DE DEMOSTRACIÓN
+    // 10. CONVERSACIÓN CON CLOUDFLARE WORKERS AI
     // =========================================================
 
     function agregarMensaje(texto, tipo) {
       const mensaje = document.createElement("div");
-
       mensaje.className = "message " + tipo;
       mensaje.textContent = texto;
-
       chatElement.appendChild(mensaje);
       chatElement.scrollTop = chatElement.scrollHeight;
-
       return mensaje;
     }
 
-    function generarRespuesta(texto) {
-      const t = texto.toLowerCase();
+    async function consultarLeonBot(texto) {
+      historialChat.push({ role: "user", content: texto });
+      historialChat = historialChat.slice(-12);
 
-      if (/\b(hola|buenas|buenos días|buenas tardes)\b/.test(t)) {
-        return "¡Hola! Soy LeonBot, el robot leonista. ¿Qué te gustaría aprender hoy?";
+      try {
+        const respuesta = await fetch(AI_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: historialChat })
+        });
+
+        let datos;
+        try {
+          datos = await respuesta.json();
+        } catch {
+          throw new Error("El servidor devolvió una respuesta que no es JSON.");
+        }
+
+        if (!respuesta.ok) {
+          throw new Error(datos.error || "Error HTTP " + respuesta.status);
+        }
+
+        const textoRespuesta = typeof datos.reply === "string"
+          ? datos.reply.trim()
+          : "";
+
+        if (!textoRespuesta) {
+          throw new Error("La IA no devolvió una respuesta. Intenta de nuevo.");
+        }
+
+        historialChat.push({ role: "assistant", content: textoRespuesta });
+        historialChat = historialChat.slice(-12);
+        return textoRespuesta;
+      } catch (error) {
+        // Evita repetir automáticamente la pregunta fallida en el próximo turno.
+        const ultimo = historialChat[historialChat.length - 1];
+        if (ultimo && ultimo.role === "user" && ultimo.content === texto) {
+          historialChat.pop();
+        }
+        throw error;
       }
-
-      if (t.includes("cómo estás") || t.includes("como estas")) {
-        return "¡Estoy listo para aprender y conversar contigo!";
-      }
-
-      if (
-        t.includes("astronomía") ||
-        t.includes("astronomia") ||
-        t.includes("universo") ||
-        t.includes("planeta")
-      ) {
-        return "¡El universo es fascinante! Podemos explorar planetas, estrellas, galaxias y misiones espaciales.";
-      }
-
-      if (
-        t.includes("microbit") ||
-        t.includes("micro:bit") ||
-        t.includes("robot")
-      ) {
-        return "Mi prototipo usa una micro:bit V2 para recibir comandos Bluetooth y mover un servomotor.";
-      }
-
-      if (t.includes("colegio") || t.includes("león") || t.includes("leon")) {
-        return "¡Saludos a toda la comunidad del Colegio León de Greiff!";
-      }
-
-      if (t.includes("adiós") || t.includes("adios") || t.includes("chao")) {
-        return "¡Hasta pronto! Espero que volvamos a conversar.";
-      }
-
-      return "¡Interesante! Soy una versión de demostración. Más adelante podremos conectar LeonBot a una inteligencia artificial para responder preguntas con mayor profundidad.";
     }
 
-    chatForm.addEventListener("submit", (evento) => {
+    chatForm.addEventListener("submit", async (evento) => {
       evento.preventDefault();
 
       const texto = chatInput.value.trim();
+      if (!texto) return;
 
-      if (!texto) {
-        return;
-      }
-
+      const botonEnviar = chatForm.querySelector('button[type="submit"]');
       agregarMensaje(texto, "user");
       chatInput.value = "";
+      chatInput.disabled = true;
+      botonEnviar.disabled = true;
+      const mensajeEstado = agregarMensaje("LeonBot está pensando…", "bot");
 
-      const respuesta = generarRespuesta(texto);
-
-      agregarMensaje(respuesta, "bot");
-      hablar(respuesta);
+      try {
+        const respuesta = await consultarLeonBot(texto);
+        mensajeEstado.textContent = respuesta;
+        chatElement.scrollTop = chatElement.scrollHeight;
+        hablar(respuesta);
+      } catch (error) {
+        console.error("Error al consultar LeonBot:", error);
+        mensajeEstado.textContent =
+          "No pude conectarme con la inteligencia artificial. " +
+          (error.message || "Comprueba tu conexión e inténtalo de nuevo.");
+        log("ERROR IA: " + (error.message || String(error)));
+      } finally {
+        chatInput.disabled = false;
+        botonEnviar.disabled = false;
+        chatInput.focus();
+      }
     });
 
     // =========================================================
