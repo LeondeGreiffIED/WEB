@@ -3,22 +3,24 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101827">
 
-  <title>LeonBot | Robot conversacional</title>
+  <title>LeonBot | Robot Leonista</title>
 
   <style>
     :root {
       color-scheme: dark;
-      --fondo: #101827;
-      --panel: #192437;
-      --panel-secundario: #22314a;
-      --texto: #f4f7fb;
-      --texto-secundario: #aebbd0;
-      --acento: #66e0c2;
-      --error: #ff8c8c;
-      --borde: #35465e;
+      --bg: #101827;
+      --panel: #182337;
+      --panel2: #202e45;
+      --border: #34445e;
+      --text: #f1f5f9;
+      --muted: #a7b4c8;
+      --primary: #60a5fa;
+      --green: #34d399;
+      --red: #fb7185;
+      --yellow: #fbbf24;
     }
 
     * {
@@ -27,931 +29,1271 @@
 
     body {
       margin: 0;
-      background: linear-gradient(160deg, #101827, #17263a);
-      color: var(--texto);
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
       min-height: 100vh;
-    }
-
-    main {
-      width: 100%;
-      max-width: 760px;
-      margin: auto;
-      padding: 18px 14px 40px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-bottom: 20px;
-    }
-
-    .logo {
-      width: 54px;
-      height: 54px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: var(--acento);
-      color: #102027;
-      font-size: 28px;
-      font-weight: 800;
-    }
-
-    h1 {
-      font-size: 26px;
-      margin: 0;
-    }
-
-    h2 {
-      font-size: 18px;
-      margin: 0 0 10px;
-    }
-
-    p {
-      color: var(--texto-secundario);
-      line-height: 1.5;
-      margin: 6px 0;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--borde);
-      border-radius: 18px;
       padding: 16px;
-      margin: 13px 0;
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+      background:
+        radial-gradient(circle at top, #263b5a 0, transparent 45%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    .estado {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      font-size: 14px;
-      overflow-wrap: anywhere;
-    }
-
-    .indicador {
-      width: 11px;
-      height: 11px;
-      flex-shrink: 0;
-      border-radius: 50%;
-      background: #77839a;
-    }
-
-    .indicador.ok {
-      background: var(--acento);
-    }
-
-    .indicador.error {
-      background: var(--error);
-    }
-
-    .acciones {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 13px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 12px;
-      padding: 12px 15px;
-      min-height: 45px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      background: var(--acento);
-      color: #102027;
-    }
-
-    button.secundario {
-      background: var(--panel-secundario);
-      color: var(--texto);
-      border: 1px solid #455771;
-    }
-
-    button.peligro {
-      background: #5a2b3a;
-      color: white;
-    }
-
-    button:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    textarea,
-    input {
-      width: 100%;
-      background: var(--fondo);
-      border: 1px solid #455771;
-      border-radius: 12px;
-      padding: 13px;
-      color: var(--texto);
+    button, input, textarea {
       font: inherit;
     }
 
-    textarea {
-      min-height: 95px;
-      resize: vertical;
+    button {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel2);
+      color: var(--text);
+      cursor: pointer;
+      touch-action: manipulation;
     }
 
-    .pequeno {
-      font-size: 12px;
-      color: var(--texto-secundario);
+    button:active {
+      transform: scale(.98);
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 12px 4px 22px;
+    }
+
+    .brand {
+      margin: 0;
+      font-size: clamp(30px, 8vw, 44px);
+      letter-spacing: -1.5px;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 6px 0 0;
+      font-size: 14px;
+    }
+
+    .panel {
+      padding: 16px;
+      margin-bottom: 14px;
+      background: rgba(24, 35, 55, .95);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .15);
+    }
+
+    .panel h2 {
+      font-size: 17px;
+      margin: 0 0 12px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg);
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+
+    .dot.connected {
+      background: var(--green);
+    }
+
+    .dot.disconnected {
+      background: var(--red);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 12px 0 0;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .button-row button {
+      flex: 1 1 135px;
+    }
+
+    .primary {
+      background: #2563eb;
+      border-color: #3b82f6;
+    }
+
+    .success {
+      background: #065f46;
+      border-color: #059669;
+    }
+
+    .danger {
+      background: #7f1d1d;
+      border-color: #be123c;
+    }
+
+    .robot-stage {
+      min-height: 230px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at center, #314766 0, #17243a 65%, #131e30 100%);
     }
 
     .robot {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .cara {
-      width: 88px;
-      height: 90px;
-      flex-shrink: 0;
-      border: 4px solid #92adbd;
-      border-radius: 24px;
-      background: #d7e8f0;
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      padding-top: 22px;
+      width: 180px;
+      height: 180px;
+      border-radius: 45% 45% 40% 40%;
+      border: 4px solid #8299b8;
+      background: linear-gradient(145deg, #dce8f5, #849bb7);
       position: relative;
+      box-shadow: 0 15px 35px #0005, inset -10px -12px 20px #24365055;
+      transition: transform .15s ease;
     }
 
-    .ojo {
-      width: 11px;
-      height: 14px;
-      background: #152a3b;
+    .robot.talking {
+      transform: translateY(-2px);
+    }
+
+    .antenna {
+      position: absolute;
+      width: 8px;
+      height: 25px;
+      top: -27px;
+      left: calc(50% - 4px);
+      background: #8299b8;
+      border-radius: 5px;
+    }
+
+    .antenna::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: -9px;
+      left: -4px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 16px #60a5fa;
+    }
+
+    .eye {
+      position: absolute;
+      top: 50px;
+      width: 29px;
+      height: 34px;
+      border-radius: 50%;
+      background: #101827;
+      border: 3px solid #526984;
+      overflow: hidden;
+    }
+
+    .eye.left {
+      left: 35px;
+    }
+
+    .eye.right {
+      right: 35px;
+    }
+
+    .eye::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #93c5fd;
+    }
+
+    .cheek {
+      position: absolute;
+      top: 99px;
+      width: 20px;
+      height: 10px;
+      background: #e99aa6;
+      opacity: .75;
       border-radius: 50%;
     }
 
-    .boca {
+    .cheek.left {
+      left: 18px;
+    }
+
+    .cheek.right {
+      right: 18px;
+    }
+
+    .mouth {
       position: absolute;
-      bottom: 13px;
-      width: 32px;
-      height: 7px;
-      border-radius: 4px;
-      background: #152a3b;
-      transition: height 0.08s;
+      left: 50%;
+      top: 105px;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 17px;
+      border-radius: 5px 5px 18px 18px;
+      background: #182337;
+      border: 3px solid #435772;
+      transition: height .07s ease, border-radius .07s ease;
     }
 
-    .boca.abierta {
-      height: 23px;
-      border-radius: 5px 5px 10px 10px;
+    .mouth.open {
+      height: 33px;
+      border-radius: 8px 8px 18px 18px;
+      background: #351f35;
     }
 
-    .robot-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .etiqueta {
-      display: inline-block;
-      margin: 5px 3px 0 0;
-      padding: 4px 9px;
-      border: 1px solid #455771;
-      border-radius: 999px;
+    .robot-label {
+      text-align: center;
       font-size: 12px;
-      color: var(--texto-secundario);
+      color: var(--muted);
+      margin-top: 14px;
     }
 
-    .conversacion {
-      min-height: 75px;
-      max-height: 260px;
+    .chat {
+      height: 210px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #101827;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      max-width: 90%;
+      width: fit-content;
+      padding: 10px 12px;
+      margin: 7px 0;
+      border-radius: 12px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+
+    .message.user {
+      margin-left: auto;
+      background: #1d4ed8;
+    }
+
+    .message.bot {
+      background: #29384f;
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-form input {
+      min-width: 0;
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .log {
+      height: 175px;
       overflow-y: auto;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
-      line-height: 1.5;
-      background: var(--fondo);
+      padding: 12px;
       border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: #b9d5f6;
+      font: 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+
+    .log-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .log-actions button {
+      flex: 1;
+      font-size: 13px;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .field input[type="range"] {
+      width: 48%;
+    }
+
+    .field select {
+      max-width: 55%;
+      padding: 8px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .notice {
+      color: #fde68a;
+      background: #42200655;
+      border: 1px solid #92400e;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 12px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
       padding: 12px;
     }
 
-    .mensaje-usuario {
-      color: #9bd8ff;
-    }
-
-    .mensaje-robot {
-      color: #d8fff5;
-    }
-
-    .aviso {
-      border-left: 3px solid #ffd27a;
-      padding-left: 11px;
-      font-size: 13px;
-      color: #e8d9b7;
-    }
-
-    #registro {
-      overflow-wrap: anywhere;
-      white-space: pre-wrap;
-    }
-
     @media (max-width: 420px) {
-      .robot {
-        align-items: flex-start;
+      body {
+        padding: 10px;
       }
 
-      .cara {
-        width: 76px;
-        height: 82px;
+      .panel {
+        padding: 13px;
       }
 
-      button {
-        flex: 1 1 auto;
+      .button-row button {
+        flex-basis: 115px;
+      }
+
+      .robot-stage {
+        min-height: 215px;
       }
     }
   </style>
 </head>
 
 <body>
-<main>
+  <main class="app">
+    <header>
+      <h1 class="brand">Leon<span>Bot</span></h1>
+      <p class="subtitle">Prototipo interactivo · Robot Leonista</p>
+    </header>
 
-  <header>
-    <div class="logo">L</div>
-    <div>
-      <h1>LeonBot</h1>
-      <p>Robot conversacional · Prototipo 0.3</p>
-    </div>
-  </header>
+    <section class="panel">
+      <h2>Conexión con micro:bit V2</h2>
 
-  <!-- CONEXIÓN BLUETOOTH -->
-  <section class="card">
-    <h2>Conexión con micro:bit</h2>
-
-    <div class="estado">
-      <span id="indicadorBluetooth" class="indicador"></span>
-      <span id="estadoBluetooth">Micro:bit desconectada</span>
-    </div>
-
-    <div class="acciones">
-      <button id="conectarBtn">Conectar micro:bit</button>
-      <button id="desconectarBtn" class="secundario" disabled>
-        Desconectar
-      </button>
-    </div>
-
-    <p class="pequeno">
-      Abre esta página en Chrome para Android mediante HTTPS.
-      Al conectar, selecciona tu micro:bit en la lista de dispositivos.
-    </p>
-  </section>
-
-  <!-- ROBOT Y SERVO -->
-  <section class="card">
-    <h2>Control de la boca</h2>
-
-    <div class="robot">
-      <div class="cara">
-        <span class="ojo"></span>
-        <span class="ojo"></span>
-        <span id="boca" class="boca"></span>
+      <div class="status-row">
+        <span class="status">
+          <span id="statusDot" class="dot disconnected"></span>
+          <span id="statusText">Desconectado</span>
+        </span>
       </div>
 
-      <div class="robot-info">
-        <strong>LeonBot</strong>
-        <p id="estadoRobot">Esperando conexión.</p>
-        <span class="etiqueta">Servo P0</span>
-        <span class="etiqueta">micro:bit V2</span>
+      <div class="button-row" style="margin-top: 13px;">
+        <button id="connectBtn" class="primary">Conectar micro:bit</button>
+        <button id="disconnectBtn" class="danger" disabled>Desconectar</button>
       </div>
-    </div>
 
-    <div class="acciones">
-      <button id="abrirBtn" class="secundario" disabled>
-        Abrir boca
-      </button>
+      <p class="hint">
+        Abre esta página en Chrome desde tu celular Android. Enciende la
+        micro:bit y pulsa Conectar. No necesitas Bluetooth en el computador
+        para utilizar esta aplicación desde el celular.
+      </p>
 
-      <button id="cerrarBtn" class="secundario" disabled>
-        Cerrar boca
-      </button>
+      <div id="bluetoothNotice" class="notice" hidden></div>
+    </section>
 
-      <button id="probarBtn" class="secundario" disabled>
-        Probar movimiento
-      </button>
-    </div>
-  </section>
+    <section class="panel">
+      <h2>Mi robot</h2>
 
-  <!-- VOZ -->
-  <section class="card">
-    <h2>Prueba de voz</h2>
+      <div class="robot-stage">
+        <div>
+          <div id="robot" class="robot">
+            <div class="antenna"></div>
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+            <div id="mouth" class="mouth"></div>
+          </div>
+          <div class="robot-label" id="mouthStatus">Boca cerrada</div>
+        </div>
+      </div>
 
-    <p>
-      Escribe una frase para que el celular la pronuncie.
-      La boca intentará moverse durante el habla.
-    </p>
+      <div class="button-row" style="margin-top: 14px;">
+        <button id="openBtn" class="success">Abrir boca</button>
+        <button id="closeBtn">Cerrar boca</button>
+        <button id="testBtn">Probar movimiento</button>
+      </div>
 
-    <textarea id="textoVoz">¡Hola! Soy LeonBot. Estoy aprendiendo a hablar contigo.</textarea>
+      <p class="hint">
+        Estos botones envían OPEN y CLOSE por UART. El dibujo de la pantalla
+        es una representación visual; el movimiento físico depende de que
+        la comunicación Bluetooth funcione.
+      </p>
+    </section>
 
-    <div class="acciones">
-      <button id="hablarBtn">Hablar</button>
-      <button id="detenerBtn" class="peligro">Detener</button>
-    </div>
+    <section class="panel">
+      <h2>Voz del robot</h2>
 
-    <p id="estadoVoz" class="pequeno">
-      Voz del navegador. La sincronización por palabra depende del dispositivo.
-    </p>
-  </section>
+      <div class="button-row">
+        <button id="speakTestBtn" class="primary">Probar voz</button>
+        <button id="stopSpeechBtn">Detener voz</button>
+      </div>
 
-  <!-- CHAT -->
-  <section class="card">
-    <h2>Conversación</h2>
+      <div class="field">
+        <label for="voiceSelect">Voz disponible</label>
+        <select id="voiceSelect">
+          <option value="">Voz predeterminada</option>
+        </select>
+      </div>
 
-    <p>
-      Esta versión incluye respuestas de demostración.
-      La conexión con una inteligencia artificial real se integrará después
-      mediante un servidor seguro.
-    </p>
+      <div class="field">
+        <label for="rateRange">Velocidad</label>
+        <input id="rateRange" type="range" min="0.6" max="1.5"
+          step="0.1" value="1">
+        <span id="rateValue">1.0</span>
+      </div>
 
-    <div id="conversacion" class="conversacion" aria-live="polite"><span class="mensaje-robot">LeonBot: ¡Hola! Escribe un mensaje para comenzar.</span></div>
+      <div class="field">
+        <label for="syncCheck">Sincronizar boca</label>
+        <input id="syncCheck" type="checkbox" checked>
+      </div>
 
-    <div style="height: 10px"></div>
+      <p class="hint">
+        La voz usa el sintetizador del navegador. En algunos celulares Android
+        no se generan eventos por palabra; en ese caso se intenta una
+        sincronización aproximada.
+      </p>
+    </section>
 
-    <input
-      id="mensajeUsuario"
-      type="text"
-      placeholder="Escribe un mensaje..."
-      autocomplete="off"
-    >
+    <section class="panel">
+      <h2>Conversación de prueba</h2>
 
-    <div class="acciones">
-      <button id="enviarBtn">Enviar y hablar</button>
-    </div>
+      <div id="chat" class="chat" aria-live="polite">
+        <div class="message bot">
+          ¡Hola! Soy LeonBot. Puedes escribirme un mensaje para probar la
+          conversación y mi voz.
+        </div>
+      </div>
 
-    <p class="aviso">
-      No coloques claves de API en este archivo. Para conectar la IA
-      utilizaremos un servidor que proteja las credenciales.
-    </p>
-  </section>
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" type="text" maxlength="500"
+          placeholder="Escribe un mensaje..." autocomplete="off">
+        <button class="primary" type="submit">Enviar</button>
+      </form>
 
-  <!-- DIAGNÓSTICO -->
-  <section class="card">
-    <h2>Registro técnico</h2>
-    <p id="registro">LeonBot iniciado. Conecta la micro:bit para comenzar.</p>
-  </section>
+      <p class="hint">
+        Esta versión contiene respuestas de demostración; todavía no está
+        conectada a una inteligencia artificial externa.
+      </p>
+    </section>
 
-</main>
+    <section class="panel">
+      <h2>Diagnóstico Bluetooth</h2>
 
-<script>
-"use strict";
+      <div class="button-row">
+        <button id="diagnosticBtn">Revisar conexión</button>
+        <button id="clearLogBtn">Limpiar registro</button>
+      </div>
 
-/* =====================================================
-   CONFIGURACIÓN BLUETOOTH UART DE MICRO:BIT
-   ===================================================== */
+      <div id="log" class="log" role="log" aria-live="polite"
+        style="margin-top: 12px;">LeonBot iniciado.
+Esperando conexión Bluetooth...</div>
 
-const UART_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+      <div class="notice">
+        Si las propiedades Escritura y Escritura sin respuesta aparecen
+        como false, la aplicación no puede enviar comandos por esa
+        característica. El registro permite detectar el problema, pero
+        no puede modificar las propiedades del servicio Bluetooth.
+      </div>
+    </section>
 
-// RX de la micro:bit: el navegador escribe los comandos aquí.
-const UART_RX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+    <footer>
+      LeonBot · Prototipo educativo · Colegio León de Greiff I.E.D.
+    </footer>
+  </main>
 
-/* =====================================================
-   VARIABLES DE ESTADO
-   ===================================================== */
+  <script>
+    "use strict";
 
-let dispositivo = null;
-let servidorBluetooth = null;
-let caracteristicaTX = null;
-let conectado = false;
+    // =========================================================
+    // 1. CONFIGURACIÓN BLUETOOTH UART
+    // =========================================================
 
-// Serializa las escrituras para evitar operaciones GATT simultáneas.
-let colaEscrituras = Promise.resolve();
+    const UART_SERVICE =
+      "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
 
-let ultimoEstadoBoca = null;
-let temporizadoresVoz = [];
-let vozActual = null;
-let indicePrueba = 0;
+    // RX de la micro:bit: el navegador escribe los comandos aquí.
+    const UART_RX =
+      "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
 
-/* =====================================================
-   REFERENCIAS A LOS ELEMENTOS HTML
-   ===================================================== */
+    // =========================================================
+    // 2. ESTADO DE LA APLICACIÓN
+    // =========================================================
 
-const elemento = id => document.getElementById(id);
+    let dispositivoBluetooth = null;
+    let servidorBluetooth = null;
+    let servicioUART = null;
+    let caracteristicaTX = null;
 
-const conectarBtn = elemento("conectarBtn");
-const desconectarBtn = elemento("desconectarBtn");
-const abrirBtn = elemento("abrirBtn");
-const cerrarBtn = elemento("cerrarBtn");
-const probarBtn = elemento("probarBtn");
+    let colaEscrituras = Promise.resolve();
+    let estadoBoca = "CLOSE";
+    let temporizadorBoca = null;
+    let temporizadorRespaldo = null;
+    let vocesDisponibles = [];
 
-const indicadorBluetooth = elemento("indicadorBluetooth");
-const estadoBluetooth = elemento("estadoBluetooth");
-const estadoRobot = elemento("estadoRobot");
-const registro = elemento("registro");
-const boca = elemento("boca");
+    let sesionVoz = 0;
+    let ultimaActividadVoz = 0;
+    let ultimaPalabra = "";
 
-/* =====================================================
-   MENSAJES Y ESTADO VISUAL
-   ===================================================== */
+    const encoder = new TextEncoder();
 
-function registrar(mensaje) {
-  registro.textContent = mensaje;
-  console.log("[LeonBot]", mensaje);
-}
+    // =========================================================
+    // 3. ELEMENTOS DE LA INTERFAZ
+    // =========================================================
 
-function actualizarConexion(estado) {
-  conectado = estado;
+    const $ = (id) => document.getElementById(id);
 
-  indicadorBluetooth.className =
-    estado ? "indicador ok" : "indicador";
+    const connectBtn = $("connectBtn");
+    const disconnectBtn = $("disconnectBtn");
+    const statusDot = $("statusDot");
+    const statusText = $("statusText");
+    const bluetoothNotice = $("bluetoothNotice");
 
-  estadoBluetooth.textContent =
-    estado ? "Micro:bit conectada" : "Micro:bit desconectada";
+    const mouth = $("mouth");
+    const mouthStatus = $("mouthStatus");
+    const robot = $("robot");
 
-  conectarBtn.disabled = estado;
-  desconectarBtn.disabled = !estado;
+    const logElement = $("log");
+    const chatElement = $("chat");
+    const chatForm = $("chatForm");
+    const chatInput = $("chatInput");
 
-  abrirBtn.disabled = !estado;
-  cerrarBtn.disabled = !estado;
-  probarBtn.disabled = !estado;
+    // =========================================================
+    // 4. REGISTRO VISIBLE
+    // =========================================================
 
-  if (!estado) {
-    estadoRobot.textContent = "Esperando conexión.";
-    ultimoEstadoBoca = null;
-  }
-}
+    function log(mensaje) {
+      const hora = new Date().toLocaleTimeString("es-CO", {
+        hour12: false
+      });
 
-/* =====================================================
-   ENVÍO DE COMANDOS POR BLUETOOTH GATT
+      const linea = "[" + hora + "] " + String(mensaje);
 
-   Los comandos son OPEN y CLOSE, terminados en salto
-   de línea para que MakeCode pueda leerlos con UART.
-   ===================================================== */
+      logElement.textContent +=
+        (logElement.textContent ? "\n" : "") + linea;
 
-function enviarComando(comando) {
-  // Agregamos cada escritura a una cola para evitar que
-  // dos operaciones GATT intenten ejecutarse a la vez.
-  colaEscrituras = colaEscrituras
-    .catch(() => {
-      // Permite continuar la cola si una escritura anterior falló.
-    })
-    .then(async () => {
-      if (
-        !dispositivo ||
-        !dispositivo.gatt ||
-        !dispositivo.gatt.connected ||
-        !caracteristicaTX
-      ) {
-        registrar("Error: la micro:bit no está conectada.");
-        throw new Error("Micro:bit desconectada");
+      logElement.scrollTop = logElement.scrollHeight;
+    }
+
+    function mostrarAviso(mensaje) {
+      bluetoothNotice.textContent = mensaje;
+      bluetoothNotice.hidden = false;
+    }
+
+    function ocultarAviso() {
+      bluetoothNotice.textContent = "";
+      bluetoothNotice.hidden = true;
+    }
+
+    // =========================================================
+    // 5. ESTADO DE CONEXIÓN
+    // =========================================================
+
+    function actualizarEstadoConexion(conectado) {
+      statusText.textContent = conectado
+        ? "Micro:bit conectada"
+        : "Desconectado";
+
+      statusDot.className = conectado
+        ? "dot connected"
+        : "dot disconnected";
+
+      connectBtn.disabled = conectado;
+      disconnectBtn.disabled = !conectado;
+    }
+
+    function estaConectado() {
+      return Boolean(
+        dispositivoBluetooth &&
+        dispositivoBluetooth.gatt &&
+        dispositivoBluetooth.gatt.connected &&
+        caracteristicaTX
+      );
+    }
+
+    // =========================================================
+    // 6. CONEXIÓN BLUETOOTH
+    // =========================================================
+
+    async function conectarBluetooth() {
+      ocultarAviso();
+
+      if (!("bluetooth" in navigator)) {
+        mostrarAviso(
+          "Este navegador no ofrece Web Bluetooth. " +
+          "Abre LeonBot en Chrome para Android mediante HTTPS."
+        );
+        log("ERROR: navigator.bluetooth no está disponible.");
+        return;
       }
 
-      const datos = new TextEncoder().encode(comando + "\n");
-      const propiedades = caracteristicaTX.properties;
+      if (!window.isSecureContext) {
+        mostrarAviso(
+          "La página no está en un contexto seguro. " +
+          "Usa la dirección HTTPS de GitHub Pages."
+        );
+        log("ERROR: la página no está en un contexto seguro.");
+        return;
+      }
 
       try {
-        if (
-          propiedades.writeWithoutResponse &&
-          typeof caracteristicaTX.writeValueWithoutResponse === "function"
-        ) {
-          await caracteristicaTX.writeValueWithoutResponse(datos);
-        } else if (
-          propiedades.write &&
-          typeof caracteristicaTX.writeValueWithResponse === "function"
-        ) {
-          await caracteristicaTX.writeValueWithResponse(datos);
-        } else {
-          throw new Error(
-            "La característica UART no permite escribir. " +
-            "write=" + propiedades.write +
-            "; writeWithoutResponse=" + propiedades.writeWithoutResponse
+        log("Buscando una micro:bit Bluetooth...");
+
+        // acceptAllDevices permite seleccionar la micro:bit aunque
+        // el nombre anunciado varíe. Se solicita el servicio UART.
+        dispositivoBluetooth = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
+          optionalServices: [UART_SERVICE]
+        });
+
+        log("Dispositivo seleccionado: " +
+          (dispositivoBluetooth.name || "Nombre no disponible"));
+
+        dispositivoBluetooth.addEventListener(
+          "gattserverdisconnected",
+          manejarDesconexion
+        );
+
+        servidorBluetooth = await dispositivoBluetooth.gatt.connect();
+
+        log("Conexión GATT establecida.");
+
+        servicioUART = await servidorBluetooth.getPrimaryService(
+          UART_SERVICE
+        );
+
+        log("Servicio UART encontrado: " + servicioUART.uuid);
+
+        // Enumerar las características reales del servicio.
+        const caracteristicas =
+          await servicioUART.getCharacteristics();
+
+        log("Características encontradas: " + caracteristicas.length);
+
+        for (const caracteristica of caracteristicas) {
+          const p = caracteristica.properties;
+
+          log("UUID: " + caracteristica.uuid);
+          log(
+            "Propiedades: write=" + p.write +
+            ", writeWithoutResponse=" + p.writeWithoutResponse +
+            ", notify=" + p.notify +
+            ", read=" + p.read
           );
         }
 
-        registrar("Comando enviado correctamente: " + comando);
+        caracteristicaTX = await servicioUART.getCharacteristic(UART_RX);
+
+        log("Característica seleccionada: " + caracteristicaTX.uuid);
+
+        mostrarPropiedadesTX();
+
+        actualizarEstadoConexion(true);
+
+        if (
+          !caracteristicaTX.properties.write &&
+          !caracteristicaTX.properties.writeWithoutResponse
+        ) {
+          mostrarAviso(
+            "Conexión Bluetooth establecida, pero la característica UART " +
+            "seleccionada no admite escritura. Consulta el diagnóstico."
+          );
+
+          log(
+            "ADVERTENCIA: la característica seleccionada no permite " +
+            "escritura. Los comandos no podrán enviarse."
+          );
+        } else {
+          ocultarAviso();
+          log("UART listo para intentar enviar comandos.");
+        }
+
       } catch (error) {
-        registrar(
-          "Error Bluetooth GATT: " +
-          error.name + " — " + error.message
+        log("ERROR de conexión: " +
+          error.name + " — " + error.message);
+
+        if (error.name === "NotFoundError") {
+          log("No se seleccionó ningún dispositivo.");
+        } else if (error.name === "SecurityError") {
+          log("Revisa HTTPS y los permisos Bluetooth del navegador.");
+        } else if (error.name === "NetworkError") {
+          log("No se pudo establecer la conexión GATT.");
+        }
+
+        mostrarAviso(
+          "No se completó la conexión. Revisa el registro y vuelve a intentar."
         );
 
-        throw error;
+        actualizarEstadoConexion(false);
       }
-    });
-
-  return colaEscrituras;
-}
-
-/* =====================================================
-   CONEXIÓN BLUETOOTH
-
-   acceptAllDevices permite mostrar dispositivos que no
-   anuncian el servicio UART en sus datos publicitarios.
-   Después solicitamos específicamente el servicio UART.
-   ===================================================== */
-
-async function conectarMicrobit() {
-  if (!navigator.bluetooth) {
-    registrar(
-      "Web Bluetooth no está disponible. Abre LeonBot en Chrome " +
-      "para Android mediante HTTPS."
-    );
-    return;
-  }
-
-  try {
-    conectarBtn.disabled = true;
-    estadoBluetooth.textContent = "Buscando dispositivos Bluetooth...";
-
-    dispositivo = await navigator.bluetooth.requestDevice({
-      acceptAllDevices: true,
-      optionalServices: [UART_SERVICE]
-    });
-
-    dispositivo.addEventListener(
-      "gattserverdisconnected",
-      manejarDesconexion
-    );
-
-    registrar(
-      "Dispositivo seleccionado: " +
-      (dispositivo.name || "nombre no disponible") +
-      ". Conectando..."
-    );
-
-    servidorBluetooth = await dispositivo.gatt.connect();
-
-  /*  const servicio = await servidorBluetooth.getPrimaryService(
-      UART_SERVICE
-    );
-
-    caracteristicaTX = await servicio.getCharacteristic(UART_RX);*/
-    
-
-const servicio = await servidorBluetooth.getPrimaryService(
-  UART_SERVICE
-);
-
-caracteristicaTX = await servicio.getCharacteristic(UART_RX);
-
-log("Servicio UART: " + servicio.uuid);
-log("Característica: " + caracteristicaTX.uuid);
-log("Escritura: " + caracteristicaTX.properties.write);
-log(
-  "Escritura sin respuesta: " +
-  caracteristicaTX.properties.writeWithoutResponse
-);
-log("Notificaciones: " + caracteristicaTX.properties.notify);
-log("Lectura: " + caracteristicaTX.properties.read);
-
-
-/*========================================*/
-    
-    actualizarConexion(true);
-    estadoRobot.textContent = "Conectada. Puedes probar la boca.";
-
-    registrar(
-      "Conexión Bluetooth establecida. Pulsa Abrir boca para probar."
-    );
-
-  } catch (error) {
-    actualizarConexion(false);
-    caracteristicaTX = null;
-
-    registrar(
-      "No se pudo completar la conexión: " +
-      error.name + " — " + error.message +
-      ". Verifica que la micro:bit tenga activo el servicio UART."
-    );
-  } finally {
-    conectarBtn.disabled = conectado;
-  }
-}
-
-function manejarDesconexion() {
-  caracteristicaTX = null;
-  servidorBluetooth = null;
-  actualizarConexion(false);
-
-  registrar("La conexión Bluetooth se ha interrumpido.");
-}
-
-async function desconectarMicrobit() {
-  try {
-    if (dispositivo?.gatt?.connected) {
-      dispositivo.gatt.disconnect();
-    }
-  } catch (error) {
-    registrar("Aviso al desconectar: " + error.message);
-  }
-
-  caracteristicaTX = null;
-  servidorBluetooth = null;
-  actualizarConexion(false);
-
-  registrar("Micro:bit desconectada.");
-}
-
-/* =====================================================
-   CONTROL DEL SERVO Y BOCA VISUAL
-   ===================================================== */
-
-async function cambiarBoca(abierta, forzar = false) {
-  boca.classList.toggle("abierta", abierta);
-
-  estadoRobot.textContent = abierta
-    ? "Boca abierta"
-    : "Boca cerrada";
-
-  // Evita enviar el mismo comando repetidamente.
-  if (!forzar && ultimoEstadoBoca === abierta) {
-    return;
-  }
-
-  ultimoEstadoBoca = abierta;
-
-  if (!conectado) {
-    registrar(
-      "Animación visual actualizada, pero la micro:bit no está conectada."
-    );
-    return;
-  }
-
-  try {
-    await enviarComando(abierta ? "OPEN" : "CLOSE");
-  } catch (error) {
-    // El error concreto ya aparece en el registro técnico.
-  }
-}
-
-conectarBtn.addEventListener("click", conectarMicrobit);
-desconectarBtn.addEventListener("click", desconectarMicrobit);
-
-abrirBtn.addEventListener("click", () => {
-  cambiarBoca(true, true);
-});
-
-cerrarBtn.addEventListener("click", () => {
-  cambiarBoca(false, true);
-});
-
-/* =====================================================
-   PRUEBA DEL SERVO
-   ===================================================== */
-
-function esperar(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function probarMovimiento() {
-  if (!conectado) {
-    registrar("Conecta la micro:bit antes de probar el servo.");
-    return;
-  }
-
-  probarBtn.disabled = true;
-  abrirBtn.disabled = true;
-  cerrarBtn.disabled = true;
-
-  try {
-    for (indicePrueba = 0; indicePrueba < 3; indicePrueba++) {
-      await cambiarBoca(true, true);
-      await esperar(400);
-
-      await cambiarBoca(false, true);
-      await esperar(400);
     }
 
-    registrar("Prueba terminada. Se enviaron comandos OPEN y CLOSE.");
+    function mostrarPropiedadesTX() {
+      if (!caracteristicaTX) {
+        log("No hay característica TX seleccionada.");
+        return;
+      }
 
-  } catch (error) {
-    registrar("La prueba se interrumpió: " + error.message);
-  } finally {
-    probarBtn.disabled = !conectado;
-    abrirBtn.disabled = !conectado;
-    cerrarBtn.disabled = !conectado;
-  }
-}
+      const p = caracteristicaTX.properties;
 
-probarBtn.addEventListener("click", probarMovimiento);
+      log("----- DIAGNÓSTICO UART -----");
+      log("Servicio: " + (servicioUART?.uuid || "No disponible"));
+      log("Característica TX: " + caracteristicaTX.uuid);
+      log("Escritura: " + p.write);
+      log("Escritura sin respuesta: " + p.writeWithoutResponse);
+      log("Notificaciones: " + p.notify);
+      log("Lectura: " + p.read);
+      log("----------------------------");
+    }
 
-/* =====================================================
-   VOZ DEL NAVEGADOR
+    function manejarDesconexion() {
+      log("La conexión Bluetooth se ha interrumpido.");
 
-   Algunos navegadores generan eventos de palabra.
-   Otros no los generan; en ese caso se utiliza una
-   animación aproximada basada en la longitud del texto.
-   ===================================================== */
+      caracteristicaTX = null;
+      servicioUART = null;
+      servidorBluetooth = null;
+      colaEscrituras = Promise.resolve();
 
-function limpiarTemporizadores() {
-  temporizadoresVoz.forEach(clearTimeout);
-  temporizadoresVoz = [];
-}
+      actualizarEstadoConexion(false);
+      detenerTemporizadoresBoca();
+    }
 
-function separarPalabras(texto) {
-  return texto.match(/\S+/g) || [];
-}
+    async function desconectarBluetooth() {
+      detenerTemporizadoresBoca();
 
-function hablar(texto) {
-  if (!texto.trim()) {
-    registrar("Escribe un texto antes de reproducir la voz.");
-    return;
-  }
+      if (
+        dispositivoBluetooth &&
+        dispositivoBluetooth.gatt &&
+        dispositivoBluetooth.gatt.connected
+      ) {
+        dispositivoBluetooth.gatt.disconnect();
+      }
 
-  if (!("speechSynthesis" in window)) {
-    registrar("Este navegador no admite síntesis de voz.");
-    return;
-  }
+      caracteristicaTX = null;
+      servicioUART = null;
+      servidorBluetooth = null;
 
-  limpiarTemporizadores();
-  window.speechSynthesis.cancel();
+      actualizarEstadoConexion(false);
+      log("Desconexión solicitada.");
+    }
 
-  const voz = new SpeechSynthesisUtterance(texto);
-  voz.lang = "es-CO";
-  voz.rate = 1;
+    // =========================================================
+    // 7. ENVÍO UART CON COLA DE ESCRITURAS
+    // =========================================================
 
-  vozActual = voz;
+    function enviarComando(comando) {
+      // La cola evita iniciar escrituras GATT simultáneas.
+      colaEscrituras = colaEscrituras
+        .catch(() => {
+          // Permite intentar el siguiente comando tras un error.
+        })
+        .then(async () => {
+          if (!estaConectado()) {
+            log("No se envió " + comando + ": micro:bit desconectada.");
+            return;
+          }
 
-  let seRecibieronEventosPalabra = false;
-  let temporizadoresAlternativos = [];
+          const propiedades = caracteristicaTX.properties;
 
-  const palabras = separarPalabras(texto);
+          if (
+            !propiedades.write &&
+            !propiedades.writeWithoutResponse
+          ) {
+            log(
+              "ERROR: UART no permite escribir. " +
+              "No se envió el comando " + comando + "."
+            );
+            return;
+          }
 
-  voz.onstart = () => {
-    elemento("estadoVoz").textContent = "Reproduciendo voz...";
-    estadoRobot.textContent = "Hablando...";
+          try {
+            const datos = encoder.encode(comando + "\n");
 
-    // Alternativa aproximada para navegadores sin eventos de palabra.
-    let posicion = 80;
+            if (
+              propiedades.writeWithoutResponse &&
+              typeof caracteristicaTX.writeValueWithoutResponse === "function"
+            ) {
+              await caracteristicaTX.writeValueWithoutResponse(datos);
+            } else if (
+              propiedades.write &&
+              typeof caracteristicaTX.writeValueWithResponse === "function"
+            ) {
+              await caracteristicaTX.writeValueWithResponse(datos);
+            } else if (propiedades.write) {
+              // Compatibilidad con navegadores que exponen writeValue.
+              await caracteristicaTX.writeValue(datos);
+            } else {
+              throw new Error(
+                "El navegador no ofrece un método compatible de escritura."
+              );
+            }
 
-    palabras.forEach(palabra => {
-      const duracion = 130 + palabra.length * 45;
+            log("Comando enviado: " + comando);
 
-      const abrir = setTimeout(() => {
-        if (!seRecibieronEventosPalabra) {
-          cambiarBoca(true);
+          } catch (error) {
+            log(
+              "ERROR Bluetooth GATT: " +
+              error.name + " — " + error.message
+            );
+
+            if (error.name === "InvalidStateError") {
+              log("Comprueba si la micro:bit continúa conectada.");
+            }
+          }
+        });
+
+      return colaEscrituras;
+    }
+
+    // =========================================================
+    // 8. CONTROL DE LA BOCA
+    // =========================================================
+
+    function cambiarBoca(abrir, forzar = false) {
+      const nuevoEstado = abrir ? "OPEN" : "CLOSE";
+
+      if (!forzar && estadoBoca === nuevoEstado) {
+        return;
+      }
+
+      estadoBoca = nuevoEstado;
+
+      mouth.classList.toggle("open", abrir);
+      robot.classList.toggle("talking", abrir);
+
+      mouthStatus.textContent = abrir
+        ? "Boca abierta"
+        : "Boca cerrada";
+
+      enviarComando(nuevoEstado);
+    }
+
+    function detenerTemporizadoresBoca() {
+      if (temporizadorBoca !== null) {
+        clearTimeout(temporizadorBoca);
+        temporizadorBoca = null;
+      }
+
+      if (temporizadorRespaldo !== null) {
+        clearInterval(temporizadorRespaldo);
+        temporizadorRespaldo = null;
+      }
+
+      mouth.classList.remove("open");
+      robot.classList.remove("talking");
+      mouthStatus.textContent = "Boca cerrada";
+      estadoBoca = "CLOSE";
+    }
+
+    async function probarMovimiento() {
+      if (!estaConectado()) {
+        log("Conecta la micro:bit antes de probar el servomotor.");
+        return;
+      }
+
+      if (
+        !caracteristicaTX.properties.write &&
+        !caracteristicaTX.properties.writeWithoutResponse
+      ) {
+        log("Prueba cancelada: UART no admite escritura.");
+        return;
+      }
+
+      log("Iniciando prueba OPEN / CLOSE.");
+
+      cambiarBoca(true, true);
+      await new Promise(resolve => setTimeout(resolve, 700));
+
+      cambiarBoca(false, true);
+      await new Promise(resolve => setTimeout(resolve, 700));
+
+      cambiarBoca(true, true);
+      await new Promise(resolve => setTimeout(resolve, 700));
+
+      cambiarBoca(false, true);
+
+      log("Prueba de comandos finalizada.");
+    }
+
+    // =========================================================
+    // 9. VOZ DEL NAVEGADOR
+    // =========================================================
+
+    function cargarVoces() {
+      if (!("speechSynthesis" in window)) {
+        log("Este navegador no ofrece síntesis de voz.");
+        $("speakTestBtn").disabled = true;
+        return;
+      }
+
+      vocesDisponibles = speechSynthesis.getVoices();
+
+      const selector = $("voiceSelect");
+      const seleccionAnterior = selector.value;
+
+      selector.innerHTML =
+        '<option value="">Voz predeterminada</option>';
+
+      vocesDisponibles.forEach((voz, indice) => {
+        const opcion = document.createElement("option");
+        opcion.value = String(indice);
+        opcion.textContent =
+          voz.name + " (" + voz.lang + ")";
+
+        selector.appendChild(opcion);
+      });
+
+      if (
+        seleccionAnterior !== "" &&
+        Number(seleccionAnterior) < vocesDisponibles.length
+      ) {
+        selector.value = seleccionAnterior;
+      }
+    }
+
+    if ("speechSynthesis" in window) {
+      speechSynthesis.addEventListener?.("voiceschanged", cargarVoces);
+      cargarVoces();
+    }
+
+    $("rateRange").addEventListener("input", () => {
+      $("rateValue").textContent =
+        Number($("rateRange").value).toFixed(1);
+    });
+
+    function hablar(texto) {
+      if (!("speechSynthesis" in window)) {
+        log("Síntesis de voz no disponible.");
+        return;
+      }
+
+      speechSynthesis.cancel();
+
+      const miSesion = ++sesionVoz;
+      detenerTemporizadoresBoca();
+
+      const utterance = new SpeechSynthesisUtterance(texto);
+      utterance.lang = "es-CO";
+      utterance.rate = Number($("rateRange").value);
+      utterance.pitch = 1.05;
+      utterance.volume = 1;
+
+      const indiceVoz = $("voiceSelect").value;
+
+      if (
+        indiceVoz !== "" &&
+        vocesDisponibles[Number(indiceVoz)]
+      ) {
+        utterance.voice = vocesDisponibles[Number(indiceVoz)];
+      }
+
+      let seRecibieronEventosPalabra = false;
+      let temporizadorFallback = null;
+
+      const sincronizar = $("syncCheck").checked;
+
+      function abrirDurante(duracion = 140) {
+        if (!sincronizar || miSesion !== sesionVoz) {
+          return;
         }
-      }, posicion);
 
-      const cerrar = setTimeout(() => {
-        if (!seRecibieronEventosPalabra) {
-          cambiarBoca(false);
+        if (temporizadorBoca !== null) {
+          clearTimeout(temporizadorBoca);
         }
-      }, posicion + Math.max(100, duracion * 0.65));
 
-      temporizadoresAlternativos.push(abrir, cerrar);
-      posicion += duracion;
+        cambiarBoca(true);
+
+        temporizadorBoca = setTimeout(() => {
+          if (miSesion === sesionVoz) {
+            cambiarBoca(false);
+          }
+        }, duracion);
+      }
+
+      utterance.onstart = () => {
+        log("Comenzó la reproducción de voz.");
+
+        // Algunos navegadores móviles no disparan onboundary.
+        // Se inicia un movimiento aproximado mientras se habla.
+        if (sincronizar) {
+          ultimaActividadVoz = Date.now();
+
+          temporizadorFallback = setInterval(() => {
+            if (
+              miSesion !== sesionVoz ||
+              seRecibieronEventosPalabra
+            ) {
+              clearInterval(temporizadorFallback);
+              temporizadorFallback = null;
+              return;
+            }
+
+            const ahora = Date.now();
+
+            if (ahora - ultimaActividadVoz > 850) {
+              ultimaActividadVoz = ahora;
+              abrirDurante(160);
+            }
+          }, 180);
+        }
+      };
+
+      utterance.onboundary = (evento) => {
+        if (!sincronizar || miSesion !== sesionVoz) {
+          return;
+        }
+
+        if (
+          evento.name === "word" ||
+          typeof evento.charIndex === "number"
+        ) {
+          seRecibieronEventosPalabra = true;
+          ultimaActividadVoz = Date.now();
+
+          if (temporizadorFallback !== null) {
+            clearInterval(temporizadorFallback);
+            temporizadorFallback = null;
+          }
+
+          abrirDurante(160);
+        }
+      };
+
+      utterance.onend = () => {
+        if (temporizadorFallback !== null) {
+          clearInterval(temporizadorFallback);
+          temporizadorFallback = null;
+        }
+
+        if (miSesion === sesionVoz) {
+          detenerTemporizadoresBoca();
+          cambiarBoca(false, true);
+        }
+
+        log("Terminó la reproducción de voz.");
+      };
+
+      utterance.onerror = (evento) => {
+        if (temporizadorFallback !== null) {
+          clearInterval(temporizadorFallback);
+          temporizadorFallback = null;
+        }
+
+        if (miSesion === sesionVoz) {
+          detenerTemporizadoresBoca();
+        }
+
+        log("Error de voz: " + evento.error);
+      };
+
+      speechSynthesis.speak(utterance);
+    }
+
+    function detenerVoz() {
+      sesionVoz++;
+
+      if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+      }
+
+      detenerTemporizadoresBoca();
+      cambiarBoca(false, true);
+
+      log("Voz detenida.");
+    }
+
+    // =========================================================
+    // 10. CONVERSACIÓN DE DEMOSTRACIÓN
+    // =========================================================
+
+    function agregarMensaje(texto, tipo) {
+      const mensaje = document.createElement("div");
+
+      mensaje.className = "message " + tipo;
+      mensaje.textContent = texto;
+
+      chatElement.appendChild(mensaje);
+      chatElement.scrollTop = chatElement.scrollHeight;
+
+      return mensaje;
+    }
+
+    function generarRespuesta(texto) {
+      const t = texto.toLowerCase();
+
+      if (/\b(hola|buenas|buenos días|buenas tardes)\b/.test(t)) {
+        return "¡Hola! Soy LeonBot, el robot leonista. ¿Qué te gustaría aprender hoy?";
+      }
+
+      if (t.includes("cómo estás") || t.includes("como estas")) {
+        return "¡Estoy listo para aprender y conversar contigo!";
+      }
+
+      if (
+        t.includes("astronomía") ||
+        t.includes("astronomia") ||
+        t.includes("universo") ||
+        t.includes("planeta")
+      ) {
+        return "¡El universo es fascinante! Podemos explorar planetas, estrellas, galaxias y misiones espaciales.";
+      }
+
+      if (
+        t.includes("microbit") ||
+        t.includes("micro:bit") ||
+        t.includes("robot")
+      ) {
+        return "Mi prototipo usa una micro:bit V2 para recibir comandos Bluetooth y mover un servomotor.";
+      }
+
+      if (t.includes("colegio") || t.includes("león") || t.includes("leon")) {
+        return "¡Saludos a toda la comunidad del Colegio León de Greiff!";
+      }
+
+      if (t.includes("adiós") || t.includes("adios") || t.includes("chao")) {
+        return "¡Hasta pronto! Espero que volvamos a conversar.";
+      }
+
+      return "¡Interesante! Soy una versión de demostración. Más adelante podremos conectar LeonBot a una inteligencia artificial para responder preguntas con mayor profundidad.";
+    }
+
+    chatForm.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+
+      const texto = chatInput.value.trim();
+
+      if (!texto) {
+        return;
+      }
+
+      agregarMensaje(texto, "user");
+      chatInput.value = "";
+
+      const respuesta = generarRespuesta(texto);
+
+      agregarMensaje(respuesta, "bot");
+      hablar(respuesta);
     });
 
-    temporizadoresVoz.push(...temporizadoresAlternativos);
-  };
+    // =========================================================
+    // 11. EVENTOS DE LOS BOTONES
+    // =========================================================
 
-  voz.onboundary = evento => {
-    if (evento.name !== "word") {
-      return;
+    connectBtn.addEventListener("click", conectarBluetooth);
+
+    disconnectBtn.addEventListener("click", desconectarBluetooth);
+
+    $("openBtn").addEventListener("click", () => {
+      cambiarBoca(true, true);
+    });
+
+    $("closeBtn").addEventListener("click", () => {
+      cambiarBoca(false, true);
+    });
+
+    $("testBtn").addEventListener("click", probarMovimiento);
+
+    $("speakTestBtn").addEventListener("click", () => {
+      hablar(
+        "Hola, soy LeonBot. Estoy probando mi voz y la sincronización de mi boca."
+      );
+    });
+
+    $("stopSpeechBtn").addEventListener("click", detenerVoz);
+
+    $("diagnosticBtn").addEventListener("click", () => {
+      if (!estaConectado()) {
+        log("Diagnóstico: no hay una conexión GATT activa.");
+        log(
+          "Conecta la micro:bit para consultar las características UART."
+        );
+        return;
+      }
+
+      mostrarPropiedadesTX();
+    });
+
+    $("clearLogBtn").addEventListener("click", () => {
+      logElement.textContent = "";
+      log("Registro limpiado.");
+    });
+
+    // =========================================================
+    // 12. INICIALIZACIÓN
+    // =========================================================
+
+    actualizarEstadoConexion(false);
+
+    if (!("bluetooth" in navigator)) {
+      mostrarAviso(
+        "Web Bluetooth no está disponible en este navegador. " +
+        "Prueba Chrome para Android y una página HTTPS."
+      );
     }
 
-    if (!seRecibieronEventosPalabra) {
-      seRecibieronEventosPalabra = true;
-
-      temporizadoresAlternativos.forEach(clearTimeout);
-
-      elemento("estadoVoz").textContent =
-        "El navegador proporciona eventos de palabra.";
-    }
-
-    cambiarBoca(true);
-
-    const palabraActual =
-      texto.slice(evento.charIndex).split(/\s+/)[0] || "";
-
-    const duracionBoca = Math.max(
-      120,
-      Math.min(320, palabraActual.length * 55)
-    );
-
-    const temporizador = setTimeout(() => {
-      cambiarBoca(false);
-    }, duracionBoca);
-
-    temporizadoresVoz.push(temporizador);
-  };
-
-  voz.onend = () => {
-    limpiarTemporizadores();
-    cambiarBoca(false);
-
-    elemento("estadoVoz").textContent =
-      seRecibieronEventosPalabra
-        ? "Voz finalizada. Se recibieron eventos de palabra."
-        : "Voz finalizada. Se utilizó animación aproximada.";
-  };
-
-  voz.onerror = evento => {
-    limpiarTemporizadores();
-    cambiarBoca(false);
-
-    elemento("estadoVoz").textContent =
-      "Error de voz: " + evento.error;
-  };
-
-  window.speechSynthesis.speak(voz);
-}
-
-elemento("hablarBtn").addEventListener("click", () => {
-  hablar(elemento("textoVoz").value);
-});
-
-elemento("detenerBtn").addEventListener("click", () => {
-  window.speechSynthesis.cancel();
-  limpiarTemporizadores();
-  cambiarBoca(false);
-
-  elemento("estadoVoz").textContent = "Voz detenida.";
-});
-
-/* =====================================================
-   CHAT DE DEMOSTRACIÓN
-
-   Las respuestas son locales. En una siguiente versión
-   se conectará este bloque con un servidor de IA.
-   ===================================================== */
-
-function agregarMensaje(remitente, mensaje) {
-  const linea = document.createElement("div");
-
-  linea.className =
-    remitente === "Tú"
-      ? "mensaje-usuario"
-      : "mensaje-robot";
-
-  linea.textContent = remitente + ": " + mensaje;
-
-  elemento("conversacion").appendChild(linea);
-  elemento("conversacion").appendChild(
-    document.createElement("br")
-  );
-
-  elemento("conversacion").scrollTop =
-    elemento("conversacion").scrollHeight;
-}
-
-function generarRespuestaDemostracion(mensaje) {
-  const texto = mensaje.toLowerCase();
-
-  if (texto.includes("hola")) {
-    return "¡Hola! Soy LeonBot. Ya puedo probar mi voz y mi boca.";
-  }
-
-  if (texto.includes("cómo") || texto.includes("como estás")) {
-    return "Estoy funcionando en modo de demostración. Pronto podré conversar con inteligencia artificial.";
-  }
-
-  if (texto.includes("astronomía") || texto.includes("espacio")) {
-    return "El universo contiene estrellas, planetas, galaxias y muchos misterios por descubrir.";
-  }
-
-  return "Te escucho. Esta es una respuesta de prueba mientras conectamos la inteligencia artificial.";
-}
-
-function enviarMensajeChat() {
-  const campo = elemento("mensajeUsuario");
-  const mensaje = campo.value.trim();
-
-  if (!mensaje) {
-    return;
-  }
-
-  agregarMensaje("Tú", mensaje);
-
-  const respuesta = generarRespuestaDemostracion(mensaje);
-
-  agregarMensaje("LeonBot", respuesta);
-
-  elemento("textoVoz").value = respuesta;
-  campo.value = "";
-
-  hablar(respuesta);
-}
-
-elemento("enviarBtn").addEventListener("click", enviarMensajeChat);
-
-elemento("mensajeUsuario").addEventListener("keydown", evento => {
-  if (evento.key === "Enter") {
-    enviarMensajeChat();
-  }
-});
-
-/* =====================================================
-   INICIALIZACIÓN
-   ===================================================== */
-
-actualizarConexion(false);
-
-if (!navigator.bluetooth) {
-  registrar(
-    "El navegador no ofrece Web Bluetooth. " +
-    "Utiliza Chrome para Android y abre LeonBot mediante HTTPS."
-  );
-} else {
-  registrar(
-    "LeonBot iniciado. Conecta la micro:bit para probar la comunicación."
-  );
-}
-</script>
-
+    log("LeonBot iniciado correctamente.");
+    log("Servicio UART configurado.");
+    log("UUID RX: " + UART_RX);
+    log("Listo para conectar la micro:bit V2.");
+  </script>
 </body>
 </html>
