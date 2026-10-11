@@ -602,6 +602,16 @@ console.log(
   caracteristicaTX.properties.writeWithoutResponse
 );
 
+console.log("UUID del servicio:", servicio.uuid);
+console.log("UUID de la característica:", caracteristicaTX.uuid);
+
+console.log("¿Admite escritura?", caracteristicaTX.properties.write);
+console.log(
+  "¿Admite escritura sin respuesta?",
+  caracteristicaTX.properties.writeWithoutResponse
+);
+console.log("¿Admite notificaciones?", caracteristicaTX.properties.notify);
+console.log("¿Admite lectura?", caracteristicaTX.properties.read);
 
     registrar(
       "UART detectado. Escritura con respuesta: " +
