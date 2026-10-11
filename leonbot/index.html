@@ -1532,7 +1532,70 @@ Esperando conexión Bluetooth...</div>
       logElement.textContent = "";
       log("Registro limpiado.");
     });
+//==================================================
 
+function contarSilabas(palabra) {
+    let texto = palabra
+        .toLowerCase()
+        .normalize("NFC")
+        .replace(/gu([eéií])/g, "g$1")
+        .replace(/qu([eéií])/g, "q$1");
+
+    const grupos = texto.match(/[aeiouáéíóúü]+/g);
+
+    if (!grupos) return 1;
+
+    let total = grupos.length;
+
+    // La vocal cerrada acentuada suele formar hiato:
+    // país = pa-ís; baúl = ba-úl.
+    for (const grupo of grupos) {
+        const vocalesAcentuadas = grupo.match(/[íú]/g);
+        if (vocalesAcentuadas) {
+            total += vocalesAcentuadas.length;
+        }
+    }
+
+    return Math.max(1, total);
+}
+
+function enviarSilabasPalabra(texto, indice) {
+    if (!syncCheck.checked) return;
+
+    const palabras = [...texto.matchAll(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+/g)];
+
+    // Busca la palabra que comienza en el punto de lectura actual.
+    let palabraActual = palabras.find(p => p.index === indice);
+
+    // Algunos navegadores entregan un índice ligeramente distinto.
+    if (!palabraActual) {
+        palabraActual = palabras.find(
+            p => p.index >= indice && p.index - indice <= 2
+        );
+    }
+
+    if (!palabraActual) return;
+
+    const cantidad = contarSilabas(palabraActual[0]);
+
+    // Ajuste inicial: cuanto mayor sea la velocidad de voz,
+    // menor será la duración asignada a cada sílaba.
+    const controlVelocidad = document.getElementById("rateRange");
+    const velocidad = Math.max(
+        0.5,
+        Math.min(2, Number(controlVelocidad?.value) || 1)
+    );
+
+    const duracion = Math.round(220 / velocidad);
+
+    // Utiliza la función UART que ya existe en tu HTML.
+    enviarComando(`SYL:${cantidad}:${duracion}`);
+}
+
+
+//pruebas de sincro==================================
+
+    
     // =========================================================
     // 14. INICIALIZACIÓN
     // =========================================================
