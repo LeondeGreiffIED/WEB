@@ -558,3 +558,339 @@ color: #777;
 .modal-cerrar:hover {
     background: #cc0000;
 }
+
+/*---------------------------------*/
+
+/* =====================================================
+   IDENTIDAD INSTITUCIONAL LEONISTA
+   Verde y blanco | Modernización fase 1
+   ===================================================== */
+
+:root {
+  --leon-verde: #176b43;
+  --leon-verde-oscuro: #104b31;
+  --leon-verde-claro: #eaf5ed;
+  --leon-blanco: #ffffff;
+  --leon-texto: #29382f;
+  --leon-borde: #d9e9de;
+}
+
+/* Navegación principal */
+
+.navbar.navbar-default.navbar-fixed-top {
+  background: rgba(255, 255, 255, 0.97);
+  border: none;
+  border-bottom: 3px solid var(--leon-verde);
+  box-shadow: 0 3px 18px rgba(16, 75, 49, 0.12);
+  min-height: 82px;
+  transition: background 0.25s ease;
+}
+
+.navbar-default .navbar-header {
+  min-height: 79px;
+}
+
+/* Marca: escudo y nombre */
+
+.navbar-default .navbar-brand.leon-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 79px;
+  padding: 7px 15px;
+  color: var(--leon-verde-oscuro);
+  white-space: normal;
+}
+
+.leon-escudo {
+  display: block;
+  width: 61px;
+  height: 65px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.leon-nombre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.25;
+}
+
+.leon-nombre strong {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.leon-nombre > span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Enlaces de navegación */
+
+.navbar-default .navbar-nav > li > a {
+  color: var(--leon-verde-oscuro);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25px;
+  padding: 30px 10px 26px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: var(--leon-verde);
+  background: var(--leon-verde-claro);
+  border-bottom-color: var(--leon-verde);
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: var(--leon-verde);
+  background: var(--leon-verde-claro);
+}
+
+/* Botón del menú móvil */
+
+.navbar-default .navbar-toggle {
+  margin-top: 22px;
+  border-color: var(--leon-borde);
+  border-radius: 8px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background: var(--leon-verde);
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background: var(--leon-verde-claro);
+}
+
+/* =====================================================
+   ZONA DE BIENVENIDA CON FOTOGRAFÍAS TENUES
+   Se aprovechan las imágenes existentes del colegio.
+   ===================================================== */
+
+#about {
+  position: relative;
+  isolation: isolate;
+  padding: 135px 0 80px;
+  background-color: #f5faf6;
+
+  background-image:
+    linear-gradient(
+      rgba(248, 252, 249, 0.90),
+      rgba(248, 252, 249, 0.90)
+    ),
+    url("../img/about-1.jpg"),
+    url("../img/about-2.jpg");
+
+  background-size:
+    cover,
+    50% 100%,
+    50% 100%;
+
+  background-position:
+    center,
+    left center,
+    right center;
+
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    no-repeat;
+}
+
+/* Tipografía y títulos */
+
+h2,
+h3,
+h4 {
+  color: var(--leon-verde-oscuro);
+}
+
+#about .about-text span {
+  color: var(--leon-verde);
+  font-weight: 700;
+}
+
+#about hr,
+hr {
+  background-color: var(--leon-verde);
+}
+
+/* Texto de bienvenida */
+
+#about .about-text,
+#about .about-desc {
+  color: var(--leon-texto);
+}
+
+#about .about-desc {
+  background: rgba(255, 255, 255, 0.88);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+#about .about-media img {
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(16, 75, 49, 0.14);
+}
+
+/* Botones institucionales */
+
+.btn-custom {
+  color: #ffffff;
+  background-color: var(--leon-verde);
+  border: 2px solid var(--leon-verde);
+  border-radius: 8px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+  color: var(--leon-verde-oscuro);
+  background-color: #ffffff;
+  border-color: var(--leon-verde);
+}
+
+/* Sección de niveles educativos */
+
+#services {
+  background-color: var(--leon-verde);
+}
+
+#services h2,
+#services h3 {
+  color: #ffffff;
+}
+
+#services hr {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Testimonios: conserva su imagen de fondo */
+
+#testimonials .overlay {
+  background: rgba(23, 107, 67, 0.87);
+}
+
+/* Galería */
+
+#portfolio {
+  background-color: #f5faf6;
+}
+
+ol.type li a.active,
+ol.type li a:hover {
+  background-color: var(--leon-verde);
+  color: #ffffff;
+}
+
+/* Pie de página */
+
+#footer {
+  background-color: var(--leon-verde-oscuro);
+}
+
+#footer .social i.fa {
+  color: var(--leon-verde);
+}
+
+#footer .social i.fa:hover {
+  background-color: #ffffff;
+  color: var(--leon-verde-oscuro);
+}
+
+#footer p,
+#footer a {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* =====================================================
+   ADAPTACIÓN A CELULARES
+   ===================================================== */
+
+@media (max-width: 767px) {
+  .navbar.navbar-default.navbar-fixed-top {
+    min-height: 70px;
+  }
+
+  .navbar-default .navbar-header {
+    min-height: 67px;
+  }
+
+  .navbar-default .navbar-brand.leon-brand {
+    height: 67px;
+    max-width: calc(100% - 65px);
+    padding: 4px 10px;
+    gap: 8px;
+  }
+
+  .leon-escudo {
+    width: 48px;
+    height: 55px;
+  }
+
+  .leon-nombre strong {
+    font-size: 10px;
+  }
+
+  .leon-nombre > span {
+    font-size: 13px;
+  }
+
+  .navbar-default .navbar-toggle {
+    margin-top: 17px;
+    margin-bottom: 17px;
+  }
+
+  .navbar-default .navbar-collapse {
+    background: #ffffff;
+    border-top: 1px solid var(--leon-borde);
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eaf2ec;
+  }
+
+  #about {
+    padding: 100px 0 55px;
+    background-image:
+      linear-gradient(
+        rgba(248, 252, 249, 0.92),
+        rgba(248, 252, 249, 0.92)
+      ),
+      url("../img/about-1.jpg"),
+      url("../img/about-2.jpg");
+
+    background-size:
+      cover,
+      cover,
+      cover;
+
+    background-position:
+      center,
+      left center,
+      right center;
+  }
+
+  #about h2 {
+    font-size: 29px;
+    line-height: 1.25;
+  }
+
+  #about .about-text {
+    margin-bottom: 30px;
+  }
+}
