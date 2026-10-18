@@ -1000,3 +1000,56 @@ ol.type li a:hover {
     margin-bottom: 30px;
   }
 }
+
+
+
+/* FOTOGRAFÍAS TENUES EN LA ZONA DE BIENVENIDA */
+
+#about {
+  position: relative;
+  isolation: isolate;
+  background-color: #f2f8f3;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.68),
+      rgba(255, 255, 255, 0.68)
+    ),
+    url("../img/about-1.jpg"),
+    url("../img/about-2.jpg");
+
+  background-size:
+    100% 100%,
+    50% 100%,
+    50% 100%;
+
+  background-position:
+    center,
+    left center,
+    right center;
+
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    no-repeat;
+}
+
+/* Mantener legible el contenido */
+
+#about .about-text,
+#about .about-desc {
+  position: relative;
+  z-index: 1;
+}
+
+#about .about-desc {
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+#about .about-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
