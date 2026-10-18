@@ -1015,8 +1015,8 @@ ol.type li a:hover {
       rgba(255, 255, 255, 0.68),
       rgba(255, 255, 255, 0.68)
     ),
-    url("../img/about-1.jpg"),
-    url("../img/about-2.jpg");
+    url("imagen/services/about-1.jpg"),
+    url("imagen/services/about-2.jpg");
 
   background-size:
     100% 100%,
