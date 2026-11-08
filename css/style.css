@@ -1087,3 +1087,399 @@ img {
     font-size: 16px;
   }
 }
+/*----------------stilos de pagina de proyectos de ciclo------------------*/
+
+/* =========================================================
+   PROYECTOS PEDAGÓGICOS POR CICLOS
+   Colegio Distrital León de Greiff I.E.D.
+   ========================================================= */
+
+.pagina-proyectos {
+  background: #ffffff;
+  color: #34443a;
+}
+
+/* Encabezado principal */
+
+.proyectos-hero {
+  margin-top: 80px;
+  background:
+    linear-gradient(rgba(16,75,49,.78), rgba(16,75,49,.78)),
+    url("../img/about-1.jpg") center/cover no-repeat;
+}
+
+.proyectos-hero-overlay {
+  padding: 100px 15px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.proyectos-hero h1 {
+  margin: 15px 0;
+  color: #ffffff;
+  font-size: 48px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.proyectos-hero p {
+  max-width: 760px;
+  margin: 20px auto;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+.proyectos-hero hr {
+  background: #ffffff;
+}
+
+.proyectos-etiqueta {
+  display: inline-block;
+  padding: 7px 15px;
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Presentación general */
+
+.proyectos-intro {
+  padding: 85px 0 65px;
+  background: #f5faf6;
+}
+
+.proyectos-intro .section-title {
+  max-width: 850px;
+  margin: 0 auto 45px;
+}
+
+.proyectos-intro .section-title p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.valor-card {
+  min-height: 220px;
+  margin: 10px 0;
+  padding: 30px 20px;
+  border: 1px solid #e0ebe3;
+  border-radius: 12px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(16,75,49,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.valor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 9px 25px rgba(16,75,49,.12);
+}
+
+.valor-card i {
+  color: #176b43;
+  font-size: 38px;
+}
+
+.valor-card h3 {
+  margin: 18px 0 12px;
+  color: #104b31;
+  font-weight: 700;
+}
+
+.valor-card p {
+  color: #65736a;
+}
+
+/* Secciones de ciclos */
+
+.ciclo-section {
+  padding: 85px 0;
+  scroll-margin-top: 80px;
+}
+
+.ciclo-claro {
+  background: #ffffff;
+}
+
+.ciclo-verde {
+  background: #f0f7f2;
+}
+
+.ciclo-encabezado {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 45px;
+}
+
+.ciclo-numero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 70px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #176b43;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.ciclo-subtitulo {
+  color: #718078;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ciclo-encabezado h2 {
+  margin: 5px 0 10px;
+  color: #104b31;
+  font-size: 36px;
+}
+
+.ciclo-encabezado hr {
+  margin: 0;
+  width: 65px;
+}
+
+/* Información del proyecto */
+
+.ciclo-descripcion {
+  padding: 10px 25px 25px 0;
+}
+
+.ciclo-descripcion h3 {
+  margin: 0 0 20px;
+  color: #176b43;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.ciclo-descripcion h4 {
+  margin-top: 25px;
+  color: #104b31;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ciclo-descripcion p,
+.ciclo-descripcion li {
+  color: #5d6b62;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.ciclo-descripcion ul {
+  padding-left: 20px;
+}
+
+.ciclo-descripcion li {
+  margin-bottom: 7px;
+}
+
+/* Galería */
+
+.ciclo-galeria {
+  padding: 22px;
+  border: 1px solid #e0ebe3;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(16,75,49,.07);
+}
+
+.ciclo-galeria h3,
+.ciclo-video h3 {
+  margin: 0 0 22px;
+  color: #104b31;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.ciclo-galeria h3 i,
+.ciclo-video h3 i {
+  margin-right: 8px;
+  color: #176b43;
+}
+
+.ciclo-carousel .item {
+  text-align: center;
+}
+
+.ciclo-carousel .item img {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.ciclo-carousel .item p {
+  margin: 14px 0 5px;
+  color: #526257;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Controles Owl Carousel */
+
+.ciclo-carousel .owl-buttons {
+  margin-top: 10px;
+}
+
+.ciclo-carousel .owl-buttons div {
+  display: inline-block;
+  margin: 8px 5px;
+  padding: 9px 14px;
+  border-radius: 5px;
+  background: #176b43;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.ciclo-carousel .owl-buttons div:hover {
+  background: #104b31;
+}
+
+.ciclo-carousel .owl-pagination {
+  margin-top: 10px;
+}
+
+.ciclo-carousel .owl-page span {
+  background: #176b43 !important;
+}
+
+/* Videos */
+
+.ciclo-video {
+  margin-top: 55px;
+  padding: 28px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(16,75,49,.07);
+}
+
+.video-contenedor {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #10251a;
+}
+
+.video-contenedor iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-descripcion {
+  margin: 15px 0 0;
+  color: #68766d;
+  text-align: center;
+}
+
+/* Cierre */
+
+.proyectos-cierre {
+  padding: 75px 15px;
+  background: #176b43;
+  color: #ffffff;
+}
+
+.proyectos-cierre h2 {
+  color: #ffffff;
+  font-size: 30px;
+}
+
+.proyectos-cierre p {
+  max-width: 700px;
+  margin: 15px auto 25px;
+  color: rgba(255,255,255,.9);
+  font-size: 16px;
+}
+
+.proyectos-cierre .btn-custom {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #104b31;
+}
+
+.proyectos-cierre .btn-custom:hover {
+  background: transparent;
+  color: #ffffff;
+}
+
+/* Adaptación a móviles */
+
+@media (max-width: 767px) {
+
+  .proyectos-hero {
+    margin-top: 68px;
+  }
+
+  .proyectos-hero-overlay {
+    padding: 70px 15px;
+  }
+
+  .proyectos-hero h1 {
+    font-size: 32px;
+  }
+
+  .proyectos-hero p {
+    font-size: 16px;
+  }
+
+  .proyectos-intro,
+  .ciclo-section {
+    padding: 55px 0;
+  }
+
+  .ciclo-encabezado {
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+
+  .ciclo-numero {
+    flex-basis: 55px;
+    width: 55px;
+    height: 55px;
+    font-size: 20px;
+  }
+
+  .ciclo-encabezado h2 {
+    font-size: 28px;
+  }
+
+  .ciclo-descripcion {
+    padding-right: 0;
+    margin-bottom: 25px;
+  }
+
+  .ciclo-galeria {
+    padding: 15px;
+  }
+
+  .ciclo-carousel .item img {
+    height: 230px;
+  }
+
+  .ciclo-video {
+    margin-top: 35px;
+    padding: 18px;
+  }
+
+  .proyectos-cierre h2 {
+    font-size: 25px;
+  }
+
+}
