@@ -4,12 +4,11 @@
    PROYECTOS DE CICLOS
    Archivo: js/detalle-ciclo.js
 
-   Funciones:
-   - Cargar información de los cuatro ciclos.
-   - Mostrar fotografías.
-   - Navegar por la galería.
-   - Reproducir videos de YouTube.
-   - Navegar entre ciclos.
+   Compatible con:
+   - detalle-ciclo.html publicado en GitHub
+   - css/proyectos-ciclos.css
+   - Galería con controles e indicadores originales
+   - Videos alojados en YouTube (No listados)
    ========================================================== */
 
 
@@ -22,6 +21,9 @@ const proyectos = {
     inicial: {
         nombre: "Ciclo Inicial",
         titulo: "Proyecto de Ciclo Inicial",
+
+        resumen:
+            "Experiencias de aprendizaje, exploración y desarrollo integral.",
 
         descripcion:
             "En este espacio se presentan las experiencias, actividades y proyectos desarrollados por los estudiantes del Ciclo Inicial.",
@@ -41,6 +43,7 @@ const proyectos = {
         videos: [
             {
                 titulo: "Presentación del proyecto",
+                descripcion: "Conoce las experiencias del Ciclo Inicial.",
                 id: "ID_VIDEO_YOUTUBE_1"
             }
         ]
@@ -50,6 +53,9 @@ const proyectos = {
     ciclo3: {
         nombre: "Ciclo 3",
         titulo: "Proyecto de Ciclo 3",
+
+        resumen:
+            "Aprendizaje colaborativo y construcción de conocimientos.",
 
         descripcion:
             "En este espacio se comparten los proyectos, experiencias y actividades pedagógicas desarrolladas por los estudiantes del Ciclo 3.",
@@ -69,6 +75,7 @@ const proyectos = {
         videos: [
             {
                 titulo: "Presentación del proyecto",
+                descripcion: "Conoce las experiencias del Ciclo 3.",
                 id: "ID_VIDEO_YOUTUBE_2"
             }
         ]
@@ -78,6 +85,9 @@ const proyectos = {
     ciclo4: {
         nombre: "Ciclo 4",
         titulo: "Astronomía y robótica",
+
+        resumen:
+            "Exploración del universo y el impacto de la robótica en la astronomía.",
 
         descripcion:
             "El proyecto de Ciclo 4 está orientado a la exploración del universo, el conocimiento de los cuerpos celestes y la comprensión de los fenómenos astronómicos. Se busca relacionar la astronomía con los avances tecnológicos y el impacto de la robótica en la exploración espacial.",
@@ -98,10 +108,12 @@ const proyectos = {
         videos: [
             {
                 titulo: "Explorando el universo",
+                descripcion: "Experiencias y actividades de astronomía.",
                 id: "ID_VIDEO_YOUTUBE_3"
             },
             {
                 titulo: "Astronomía y robótica",
+                descripcion: "La tecnología y la exploración espacial.",
                 id: "ID_VIDEO_YOUTUBE_4"
             }
         ]
@@ -111,6 +123,9 @@ const proyectos = {
     ciclo5: {
         nombre: "Ciclo 5",
         titulo: "Proyecto de Ciclo 5",
+
+        resumen:
+            "Investigación, innovación y construcción de proyectos.",
 
         descripcion:
             "Este espacio presenta los proyectos, experiencias de aprendizaje y actividades desarrolladas por los estudiantes del Ciclo 5.",
@@ -130,6 +145,7 @@ const proyectos = {
         videos: [
             {
                 titulo: "Presentación del proyecto",
+                descripcion: "Conoce las experiencias del Ciclo 5.",
                 id: "ID_VIDEO_YOUTUBE_5"
             }
         ]
@@ -142,17 +158,26 @@ const proyectos = {
    2. VARIABLES GENERALES
    ========================================================== */
 
+const ordenCiclos = [
+    "inicial",
+    "ciclo3",
+    "ciclo4",
+    "ciclo5"
+];
+
 let cicloActual = "";
 let indiceFoto = 0;
 
 
 /* ==========================================================
-   3. INICIALIZAR LA PÁGINA
+   3. INICIAR PÁGINA
    ========================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const parametros = new URLSearchParams(window.location.search);
+    const parametros = new URLSearchParams(
+        window.location.search
+    );
 
     cicloActual = parametros.get("ciclo");
 
@@ -162,6 +187,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     cargarCiclo(cicloActual);
+
+    configurarControlesCarrusel();
+
+    agregarEstilosVideos();
 
 });
 
@@ -182,45 +211,47 @@ function cargarCiclo(ciclo) {
     cicloActual = ciclo;
     indiceFoto = 0;
 
-    // Actualizar título de la pestaña
+    // Título de la pestaña
     document.title =
-        datos.nombre + " | Proyectos de Ciclos - León de Greiff";
+        datos.nombre +
+        " | Proyectos de Ciclos - Colegio León de Greiff";
 
-    // Actualizar encabezados
-    asignarTexto(".detalle-nombre", datos.nombre);
-    asignarTexto(".detalle-titulo", datos.titulo);
+    // Encabezado de la portada
+    asignarTexto("#titulo-ciclo", datos.titulo);
+    asignarTexto("#resumen-ciclo", datos.resumen);
 
-    // Actualizar descripción
-    asignarTexto(".detalle-descripcion", datos.descripcion);
+    // Información del proyecto
+    asignarTexto("#titulo-proyecto", datos.titulo);
+    asignarTexto("#descripcion-proyecto", datos.descripcion);
+    asignarTexto("#proposito-proyecto", datos.objetivo);
 
-    // Actualizar objetivo
-    asignarTexto(".detalle-objetivo", datos.objetivo);
+    // Imagen destacada
+    const imagen = document.querySelector("#imagen-destacada");
 
-    // Actualizar imagen principal
-    const imagenPrincipal =
-        document.querySelector(".detalle-imagen-principal");
+    if (imagen) {
+        imagen.src = datos.imagenPrincipal;
+        imagen.alt = datos.titulo;
+        imagen.style.display = "";
 
-    if (imagenPrincipal) {
-        imagenPrincipal.src = datos.imagenPrincipal;
-        imagenPrincipal.alt = datos.titulo;
-        imagenPrincipal.onerror = function () {
+        imagen.onerror = function () {
             this.style.display = "none";
         };
     }
 
-    // Cargar galería
+    // Galería
     mostrarGaleria(datos.fotos);
 
-    // Cargar videos
+    // Videos
     mostrarVideos(datos.videos);
 
-    // Actualizar navegación
+    // Navegación entre ciclos
     actualizarNavegacion();
+
 }
 
 
 /* ==========================================================
-   5. ASIGNAR TEXTO A ELEMENTOS HTML
+   5. ACTUALIZAR TEXTO DE LOS ELEMENTOS
    ========================================================== */
 
 function asignarTexto(selector, texto) {
@@ -228,100 +259,183 @@ function asignarTexto(selector, texto) {
     const elemento = document.querySelector(selector);
 
     if (elemento) {
-        elemento.textContent = texto;
+        elemento.textContent = texto || "";
     }
 
 }
 
 
 /* ==========================================================
-   6. MOSTRAR GALERÍA DE FOTOGRAFÍAS
+   6. CONFIGURAR CONTROLES DEL CARRUSEL
+   ========================================================== */
+
+function configurarControlesCarrusel() {
+
+    const botonAnterior =
+        document.querySelector("#carrusel .anterior");
+
+    const botonSiguiente =
+        document.querySelector("#carrusel .siguiente");
+
+    if (botonAnterior) {
+
+        botonAnterior.type = "button";
+
+        botonAnterior.addEventListener("click", function () {
+            cambiarFoto(-1);
+        });
+
+    }
+
+    if (botonSiguiente) {
+
+        botonSiguiente.type = "button";
+
+        botonSiguiente.addEventListener("click", function () {
+            cambiarFoto(1);
+        });
+
+    }
+
+}
+
+
+/* ==========================================================
+   7. MOSTRAR GALERÍA DE FOTOGRAFÍAS
    ========================================================== */
 
 function mostrarGaleria(fotos) {
 
-    const carrusel = document.querySelector(".carrusel");
+    const carrusel = document.querySelector("#carrusel");
+    const indicadores = document.querySelector("#indicadores");
 
     if (!carrusel) return;
 
-    carrusel.innerHTML = "";
+    // Eliminar solamente las imágenes anteriores.
+    // Se conservan los botones originales del HTML.
+    carrusel.querySelectorAll(".carrusel-imagen").forEach(
+        function (imagen) {
+            imagen.remove();
+        }
+    );
+
+    if (indicadores) {
+        indicadores.innerHTML = "";
+    }
+
+    indiceFoto = 0;
 
     if (!fotos || fotos.length === 0) {
 
-        carrusel.innerHTML = `
-            <p class="sin-fotos">
-                Próximamente publicaremos fotografías de este proyecto.
-            </p>
-        `;
+        mostrarMensajeGaleria(
+            carrusel,
+            "Próximamente publicaremos fotografías de este proyecto."
+        );
 
         return;
     }
 
-    // Botón anterior
-    const botonAnterior = document.createElement("button");
-
-    botonAnterior.className = "anterior";
-    botonAnterior.type = "button";
-    botonAnterior.textContent = "❮";
-    botonAnterior.setAttribute("aria-label", "Fotografía anterior");
-
-    botonAnterior.addEventListener("click", fotoAnterior);
-
-    // Botón siguiente
-    const botonSiguiente = document.createElement("button");
-
-    botonSiguiente.className = "siguiente";
-    botonSiguiente.type = "button";
-    botonSiguiente.textContent = "❯";
-    botonSiguiente.setAttribute("aria-label", "Fotografía siguiente");
-
-    botonSiguiente.addEventListener("click", fotoSiguiente);
-
-    carrusel.appendChild(botonAnterior);
-    carrusel.appendChild(botonSiguiente);
-
-    // Crear fotografías
     fotos.forEach(function (ruta, indice) {
 
         const imagen = document.createElement("img");
 
         imagen.src = ruta;
+
         imagen.alt =
-            "Fotografía " + (indice + 1) + " del proyecto " + proyectos[cicloActual].nombre;
+            "Fotografía " +
+            (indice + 1) +
+            " del proyecto " +
+            proyectos[cicloActual].nombre;
 
         imagen.className = "carrusel-imagen";
 
         imagen.loading = "lazy";
 
-        imagen.onerror = function () {
-            this.style.display = "none";
-        };
-
         if (indice === 0) {
             imagen.classList.add("activa");
         }
 
+        imagen.onerror = function () {
+            this.style.display = "none";
+
+            const punto = indicadores
+                ? indicadores.children[indice]
+                : null;
+
+            if (punto) {
+                punto.style.display = "none";
+            }
+        };
+
+        // Insertar las imágenes antes de los controles.
+        const botonAnterior =
+            carrusel.querySelector(".anterior");
+
         carrusel.insertBefore(imagen, botonAnterior);
+
+        // Crear indicador
+        if (indicadores) {
+
+            const punto = document.createElement("button");
+
+            punto.type = "button";
+
+            punto.className = "punto";
+
+            punto.setAttribute(
+                "aria-label",
+                "Ver fotografía " + (indice + 1)
+            );
+
+            punto.addEventListener("click", function () {
+                seleccionarFoto(indice);
+            });
+
+            if (indice === 0) {
+                punto.classList.add("activo");
+            }
+
+            indicadores.appendChild(punto);
+
+        }
 
     });
 
-    actualizarContadorFotos(fotos.length);
+    actualizarEstadoGaleria();
 
 }
 
 
 /* ==========================================================
-   7. CAMBIAR FOTOGRAFÍA
+   8. MENSAJE CUANDO NO HAY FOTOGRAFÍAS
+   ========================================================== */
+
+function mostrarMensajeGaleria(carrusel, mensaje) {
+
+    const texto = document.createElement("p");
+
+    texto.className = "mensaje-sin-contenido";
+
+    texto.textContent = mensaje;
+
+    carrusel.insertBefore(
+        texto,
+        carrusel.querySelector(".anterior")
+    );
+
+}
+
+
+/* ==========================================================
+   9. CAMBIAR FOTOGRAFÍA
    ========================================================== */
 
 function cambiarFoto(direccion) {
 
     const imagenes =
-        document.querySelectorAll(".carrusel-imagen");
+        document.querySelectorAll("#carrusel .carrusel-imagen");
 
     if (!imagenes.length) return;
-
-    imagenes[indiceFoto].classList.remove("activa");
 
     indiceFoto += direccion;
 
@@ -333,72 +447,91 @@ function cambiarFoto(direccion) {
         indiceFoto = imagenes.length - 1;
     }
 
-    imagenes[indiceFoto].classList.add("activa");
+    actualizarEstadoGaleria();
 
-    actualizarContadorFotos(imagenes.length);
-
-}
-
-
-function fotoAnterior() {
-    cambiarFoto(-1);
-}
-
-
-function fotoSiguiente() {
-    cambiarFoto(1);
 }
 
 
 /* ==========================================================
-   8. CONTADOR DE FOTOGRAFÍAS
+   10. SELECCIONAR FOTOGRAFÍA POR INDICADOR
    ========================================================== */
 
-function actualizarContadorFotos(total) {
+function seleccionarFoto(indice) {
 
-    const contador =
-        document.querySelector(".contador-fotos");
+    const imagenes =
+        document.querySelectorAll("#carrusel .carrusel-imagen");
 
-    if (contador) {
+    if (indice < 0 || indice >= imagenes.length) return;
 
-        contador.textContent =
-            (indiceFoto + 1) + " / " + total;
+    indiceFoto = indice;
 
-    }
+    actualizarEstadoGaleria();
 
 }
 
 
 /* ==========================================================
-   9. MOSTRAR VIDEOS DE YOUTUBE
+   11. ACTUALIZAR ESTADO DEL CARRUSEL
+   ========================================================== */
+
+function actualizarEstadoGaleria() {
+
+    const imagenes =
+        document.querySelectorAll("#carrusel .carrusel-imagen");
+
+    const indicadores =
+        document.querySelectorAll("#indicadores .punto");
+
+    imagenes.forEach(function (imagen, indice) {
+
+        imagen.classList.toggle(
+            "activa",
+            indice === indiceFoto
+        );
+
+    });
+
+    indicadores.forEach(function (punto, indice) {
+
+        punto.classList.toggle(
+            "activo",
+            indice === indiceFoto
+        );
+
+    });
+
+}
+
+
+/* ==========================================================
+   12. MOSTRAR VIDEOS DE YOUTUBE
    ========================================================== */
 
 function mostrarVideos(videos) {
 
     const contenedor =
-        document.querySelector(".videos-contenedor");
+        document.querySelector("#rejilla-videos");
 
     if (!contenedor) return;
 
     contenedor.innerHTML = "";
 
-    // Si no hay videos registrados
     if (!videos || videos.length === 0) {
 
-        contenedor.innerHTML = `
-            <p class="sin-videos">
-                Próximamente publicaremos videos de este proyecto.
-            </p>
-        `;
+        mostrarMensajeVideos(
+            contenedor,
+            "Próximamente publicaremos videos de este proyecto."
+        );
 
         return;
     }
 
-    let videosValidos = 0;
+    let cantidadVideos = 0;
 
     videos.forEach(function (video) {
 
-        // Validar identificador de YouTube
+        // Validar el identificador de YouTube.
+        // Los identificadores tienen 11 caracteres.
         if (
             !video.id ||
             !/^[a-zA-Z0-9_-]{11}$/.test(video.id)
@@ -406,24 +539,19 @@ function mostrarVideos(videos) {
             return;
         }
 
-        videosValidos++;
+        cantidadVideos++;
 
-        // Crear tarjeta
-        const tarjeta = document.createElement("div");
+        // Tarjeta
+        const tarjeta = document.createElement("article");
 
-        tarjeta.className = "video-tarjeta";
+        tarjeta.className = "tarjeta-video";
 
-        // Crear título
-        const titulo = document.createElement("h3");
-
-        titulo.textContent =
-            video.titulo || "Video del proyecto";
-
-        // Crear reproductor
+        // Reproductor
         const reproductor = document.createElement("iframe");
 
         reproductor.src =
-            "https://www.youtube-nocookie.com/embed/" + video.id;
+            "https://www.youtube-nocookie.com/embed/" +
+            encodeURIComponent(video.id);
 
         reproductor.title =
             video.titulo || "Video del proyecto";
@@ -438,21 +566,40 @@ function mostrarVideos(videos) {
 
         reproductor.allowFullscreen = true;
 
-        // Incorporar elementos
-        tarjeta.appendChild(titulo);
+        // Información del video
+        const informacion = document.createElement("div");
+
+        informacion.className = "video-info";
+
+        const titulo = document.createElement("h3");
+
+        titulo.textContent =
+            video.titulo || "Video del proyecto";
+
+        const descripcion = document.createElement("p");
+
+        descripcion.textContent =
+            video.descripcion || "";
+
+        informacion.appendChild(titulo);
+
+        if (video.descripcion) {
+            informacion.appendChild(descripcion);
+        }
+
         tarjeta.appendChild(reproductor);
+        tarjeta.appendChild(informacion);
 
         contenedor.appendChild(tarjeta);
 
     });
 
-    if (videosValidos === 0) {
+    if (cantidadVideos === 0) {
 
-        contenedor.innerHTML = `
-            <p class="sin-videos">
-                Próximamente publicaremos videos de este proyecto.
-            </p>
-        `;
+        mostrarMensajeVideos(
+            contenedor,
+            "Próximamente publicaremos videos de este proyecto."
+        );
 
     }
 
@@ -460,16 +607,90 @@ function mostrarVideos(videos) {
 
 
 /* ==========================================================
-   10. NAVEGACIÓN ENTRE CICLOS
+   13. MENSAJE CUANDO NO HAY VIDEOS
    ========================================================== */
 
-const ordenCiclos = [
-    "inicial",
-    "ciclo3",
-    "ciclo4",
-    "ciclo5"
-];
+function mostrarMensajeVideos(contenedor, mensaje) {
 
+    const texto = document.createElement("p");
+
+    texto.className = "mensaje-sin-contenido";
+
+    texto.textContent = mensaje;
+
+    contenedor.appendChild(texto);
+
+}
+
+
+/* ==========================================================
+   14. ESTILOS PARA LOS REPRODUCTORES YOUTUBE
+   ========================================================== */
+
+function agregarEstilosVideos() {
+
+    if (document.querySelector("#estilos-videos-youtube")) {
+        return;
+    }
+
+    const estilos = document.createElement("style");
+
+    estilos.id = "estilos-videos-youtube";
+
+    estilos.textContent = `
+        .tarjeta-video iframe {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            height: auto;
+            border: 0;
+            background: #000;
+        }
+
+        .tarjeta-video {
+            overflow: hidden;
+        }
+
+        .tarjeta-video .video-info {
+            padding: 17px;
+        }
+
+        .tarjeta-video .video-info h3 {
+            margin: 0 0 7px;
+            color: #176b3a;
+            font-size: 17px;
+        }
+
+        .tarjeta-video .video-info p {
+            margin: 0;
+            color: #66736a;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        #rejilla-videos {
+            min-width: 0;
+        }
+
+        #rejilla-videos iframe {
+            max-width: 100%;
+        }
+
+        @media (max-width: 750px) {
+            .tarjeta-video iframe {
+                width: 100%;
+            }
+        }
+    `;
+
+    document.head.appendChild(estilos);
+
+}
+
+
+/* ==========================================================
+   15. NAVEGACIÓN ENTRE CICLOS
+   ========================================================== */
 
 function actualizarNavegacion() {
 
@@ -477,11 +698,12 @@ function actualizarNavegacion() {
         ordenCiclos.indexOf(cicloActual);
 
     const botonAnterior =
-        document.querySelector(".ciclo-anterior");
+        document.querySelector("#ciclo-anterior");
 
     const botonSiguiente =
-        document.querySelector(".ciclo-siguiente");
+        document.querySelector("#ciclo-siguiente");
 
+    // Ciclo anterior
     if (botonAnterior) {
 
         if (indiceActual > 0) {
@@ -502,6 +724,7 @@ function actualizarNavegacion() {
 
     }
 
+    // Ciclo siguiente
     if (botonSiguiente) {
 
         if (indiceActual < ordenCiclos.length - 1) {
@@ -526,7 +749,7 @@ function actualizarNavegacion() {
 
 
 /* ==========================================================
-   11. ERROR: CICLO NO ENCONTRADO
+   16. CICLO NO ENCONTRADO
    ========================================================== */
 
 function mostrarErrorCiclo() {
@@ -534,22 +757,20 @@ function mostrarErrorCiclo() {
     const contenido =
         document.querySelector(".detalle-contenido");
 
-    if (contenido) {
+    if (!contenido) return;
 
-        contenido.innerHTML = `
-            <div class="error-ciclo">
-                <h2>Proyecto no encontrado</h2>
+    contenido.innerHTML = `
+        <div class="mensaje-sin-contenido">
+            <h2>Proyecto no encontrado</h2>
 
-                <p>
-                    No fue posible encontrar la información del ciclo solicitado.
-                </p>
+            <p>
+                No fue posible encontrar la información del ciclo solicitado.
+            </p>
 
-                <a href="proyectos-ciclos.html">
-                    Volver a Proyectos de Ciclos
-                </a>
-            </div>
-        `;
-
-    }
+            <a href="proyectos-ciclos.html">
+                Volver a Proyectos de Ciclos
+            </a>
+        </div>
+    `;
 
 }
