@@ -2,126 +2,292 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Conoce los proyectos pedagógicos por ciclos del Colegio Distrital León de Greiff I.E.D.">
-  <title>Proyectos de Ciclos | Colegio León de Greiff</title>
-  <link rel="stylesheet" href="css/proyectos-ciclos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Conoce los proyectos pedagógicos por ciclos del Colegio Distrital León de Greiff I.E.D.">
+
+    <title>Proyectos de Ciclos | Colegio León de Greiff</title>
+
+    <link rel="stylesheet" href="css/proyectos-ciclos.css">
 </head>
 
 <body>
 
-  <header class="encabezado">
-    <div class="encabezado-contenido">
-      <a href="index.html" class="marca">
-        <img src="Imagenes/Simbolos/Escudo1.jpg" alt="Escudo Colegio León de Greiff">
-        <div>
-          <strong>COLEGIO DISTRITAL</strong>
-          <span>LEÓN DE GREIFF I.E.D.</span>
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+
+        <div class="encabezado-contenido">
+
+            <a href="index.html" class="marca">
+
+                <img
+                    src="Imagenes/Simbolos/Escudo1.jpg"
+                    alt="Escudo Colegio León de Greiff">
+
+                <div>
+                    <strong>COLEGIO DISTRITAL</strong>
+                    <span>LEÓN DE GREIFF I.E.D.</span>
+                </div>
+
+            </a>
+
+            <nav class="menu">
+
+                <a href="index.html">Inicio</a>
+
+                <a
+                    href="proyectos-ciclos.html"
+                    class="activo">
+                    Proyectos de ciclos
+                </a>
+
+            </nav>
+
         </div>
-      </a>
 
-      <nav class="menu">
-        <a href="index.html">Inicio</a>
-        <a href="proyectos-ciclos.html" class="activo">Proyectos de ciclos</a>
-      </nav>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <section class="portada">
-      <div class="portada-contenido">
-        <span class="etiqueta">IDENTIDAD · PARTICIPACIÓN · APRENDIZAJE</span>
-        <h1>Proyectos de Ciclos</h1>
+
+    <!-- PORTADA -->
+    <main>
+
+        <section class="portada">
+
+            <div class="portada-contenido">
+
+                <span class="etiqueta">
+                    IDENTIDAD · PARTICIPACIÓN · APRENDIZAJE
+                </span>
+
+                <h1>Proyectos de Ciclos</h1>
+
+                <p>
+                    Conoce las experiencias, aprendizajes y proyectos
+                    que construyen nuestros estudiantes en cada etapa
+                    de su formación.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- TARJETAS DE CICLOS -->
+        <section class="seccion-ciclos">
+
+            <div class="titulo-seccion">
+
+                <span class="linea-verde"></span>
+
+                <h2>Nuestros proyectos pedagógicos</h2>
+
+                <p>
+                    Selecciona un ciclo para conocer sus experiencias
+                    y proyectos.
+                </p>
+
+            </div>
+
+
+            <div class="rejilla-ciclos">
+
+
+                <!-- CICLO INICIAL -->
+                <a
+                    class="tarjeta-ciclo"
+                    href="detalle-ciclo.html?ciclo=inicial">
+
+                    <div class="imagen-ciclo">
+
+                        <img
+                            src="img/Proyectos/CicloInicial/inicial-1.jpg"
+                            alt="Estudiantes del Ciclo Inicial"
+                            loading="lazy"
+                            onerror="this.style.display='none'">
+
+                        <span class="numero-ciclo">01</span>
+
+                        <span class="ver-proyecto">
+                            Conocer proyecto →
+                        </span>
+
+                    </div>
+
+                    <div class="contenido-tarjeta">
+
+                        <span class="categoria">
+                            PRIMERAS EXPERIENCIAS
+                        </span>
+
+                        <h3>Ciclo Inicial</h3>
+
+                        <p>
+                            Explora las experiencias y proyectos
+                            de nuestros primeros años escolares.
+                        </p>
+
+                        <span class="enlace-tarjeta">
+                            Explorar ciclo ↗
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- CICLO 3 -->
+                <a
+                    class="tarjeta-ciclo"
+                    href="detalle-ciclo.html?ciclo=ciclo3">
+
+                    <div class="imagen-ciclo">
+
+                        <img
+                            src="img/Proyectos/Ciclo3/c3-1.jpg"
+                            alt="Experiencias pedagógicas del Ciclo 3"
+                            loading="lazy"
+                            onerror="this.style.display='none'">
+
+                        <span class="numero-ciclo">02</span>
+
+                        <span class="ver-proyecto">
+                            Conocer proyecto →
+                        </span>
+
+                    </div>
+
+                    <div class="contenido-tarjeta">
+
+                        <span class="categoria">
+                            DESCUBRIMIENTO Y EXPLORACIÓN
+                        </span>
+
+                        <h3>Ciclo 3</h3>
+
+                        <p>
+                            Conoce los procesos de aprendizaje y
+                            las experiencias desarrolladas en este ciclo.
+                        </p>
+
+                        <span class="enlace-tarjeta">
+                            Explorar ciclo ↗
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- CICLO 4 -->
+                <a
+                    class="tarjeta-ciclo"
+                    href="detalle-ciclo.html?ciclo=ciclo4">
+
+                    <div class="imagen-ciclo">
+
+                        <img
+                            src="img/Proyectos/Ciclo4/c4-1.jpg"
+                            alt="Proyecto de Astronomía y Robótica del Ciclo 4"
+                            loading="lazy"
+                            onerror="this.style.display='none'">
+
+                        <span class="numero-ciclo">03</span>
+
+                        <span class="ver-proyecto">
+                            Conocer proyecto →
+                        </span>
+
+                    </div>
+
+                    <div class="contenido-tarjeta">
+
+                        <span class="categoria">
+                            INVESTIGACIÓN Y CREACIÓN
+                        </span>
+
+                        <h3>Ciclo 4</h3>
+
+                        <p>
+                            Descubre los proyectos de astronomía,
+                            tecnología y robótica.
+                        </p>
+
+                        <span class="enlace-tarjeta">
+                            Explorar ciclo ↗
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- CICLO 5 -->
+                <a
+                    class="tarjeta-ciclo"
+                    href="detalle-ciclo.html?ciclo=ciclo5">
+
+                    <div class="imagen-ciclo">
+
+                        <img
+                            src="img/Proyectos/Ciclo5/c5-1.jpg"
+                            alt="Proyectos pedagógicos del Ciclo 5"
+                            loading="lazy"
+                            onerror="this.style.display='none'">
+
+                        <span class="numero-ciclo">04</span>
+
+                        <span class="ver-proyecto">
+                            Conocer proyecto →
+                        </span>
+
+                    </div>
+
+                    <div class="contenido-tarjeta">
+
+                        <span class="categoria">
+                            PROYECCIÓN Y TRANSFORMACIÓN
+                        </span>
+
+                        <h3>Ciclo 5</h3>
+
+                        <p>
+                            Conoce las propuestas y experiencias
+                            que fortalecen el proyecto de vida
+                            de nuestros estudiantes.
+                        </p>
+
+                        <span class="enlace-tarjeta">
+                            Explorar ciclo ↗
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+
+        <strong>
+            COLEGIO DISTRITAL LEÓN DE GREIFF I.E.D.
+        </strong>
+
         <p>
-          Conoce las experiencias, aprendizajes y proyectos que construyen
-          nuestros estudiantes en cada etapa de su formación.
+            Educación, conocimiento y transformación.
         </p>
-      </div>
-    </section>
 
-    <section class="seccion-ciclos">
-      <div class="titulo-seccion">
-        <span class="linea-verde"></span>
-        <h2>Nuestros proyectos pedagógicos</h2>
-        <p>Selecciona un ciclo para conocer sus experiencias y proyectos.</p>
-      </div>
-
-      <div class="rejilla-ciclos">
-
-        <!-- CICLO INICIAL -->
-        <a class="tarjeta-ciclo" href="detalle-ciclo.html?ciclo=inicial">
-          <div class="imagen-ciclo">
-            <img src="Imagenes/Proyectos/CicloInicial/portada.jpg"
-                 alt="Estudiantes del Ciclo Inicial">
-            <span class="numero-ciclo">01</span>
-            <span class="ver-proyecto">Conocer proyecto <span>→</span></span>
-          </div>
-          <div class="contenido-tarjeta">
-            <span class="categoria">PRIMERAS EXPERIENCIAS</span>
-            <h3>Ciclo Inicial</h3>
-            <p>Explora las experiencias y proyectos de nuestros primeros años escolares.</p>
-            <span class="enlace-tarjeta">Explorar ciclo <span>↗</span></span>
-          </div>
+        <a href="index.html">
+            Volver a la página principal
         </a>
 
-        <!-- CICLO 3 -->
-        <a class="tarjeta-ciclo" href="detalle-ciclo.html?ciclo=ciclo3">
-          <div class="imagen-ciclo">
-            <img src="Imagenes/Proyectos/Ciclo3/portada.jpg"
-                 alt="Estudiantes del Ciclo 3">
-            <span class="numero-ciclo">02</span>
-            <span class="ver-proyecto">Conocer proyecto <span>→</span></span>
-          </div>
-          <div class="contenido-tarjeta">
-            <span class="categoria">DESCUBRIMIENTO Y EXPLORACIÓN</span>
-            <h3>Ciclo 3</h3>
-            <p>Conoce los procesos de aprendizaje y las experiencias desarrolladas en este ciclo.</p>
-            <span class="enlace-tarjeta">Explorar ciclo <span>↗</span></span>
-          </div>
-        </a>
-
-        <!-- CICLO 4 -->
-        <a class="tarjeta-ciclo" href="detalle-ciclo.html?ciclo=ciclo4">
-          <div class="imagen-ciclo">
-            <img src="Imagenes/Proyectos/Ciclo4/portada.jpg"
-                 alt="Estudiantes del Ciclo 4">
-            <span class="numero-ciclo">03</span>
-            <span class="ver-proyecto">Conocer proyecto <span>→</span></span>
-          </div>
-          <div class="contenido-tarjeta">
-            <span class="categoria">INVESTIGACIÓN Y CREACIÓN</span>
-            <h3>Ciclo 4</h3>
-            <p>Descubre los proyectos de investigación, tecnología y construcción de conocimiento.</p>
-            <span class="enlace-tarjeta">Explorar ciclo <span>↗</span></span>
-          </div>
-        </a>
-
-        <!-- CICLO 5 -->
-        <a class="tarjeta-ciclo" href="detalle-ciclo.html?ciclo=ciclo5">
-          <div class="imagen-ciclo">
-            <img src="Imagenes/Proyectos/Ciclo5/portada.jpg"
-                 alt="Estudiantes del Ciclo 5">
-            <span class="numero-ciclo">04</span>
-            <span class="ver-proyecto">Conocer proyecto <span>→</span></span>
-          </div>
-          <div class="contenido-tarjeta">
-            <span class="categoria">PROYECCIÓN Y TRANSFORMACIÓN</span>
-            <h3>Ciclo 5</h3>
-            <p>Conoce las propuestas y experiencias que fortalecen el proyecto de vida de nuestros estudiantes.</p>
-            <span class="enlace-tarjeta">Explorar ciclo <span>↗</span></span>
-          </div>
-        </a>
-
-      </div>
-    </section>
-  </main>
-
-  <footer class="pie-pagina">
-    <strong>COLEGIO DISTRITAL LEÓN DE GREIFF I.E.D.</strong>
-    <p>Educación, conocimiento y transformación.</p>
-    <a href="index.html">Volver a la página principal</a>
-  </footer>
+    </footer>
 
 </body>
 </html>
