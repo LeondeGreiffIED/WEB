@@ -61,11 +61,11 @@ const proyectos = {
         objetivo: "Desarrollar experiencias de investigación, experimentación y creación que permitan comprender fenómenos astronómicos y reconocer las aplicaciones de la robótica en la exploración del espacio.",
 
         // Agrega aquí las rutas cuando cargues las fotografías.
-           fotos: [
+    fotos: [
         "img/Proyectos/Ciclo4/c4-1.jpg",
         "img/Proyectos/Ciclo4/c4-2.jpg",
         "img/Proyectos/Ciclo4/c4-3.jpg",
-        "img/Proyectos/Ciclo4/c4-4.jpg",
+        "img/Proyectos/Ciclo4/c4-4.jpg"
         
     ],
 
