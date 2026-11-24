@@ -21,21 +21,29 @@ const proyectos = {
     },
 
     ciclo3: {
-        nombre: "Ciclo 3",
-        titulo: "Proyecto de Ciclo 3",
-        resumen: "Aprendizaje colaborativo y construcción de conocimientos.",
-        descripcion: "En este espacio se comparten los proyectos, experiencias y actividades pedagógicas desarrolladas por los estudiantes del Ciclo 3.",
-        objetivo: "Promover el aprendizaje significativo, el trabajo colaborativo y el desarrollo de habilidades mediante proyectos que relacionen los saberes escolares con el contexto.",
+    nombre: "Ciclo 3",
+    titulo: "Proyecto de Ciclo 3",
 
-        // Fotografías comprobadas en el repositorio.
-        fotos: [
-            "img/Proyectos/Ciclo3/c3-1.jpg",
-            "img/Proyectos/Ciclo3/c3-2.jpg",
-            "img/Proyectos/Ciclo3/c3-3.jpg",
-            "img/Proyectos/Ciclo3/c3-4.jpg",
-            "img/Proyectos/Ciclo3/c3-10.jpg"
-        ],
+    resumen:
+        "Aprendizaje colaborativo y construcción de conocimientos.",
 
+    descripcion:
+        "En este espacio se comparten los proyectos, experiencias y actividades pedagógicas desarrolladas por los estudiantes del Ciclo 3.",
+
+    objetivo:
+        "Promover el aprendizaje significativo, el trabajo colaborativo y el desarrollo de habilidades mediante proyectos que relacionen los saberes escolares con el contexto.",
+
+    imagenPrincipal: "img/Proyectos/Ciclo3/c3-1.jpg",
+
+    fotos: [
+        "img/Proyectos/Ciclo3/c3-1.jpg",
+        "img/Proyectos/Ciclo3/c3-2.jpg",
+        "img/Proyectos/Ciclo3/c3-3.jpg",
+        "img/Proyectos/Ciclo3/c3-4.jpg",
+        "img/Proyectos/Ciclo3/c3-10.jpg"
+    ],
+
+ 
         videos: [
             {
                 titulo: "Presentación del proyecto",
