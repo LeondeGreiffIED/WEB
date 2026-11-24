@@ -69,13 +69,13 @@ const proyectos = {
         fotos: [
             "Imagenes/Proyectos/Ciclo3/c3-10.jpg",
             "Imagenes/Proyectos/Ciclo3/c3-9.jpg",
-            "Imagenes/Proyectos/Ciclo3/c3-8.jpg"
-           "Imagenes/Proyectos/Ciclo3/c3-7.jpg"
-           "Imagenes/Proyectos/Ciclo3/c3-6.jpg"
-           "Imagenes/Proyectos/Ciclo3/c3-5.jpg"
-           "Imagenes/Proyectos/Ciclo3/c3-4.jpg"
-           "Imagenes/Proyectos/Ciclo3/c3-3.jpg"
-           "Imagenes/Proyectos/Ciclo3/c3-2.jpg"
+            "Imagenes/Proyectos/Ciclo3/c3-8.jpg",
+           "Imagenes/Proyectos/Ciclo3/c3-7.jpg",
+           "Imagenes/Proyectos/Ciclo3/c3-6.jpg",
+           "Imagenes/Proyectos/Ciclo3/c3-5.jpg",
+           "Imagenes/Proyectos/Ciclo3/c3-4.jpg",
+           "Imagenes/Proyectos/Ciclo3/c3-3.jpg",
+           "Imagenes/Proyectos/Ciclo3/c3-2.jpg",
            "Imagenes/Proyectos/Ciclo3/c3-1.jpg"
            
         ],
