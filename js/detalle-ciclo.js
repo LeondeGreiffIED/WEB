@@ -3,81 +3,37 @@
    COLEGIO DISTRITAL LEÓN DE GREIFF I.E.D.
    PROYECTOS DE CICLOS
    Archivo: js/detalle-ciclo.js
-
-   Compatible con:
-   - detalle-ciclo.html publicado en GitHub
-   - css/proyectos-ciclos.css
-   - Galería con controles e indicadores originales
-   - Videos alojados en YouTube (No listados)
    ========================================================== */
 
-
-/* ==========================================================
-   1. INFORMACIÓN DE LOS PROYECTOS
-   ========================================================== */
+/* ----------------------------------------------------------
+   1. INFORMACIÓN Y RUTAS DE LOS PROYECTOS
+   ---------------------------------------------------------- */
 
 const proyectos = {
-
     inicial: {
         nombre: "Ciclo Inicial",
         titulo: "Proyecto de Ciclo Inicial",
-
-        resumen:
-            "Experiencias de aprendizaje, exploración y desarrollo integral.",
-
-        descripcion:
-            "En este espacio se presentan las experiencias, actividades y proyectos desarrollados por los estudiantes del Ciclo Inicial.",
-
-        objetivo:
-            "Fortalecer los procesos de aprendizaje mediante experiencias pedagógicas significativas que promuevan la exploración, la creatividad y el desarrollo integral.",
-
-        imagenPrincipal:
-            "Imagenes/Proyectos/CicloInicial/portada.jpg",
-
-        fotos: [
-            "Imagenes/Proyectos/CicloInicial/foto-01.jpg",
-            "Imagenes/Proyectos/CicloInicial/foto-02.jpg",
-            "Imagenes/Proyectos/CicloInicial/foto-03.jpg"
-        ],
-
-        videos: [
-            {
-                titulo: "Presentación del proyecto",
-                descripcion: "Conoce las experiencias del Ciclo Inicial.",
-                id: "ID_VIDEO_YOUTUBE_1"
-            }
-        ]
+        resumen: "Experiencias de aprendizaje, exploración y desarrollo integral.",
+        descripcion: "En este espacio se presentan las experiencias, actividades y proyectos desarrollados por los estudiantes del Ciclo Inicial.",
+        objetivo: "Fortalecer los procesos de aprendizaje mediante experiencias pedagógicas significativas que promuevan la exploración, la creatividad y el desarrollo integral.",
+        fotos: [],
+        videos: []
     },
-
 
     ciclo3: {
         nombre: "Ciclo 3",
         titulo: "Proyecto de Ciclo 3",
+        resumen: "Aprendizaje colaborativo y construcción de conocimientos.",
+        descripcion: "En este espacio se comparten los proyectos, experiencias y actividades pedagógicas desarrolladas por los estudiantes del Ciclo 3.",
+        objetivo: "Promover el aprendizaje significativo, el trabajo colaborativo y el desarrollo de habilidades mediante proyectos que relacionen los saberes escolares con el contexto.",
 
-        resumen:
-            "Aprendizaje colaborativo y construcción de conocimientos.",
-
-        descripcion:
-            "En este espacio se comparten los proyectos, experiencias y actividades pedagógicas desarrolladas por los estudiantes del Ciclo 3.",
-
-        objetivo:
-            "Promover el aprendizaje significativo, el trabajo colaborativo y el desarrollo de habilidades mediante proyectos que relacionen los saberes escolares con el contexto.",
-
-        imagenPrincipal:
-            "Imagenes/Proyectos/Ciclo3/portada.jpg",
-
+        // Fotografías comprobadas en el repositorio.
         fotos: [
-            "Imagenes/Proyectos/Ciclo3/c3-10.jpg",
-            "Imagenes/Proyectos/Ciclo3/c3-9.jpg",
-            "Imagenes/Proyectos/Ciclo3/c3-8.jpg",
-           "Imagenes/Proyectos/Ciclo3/c3-7.jpg",
-           "Imagenes/Proyectos/Ciclo3/c3-6.jpg",
-           "Imagenes/Proyectos/Ciclo3/c3-5.jpg",
-           "Imagenes/Proyectos/Ciclo3/c3-4.jpg",
-           "Imagenes/Proyectos/Ciclo3/c3-3.jpg",
-           "Imagenes/Proyectos/Ciclo3/c3-2.jpg",
-           "Imagenes/Proyectos/Ciclo3/c3-1.jpg"
-           
+            "img/Proyectos/Ciclo3/c3-1.jpg",
+            "img/Proyectos/Ciclo3/c3-2.jpg",
+            "img/Proyectos/Ciclo3/c3-3.jpg",
+            "img/Proyectos/Ciclo3/c3-4.jpg",
+            "img/Proyectos/Ciclo3/c3-10.jpg"
         ],
 
         videos: [
@@ -89,29 +45,15 @@ const proyectos = {
         ]
     },
 
-
     ciclo4: {
         nombre: "Ciclo 4",
         titulo: "Astronomía y robótica",
+        resumen: "Exploración del universo y el impacto de la robótica en la astronomía.",
+        descripcion: "El proyecto de Ciclo 4 está orientado a la exploración del universo, el conocimiento de los cuerpos celestes y la comprensión de los fenómenos astronómicos. Se busca relacionar la astronomía con los avances tecnológicos y el impacto de la robótica en la exploración espacial.",
+        objetivo: "Desarrollar experiencias de investigación, experimentación y creación que permitan comprender fenómenos astronómicos y reconocer las aplicaciones de la robótica en la exploración del espacio.",
 
-        resumen:
-            "Exploración del universo y el impacto de la robótica en la astronomía.",
-
-        descripcion:
-            "El proyecto de Ciclo 4 está orientado a la exploración del universo, el conocimiento de los cuerpos celestes y la comprensión de los fenómenos astronómicos. Se busca relacionar la astronomía con los avances tecnológicos y el impacto de la robótica en la exploración espacial.",
-
-        objetivo:
-            "Desarrollar experiencias de investigación, experimentación y creación que permitan comprender fenómenos astronómicos y reconocer las aplicaciones de la robótica en la exploración del espacio.",
-
-        imagenPrincipal:
-            "Imagenes/Proyectos/Ciclo4/portada.jpg",
-
-        fotos: [
-            "Imagenes/Proyectos/Ciclo4/c4-1.jpg",
-            "Imagenes/Proyectos/Ciclo4/c4-2.jpg",
-            "Imagenes/Proyectos/Ciclo4/c4-3.jpg",
-            "Imagenes/Proyectos/Ciclo4/c4-4.jpg"
-        ],
+        // Agrega aquí las rutas cuando cargues las fotografías.
+        fotos: [],
 
         videos: [
             {
@@ -127,28 +69,15 @@ const proyectos = {
         ]
     },
 
-
     ciclo5: {
         nombre: "Ciclo 5",
         titulo: "Proyecto de Ciclo 5",
+        resumen: "Investigación, innovación y construcción de proyectos.",
+        descripcion: "Este espacio presenta los proyectos, experiencias de aprendizaje y actividades desarrolladas por los estudiantes del Ciclo 5.",
+        objetivo: "Fortalecer las competencias académicas, investigativas y ciudadanas mediante el desarrollo de proyectos que permitan a los estudiantes aplicar sus conocimientos en situaciones reales.",
 
-        resumen:
-            "Investigación, innovación y construcción de proyectos.",
-
-        descripcion:
-            "Este espacio presenta los proyectos, experiencias de aprendizaje y actividades desarrolladas por los estudiantes del Ciclo 5.",
-
-        objetivo:
-            "Fortalecer las competencias académicas, investigativas y ciudadanas mediante el desarrollo de proyectos que permitan a los estudiantes aplicar sus conocimientos en situaciones reales.",
-
-        imagenPrincipal:
-            "Imagenes/Proyectos/Ciclo5/portada.jpg",
-
-        fotos: [
-            "Imagenes/Proyectos/Ciclo5/foto-01.jpg",
-            "Imagenes/Proyectos/Ciclo5/foto-02.jpg",
-            "Imagenes/Proyectos/Ciclo5/foto-03.jpg"
-        ],
+        // Agrega aquí las rutas cuando cargues las fotografías.
+        fotos: [],
 
         videos: [
             {
@@ -158,13 +87,12 @@ const proyectos = {
             }
         ]
     }
-
 };
 
 
-/* ==========================================================
+/* ----------------------------------------------------------
    2. VARIABLES GENERALES
-   ========================================================== */
+   ---------------------------------------------------------- */
 
 const ordenCiclos = [
     "inicial",
@@ -175,11 +103,12 @@ const ordenCiclos = [
 
 let cicloActual = "";
 let indiceFoto = 0;
+let fotosDisponibles = [];
 
 
-/* ==========================================================
-   3. INICIAR PÁGINA
-   ========================================================== */
+/* ----------------------------------------------------------
+   3. INICIALIZAR LA PÁGINA
+   ---------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -203,9 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-/* ==========================================================
+/* ----------------------------------------------------------
    4. CARGAR INFORMACIÓN DEL CICLO
-   ========================================================== */
+   ---------------------------------------------------------- */
 
 function cargarCiclo(ciclo) {
 
@@ -218,49 +147,32 @@ function cargarCiclo(ciclo) {
 
     cicloActual = ciclo;
     indiceFoto = 0;
+    fotosDisponibles = [];
 
-    // Título de la pestaña
     document.title =
         datos.nombre +
         " | Proyectos de Ciclos - Colegio León de Greiff";
 
-    // Encabezado de la portada
     asignarTexto("#titulo-ciclo", datos.titulo);
     asignarTexto("#resumen-ciclo", datos.resumen);
 
-    // Información del proyecto
     asignarTexto("#titulo-proyecto", datos.titulo);
     asignarTexto("#descripcion-proyecto", datos.descripcion);
     asignarTexto("#proposito-proyecto", datos.objetivo);
 
-    // Imagen destacada
-    const imagen = document.querySelector("#imagen-destacada");
+    cargarImagenDestacada(datos.fotos);
 
-    if (imagen) {
-        imagen.src = datos.imagenPrincipal;
-        imagen.alt = datos.titulo;
-        imagen.style.display = "";
-
-        imagen.onerror = function () {
-            this.style.display = "none";
-        };
-    }
-
-    // Galería
     mostrarGaleria(datos.fotos);
 
-    // Videos
     mostrarVideos(datos.videos);
 
-    // Navegación entre ciclos
     actualizarNavegacion();
-
 }
 
 
-/* ==========================================================
-   5. ACTUALIZAR TEXTO DE LOS ELEMENTOS
-   ========================================================== */
+/* ----------------------------------------------------------
+   5. ASIGNAR TEXTOS
+   ---------------------------------------------------------- */
 
 function asignarTexto(selector, texto) {
 
@@ -269,13 +181,50 @@ function asignarTexto(selector, texto) {
     if (elemento) {
         elemento.textContent = texto || "";
     }
-
 }
 
 
-/* ==========================================================
-   6. CONFIGURAR CONTROLES DEL CARRUSEL
-   ========================================================== */
+/* ----------------------------------------------------------
+   6. CARGAR IMAGEN DESTACADA
+   ---------------------------------------------------------- */
+
+function cargarImagenDestacada(fotos) {
+
+    const imagen = document.querySelector("#imagen-destacada");
+
+    if (!imagen) return;
+
+    imagen.removeAttribute("src");
+    imagen.style.display = "none";
+
+    if (!fotos || fotos.length === 0) return;
+
+    const primeraFoto = new Image();
+
+    primeraFoto.onload = function () {
+
+        imagen.src = primeraFoto.src;
+        imagen.alt = proyectos[cicloActual].titulo;
+        imagen.style.display = "block";
+
+    };
+
+    primeraFoto.onerror = function () {
+
+        console.error(
+            "No se pudo cargar la imagen destacada:",
+            fotos[0]
+        );
+
+    };
+
+    primeraFoto.src = fotos[0];
+}
+
+
+/* ----------------------------------------------------------
+   7. CONTROLES DEL CARRUSEL
+   ---------------------------------------------------------- */
 
 function configurarControlesCarrusel() {
 
@@ -304,13 +253,12 @@ function configurarControlesCarrusel() {
         });
 
     }
-
 }
 
 
-/* ==========================================================
-   7. MOSTRAR GALERÍA DE FOTOGRAFÍAS
-   ========================================================== */
+/* ----------------------------------------------------------
+   8. CARGAR Y VALIDAR LAS FOTOGRAFÍAS
+   ---------------------------------------------------------- */
 
 function mostrarGaleria(fotos) {
 
@@ -319,12 +267,14 @@ function mostrarGaleria(fotos) {
 
     if (!carrusel) return;
 
-    // Eliminar solamente las imágenes anteriores.
-    // Se conservan los botones originales del HTML.
+    // Eliminar imágenes anteriores.
     carrusel.querySelectorAll(".carrusel-imagen").forEach(
-        function (imagen) {
-            imagen.remove();
-        }
+        imagen => imagen.remove()
+    );
+
+    // Eliminar mensajes anteriores.
+    carrusel.querySelectorAll(".mensaje-sin-contenido").forEach(
+        mensaje => mensaje.remove()
     );
 
     if (indicadores) {
@@ -332,6 +282,7 @@ function mostrarGaleria(fotos) {
     }
 
     indiceFoto = 0;
+    fotosDisponibles = [];
 
     if (!fotos || fotos.length === 0) {
 
@@ -343,12 +294,79 @@ function mostrarGaleria(fotos) {
         return;
     }
 
-    fotos.forEach(function (ruta, indice) {
+    // Comprobar cada fotografía antes de incorporarla.
+    const comprobaciones = fotos.map(function (ruta) {
+
+        return new Promise(function (resolve) {
+
+            const imagen = new Image();
+
+            imagen.onload = function () {
+                resolve({
+                    ruta: ruta,
+                    correcta: true
+                });
+            };
+
+            imagen.onerror = function () {
+
+                console.error(
+                    "ERROR: No se pudo cargar la fotografía:",
+                    ruta
+                );
+
+                resolve({
+                    ruta: ruta,
+                    correcta: false
+                });
+
+            };
+
+            // Ruta relativa al directorio raíz del sitio.
+            imagen.src = ruta;
+
+        });
+
+    });
+
+    Promise.all(comprobaciones).then(function (resultados) {
+
+        fotosDisponibles = resultados
+            .filter(resultado => resultado.correcta)
+            .map(resultado => resultado.ruta);
+
+        if (fotosDisponibles.length === 0) {
+
+            mostrarMensajeGaleria(
+                carrusel,
+                "No se encontraron fotografías disponibles. Verifica los nombres y las rutas de las imágenes."
+            );
+
+            return;
+        }
+
+        construirCarrusel();
+
+    });
+}
+
+
+/* ----------------------------------------------------------
+   9. CONSTRUIR EL CARRUSEL
+   ---------------------------------------------------------- */
+
+function construirCarrusel() {
+
+    const carrusel = document.querySelector("#carrusel");
+    const indicadores = document.querySelector("#indicadores");
+
+    if (!carrusel) return;
+
+    fotosDisponibles.forEach(function (ruta, indice) {
 
         const imagen = document.createElement("img");
 
         imagen.src = ruta;
-
         imagen.alt =
             "Fotografía " +
             (indice + 1) +
@@ -357,37 +375,25 @@ function mostrarGaleria(fotos) {
 
         imagen.className = "carrusel-imagen";
 
-        imagen.loading = "lazy";
+        imagen.loading = "eager";
+        imagen.decoding = "async";
 
         if (indice === 0) {
             imagen.classList.add("activa");
         }
 
-        imagen.onerror = function () {
-            this.style.display = "none";
-
-            const punto = indicadores
-                ? indicadores.children[indice]
-                : null;
-
-            if (punto) {
-                punto.style.display = "none";
-            }
-        };
-
-        // Insertar las imágenes antes de los controles.
+        // Insertar antes de los botones.
         const botonAnterior =
             carrusel.querySelector(".anterior");
 
         carrusel.insertBefore(imagen, botonAnterior);
 
-        // Crear indicador
+        // Crear indicador.
         if (indicadores) {
 
             const punto = document.createElement("button");
 
             punto.type = "button";
-
             punto.className = "punto";
 
             punto.setAttribute(
@@ -395,13 +401,13 @@ function mostrarGaleria(fotos) {
                 "Ver fotografía " + (indice + 1)
             );
 
-            punto.addEventListener("click", function () {
-                seleccionarFoto(indice);
-            });
-
             if (indice === 0) {
                 punto.classList.add("activo");
             }
+
+            punto.addEventListener("click", function () {
+                seleccionarFoto(indice);
+            });
 
             indicadores.appendChild(punto);
 
@@ -411,84 +417,98 @@ function mostrarGaleria(fotos) {
 
     actualizarEstadoGaleria();
 
+    // Mostrar controles solamente si hay más de una fotografía.
+    const controles = carrusel.querySelectorAll(".control-carrusel");
+
+    controles.forEach(function (control) {
+        control.style.display =
+            fotosDisponibles.length > 1 ? "block" : "none";
+    });
 }
 
 
-/* ==========================================================
-   8. MENSAJE CUANDO NO HAY FOTOGRAFÍAS
-   ========================================================== */
+/* ----------------------------------------------------------
+   10. MENSAJE DE GALERÍA VACÍA
+   ---------------------------------------------------------- */
 
 function mostrarMensajeGaleria(carrusel, mensaje) {
 
     const texto = document.createElement("p");
 
     texto.className = "mensaje-sin-contenido";
-
     texto.textContent = mensaje;
 
-    carrusel.insertBefore(
-        texto,
-        carrusel.querySelector(".anterior")
-    );
+    const botonAnterior =
+        carrusel.querySelector(".anterior");
+
+    carrusel.insertBefore(texto, botonAnterior);
+
+    const controles =
+        carrusel.querySelectorAll(".control-carrusel");
+
+    controles.forEach(control => {
+        control.style.display = "none";
+    });
 
 }
 
 
-/* ==========================================================
-   9. CAMBIAR FOTOGRAFÍA
-   ========================================================== */
+/* ----------------------------------------------------------
+   11. CAMBIAR FOTOGRAFÍA
+   ---------------------------------------------------------- */
 
 function cambiarFoto(direccion) {
 
-    const imagenes =
-        document.querySelectorAll("#carrusel .carrusel-imagen");
-
-    if (!imagenes.length) return;
+    if (fotosDisponibles.length <= 1) return;
 
     indiceFoto += direccion;
 
-    if (indiceFoto >= imagenes.length) {
+    if (indiceFoto >= fotosDisponibles.length) {
         indiceFoto = 0;
     }
 
     if (indiceFoto < 0) {
-        indiceFoto = imagenes.length - 1;
+        indiceFoto = fotosDisponibles.length - 1;
     }
 
     actualizarEstadoGaleria();
-
 }
 
 
-/* ==========================================================
-   10. SELECCIONAR FOTOGRAFÍA POR INDICADOR
-   ========================================================== */
+/* ----------------------------------------------------------
+   12. SELECCIONAR FOTOGRAFÍA
+   ---------------------------------------------------------- */
 
 function seleccionarFoto(indice) {
 
-    const imagenes =
-        document.querySelectorAll("#carrusel .carrusel-imagen");
-
-    if (indice < 0 || indice >= imagenes.length) return;
+    if (
+        indice < 0 ||
+        indice >= fotosDisponibles.length
+    ) {
+        return;
+    }
 
     indiceFoto = indice;
 
     actualizarEstadoGaleria();
-
 }
 
 
-/* ==========================================================
-   11. ACTUALIZAR ESTADO DEL CARRUSEL
-   ========================================================== */
+/* ----------------------------------------------------------
+   13. ACTUALIZAR IMAGEN E INDICADORES
+   ---------------------------------------------------------- */
 
 function actualizarEstadoGaleria() {
 
     const imagenes =
-        document.querySelectorAll("#carrusel .carrusel-imagen");
+        document.querySelectorAll(
+            "#carrusel .carrusel-imagen"
+        );
 
     const indicadores =
-        document.querySelectorAll("#indicadores .punto");
+        document.querySelectorAll(
+            "#indicadores .punto"
+        );
 
     imagenes.forEach(function (imagen, indice) {
 
@@ -511,9 +531,9 @@ function actualizarEstadoGaleria() {
 }
 
 
-/* ==========================================================
-   12. MOSTRAR VIDEOS DE YOUTUBE
-   ========================================================== */
+/* ----------------------------------------------------------
+   14. MOSTRAR VIDEOS DE YOUTUBE
+   ---------------------------------------------------------- */
 
 function mostrarVideos(videos) {
 
@@ -524,22 +544,11 @@ function mostrarVideos(videos) {
 
     contenedor.innerHTML = "";
 
-    if (!videos || videos.length === 0) {
-
-        mostrarMensajeVideos(
-            contenedor,
-            "Próximamente publicaremos videos de este proyecto."
-        );
-
-        return;
-    }
-
     let cantidadVideos = 0;
 
-    videos.forEach(function (video) {
+    (videos || []).forEach(function (video) {
 
-        // Validar el identificador de YouTube.
-        // Los identificadores tienen 11 caracteres.
+        // Evitar mostrar identificadores provisionales.
         if (
             !video.id ||
             !/^[a-zA-Z0-9_-]{11}$/.test(video.id)
@@ -549,12 +558,9 @@ function mostrarVideos(videos) {
 
         cantidadVideos++;
 
-        // Tarjeta
         const tarjeta = document.createElement("article");
-
         tarjeta.className = "tarjeta-video";
 
-        // Reproductor
         const reproductor = document.createElement("iframe");
 
         reproductor.src =
@@ -565,7 +571,6 @@ function mostrarVideos(videos) {
             video.titulo || "Video del proyecto";
 
         reproductor.loading = "lazy";
-
         reproductor.referrerPolicy =
             "strict-origin-when-cross-origin";
 
@@ -574,20 +579,14 @@ function mostrarVideos(videos) {
 
         reproductor.allowFullscreen = true;
 
-        // Información del video
         const informacion = document.createElement("div");
-
         informacion.className = "video-info";
 
         const titulo = document.createElement("h3");
-
-        titulo.textContent =
-            video.titulo || "Video del proyecto";
+        titulo.textContent = video.titulo || "Video del proyecto";
 
         const descripcion = document.createElement("p");
-
-        descripcion.textContent =
-            video.descripcion || "";
+        descripcion.textContent = video.descripcion || "";
 
         informacion.appendChild(titulo);
 
@@ -614,16 +613,15 @@ function mostrarVideos(videos) {
 }
 
 
-/* ==========================================================
-   13. MENSAJE CUANDO NO HAY VIDEOS
-   ========================================================== */
+/* ----------------------------------------------------------
+   15. MENSAJE CUANDO NO HAY VIDEOS
+   ---------------------------------------------------------- */
 
 function mostrarMensajeVideos(contenedor, mensaje) {
 
     const texto = document.createElement("p");
 
     texto.className = "mensaje-sin-contenido";
-
     texto.textContent = mensaje;
 
     contenedor.appendChild(texto);
@@ -631,9 +629,9 @@ function mostrarMensajeVideos(contenedor, mensaje) {
 }
 
 
-/* ==========================================================
-   14. ESTILOS PARA LOS REPRODUCTORES YOUTUBE
-   ========================================================== */
+/* ----------------------------------------------------------
+   16. ESTILOS DE LOS VIDEOS
+   ---------------------------------------------------------- */
 
 function agregarEstilosVideos() {
 
@@ -683,12 +681,6 @@ function agregarEstilosVideos() {
         #rejilla-videos iframe {
             max-width: 100%;
         }
-
-        @media (max-width: 750px) {
-            .tarjeta-video iframe {
-                width: 100%;
-            }
-        }
     `;
 
     document.head.appendChild(estilos);
@@ -696,9 +688,9 @@ function agregarEstilosVideos() {
 }
 
 
-/* ==========================================================
-   15. NAVEGACIÓN ENTRE CICLOS
-   ========================================================== */
+/* ----------------------------------------------------------
+   17. NAVEGACIÓN ENTRE CICLOS
+   ---------------------------------------------------------- */
 
 function actualizarNavegacion() {
 
@@ -711,16 +703,13 @@ function actualizarNavegacion() {
     const botonSiguiente =
         document.querySelector("#ciclo-siguiente");
 
-    // Ciclo anterior
     if (botonAnterior) {
 
         if (indiceActual > 0) {
 
-            const cicloAnterior =
-                ordenCiclos[indiceActual - 1];
-
             botonAnterior.href =
-                "detalle-ciclo.html?ciclo=" + cicloAnterior;
+                "detalle-ciclo.html?ciclo=" +
+                ordenCiclos[indiceActual - 1];
 
             botonAnterior.style.display = "";
 
@@ -732,16 +721,13 @@ function actualizarNavegacion() {
 
     }
 
-    // Ciclo siguiente
     if (botonSiguiente) {
 
         if (indiceActual < ordenCiclos.length - 1) {
 
-            const cicloSiguiente =
-                ordenCiclos[indiceActual + 1];
-
             botonSiguiente.href =
-                "detalle-ciclo.html?ciclo=" + cicloSiguiente;
+                "detalle-ciclo.html?ciclo=" +
+                ordenCiclos[indiceActual + 1];
 
             botonSiguiente.style.display = "";
 
@@ -756,9 +742,9 @@ function actualizarNavegacion() {
 }
 
 
-/* ==========================================================
-   16. CICLO NO ENCONTRADO
-   ========================================================== */
+/* ----------------------------------------------------------
+   18. CICLO NO ENCONTRADO
+   ---------------------------------------------------------- */
 
 function mostrarErrorCiclo() {
 
@@ -770,11 +756,10 @@ function mostrarErrorCiclo() {
     contenido.innerHTML = `
         <div class="mensaje-sin-contenido">
             <h2>Proyecto no encontrado</h2>
-
             <p>
-                No fue posible encontrar la información del ciclo solicitado.
+                No fue posible encontrar la información
+                del ciclo solicitado.
             </p>
-
             <a href="proyectos-ciclos.html">
                 Volver a Proyectos de Ciclos
             </a>
