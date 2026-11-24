@@ -102,13 +102,18 @@ a {
 /* PORTADA */
 
 .portada {
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  background:
-    linear-gradient(90deg, rgba(12, 66, 34, .94), rgba(23, 107, 58, .78)),
-    url("../Imagenes/Proyectos/fondo-proyectos.jpg") center/cover;
-  color: white;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(12, 66, 34, .94),
+            rgba(23, 107, 58, .78)
+        );
+
+    color: white;
 }
 
 .portada-contenido {
