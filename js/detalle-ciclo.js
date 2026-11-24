@@ -67,9 +67,17 @@ const proyectos = {
             "Imagenes/Proyectos/Ciclo3/portada.jpg",
 
         fotos: [
-            "Imagenes/Proyectos/Ciclo3/foto-01.jpg",
-            "Imagenes/Proyectos/Ciclo3/foto-02.jpg",
-            "Imagenes/Proyectos/Ciclo3/foto-03.jpg"
+            "Imagenes/Proyectos/Ciclo3/c3-10.jpg",
+            "Imagenes/Proyectos/Ciclo3/c3-9.jpg",
+            "Imagenes/Proyectos/Ciclo3/c3-8.jpg"
+           "Imagenes/Proyectos/Ciclo3/c3-7.jpg"
+           "Imagenes/Proyectos/Ciclo3/c3-6.jpg"
+           "Imagenes/Proyectos/Ciclo3/c3-5.jpg"
+           "Imagenes/Proyectos/Ciclo3/c3-4.jpg"
+           "Imagenes/Proyectos/Ciclo3/c3-3.jpg"
+           "Imagenes/Proyectos/Ciclo3/c3-2.jpg"
+           "Imagenes/Proyectos/Ciclo3/c3-1.jpg"
+           
         ],
 
         videos: [
@@ -99,10 +107,10 @@ const proyectos = {
             "Imagenes/Proyectos/Ciclo4/portada.jpg",
 
         fotos: [
-            "Imagenes/Proyectos/Ciclo4/foto-01.jpg",
-            "Imagenes/Proyectos/Ciclo4/foto-02.jpg",
-            "Imagenes/Proyectos/Ciclo4/foto-03.jpg",
-            "Imagenes/Proyectos/Ciclo4/foto-04.jpg"
+            "Imagenes/Proyectos/Ciclo4/c4-1.jpg",
+            "Imagenes/Proyectos/Ciclo4/c4-2.jpg",
+            "Imagenes/Proyectos/Ciclo4/c4-3.jpg",
+            "Imagenes/Proyectos/Ciclo4/c4-4.jpg"
         ],
 
         videos: [
