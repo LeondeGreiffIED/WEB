@@ -1,0 +1,182 @@
+
+/* =========================================
+   NAVEGACIÓN INSTITUCIONAL CENTRALIZADA
+   Colegio Distrital León de Greiff I.E.D.
+========================================= */
+
+:root {
+    --menu-verde: #176b43;
+    --menu-verde-oscuro: #104b31;
+    --menu-fondo: #ffffff;
+    --menu-texto: #26382d;
+}
+
+.menu-institucional {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    background: var(--menu-fondo);
+    border-bottom: 3px solid var(--menu-verde);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, .09);
+}
+
+.menu-contenedor {
+    width: min(1200px, 94%);
+    min-height: 82px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.menu-marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    color: var(--menu-verde-oscuro);
+    text-decoration: none !important;
+}
+
+.menu-marca img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+}
+
+.menu-marca span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+.menu-marca strong {
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.menu-marca small {
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.menu-enlaces {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.menu-enlaces a {
+    display: inline-block;
+    padding: 12px 10px;
+    border-radius: 6px;
+    color: var(--menu-texto);
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none !important;
+    transition: all .2s ease;
+}
+
+.menu-enlaces a:hover,
+.menu-enlaces a.activo {
+    background: #eaf5ed;
+    color: var(--menu-verde);
+}
+
+.menu-enlaces a.activo {
+    box-shadow: inset 0 -3px var(--menu-verde);
+}
+
+.menu-externo {
+    color: var(--menu-verde);
+    font-size: 12px;
+}
+
+.menu-toggle {
+    display: none;
+    width: 44px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #dce9df;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    margin: 4px 0;
+    border-radius: 3px;
+    background: var(--menu-verde);
+}
+
+/* TABLET */
+
+@media (max-width: 1050px) {
+
+    .menu-contenedor {
+        flex-wrap: wrap;
+        padding: 12px 0;
+    }
+
+    .menu-enlaces {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* CELULAR */
+
+@media (max-width: 767px) {
+
+    .menu-contenedor {
+        min-height: 72px;
+        flex-wrap: nowrap;
+        padding: 8px 0;
+    }
+
+    .menu-marca img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .menu-marca small {
+        font-size: 11px;
+    }
+
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .menu-enlaces {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        width: 100%;
+        max-height: calc(100vh - 75px);
+        overflow-y: auto;
+        padding: 10px 4%;
+        background: #fff;
+        border-top: 1px solid #e3ece5;
+        box-shadow: 0 8px 15px rgba(0,0,0,.10);
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .menu-enlaces.abierto {
+        display: flex;
+    }
+
+    .menu-enlaces a {
+        display: block;
+        padding: 13px 15px;
+        font-size: 13px;
+    }
+}
